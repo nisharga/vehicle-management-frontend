@@ -9,7 +9,7 @@ const Service = () => {
     <div className="container mx-auto">
       <div>
         <h1 className="text-center text-4xl text-secondary font-semibold md:py-10 py-5">
-          Why take the <span className="text-brand">our services?</span>
+          Why take the <span className="text-brand">our services?????</span>
         </h1>
       </div>
       {/* Project details card started */}
