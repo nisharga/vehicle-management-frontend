@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 /* custom font start */
-@import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;1,300;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400&display=swap");
 /* custom font send */
 * {
-  font-family: "Merriweather", serif;
+  font-family: "Lato", sans-serif;
 }
 
 /* custom scrollbar start*/
@@ -37,6 +37,14 @@
   background: #00334e !important;
 }
 
+:where(.css-dev-only-do-not-override-1b0bdye).ant-menu-dark.ant-menu-inline
+  .ant-menu-sub.ant-menu-inline,
+:where(.css-dev-only-do-not-override-1b0bdye).ant-menu-dark
+  > .ant-menu.ant-menu-inline
+  .ant-menu-sub.ant-menu-inline {
+  background: #011e2e !important;
+}
+
 :where(.css-dev-only-do-not-override-1b0bdye).ant-layout
   .ant-layout-sider-trigger {
   background: #faab00 !important;
@@ -44,4 +52,21 @@
 
 .vms-login-page-banner {
   background-image: url("../assets/banner.jpg");
+}
+
+:where(.css-dev-only-do-not-override-1b0bdye).ant-menu-dark
+  .ant-menu-item-selected,
+:where(.css-dev-only-do-not-override-1b0bdye).ant-menu-dark
+  > .ant-menu
+  .ant-menu-item-selected {
+  background-color: #efefef !important;
+  border-radius: 0px !important;
+}
+
+:where(.css-dev-only-do-not-override-1b0bdye).ant-menu-dark
+  .ant-menu-item-selected,
+:where(.css-dev-only-do-not-override-1b0bdye).ant-menu-dark
+  > .ant-menu
+  .ant-menu-item-selected {
+  color: #00334e !important;
 }

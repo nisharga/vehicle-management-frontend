@@ -8,8 +8,8 @@ import Image from "next/image";
 import { useState } from "react";
 import logo from "../../assets/logo.png";
 
-const role = USER_ROLE.SUPER_ADMIN;
-// const role = USER_ROLE.MANAGER;
+// const role = USER_ROLE.SUPER_ADMIN;
+const role = USER_ROLE.MANAGER;
 // const role = USER_ROLE.DRIVER;
 
 const Sidebar = () => {
