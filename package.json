@@ -1,5 +1,5 @@
 {
-  "name": "vehicle-management-frontend",
+  "name": "vehicle-management-frontend-dashboard",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,24 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@babel/runtime": "^7.23.9",
-    "@hookform/resolvers": "^3.3.4",
-    "@iconify/react": "^4.1.1",
+    "@ant-design/cssinjs": "^1.18.4",
+    "@ant-design/nextjs-registry": "^1.0.0",
+    "@reduxjs/toolkit": "^2.1.0",
     "antd": "^5.13.3",
-    "aos": "^3.0.0-beta.6",
     "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",
-    "react-hook-form": "^7.49.3",
-    "sharp": "^0.33.2",
-    "yup": "^1.3.3"
+    "react-redux": "^9.1.0"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
-    "daisyui": "^4.6.0",
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
     "postcss": "^8",
