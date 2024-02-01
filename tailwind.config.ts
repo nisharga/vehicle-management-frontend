@@ -9,19 +9,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        brand: "#FFB230",
+        brand: "#FAAB00",
         secondary: "#00334E",
         textColor: "#707070",
         heading: "#111111",
       },
     },
-    container: {
-      center: true,
-    },
   },
-  plugins: [require("daisyui")],
-  daisyui: {
-    themes: ["light"],
-  },
+  plugins: [],
 };
 export default config;

@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* custom font start */
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;1,300;1,400&display=swap");
+/* custom font send */
+* {
+  font-family: "Merriweather", serif;
+}
+
+/* custom scrollbar start*/
+/* fixed part */
+::-webkit-scrollbar {
+  background-color: #fff;
+  height: 9px;
+  border: 1px solid #fff;
+  width: 10px;
+}
+
+/* moving part */
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #00334e;
+  border: 2px solid #fff;
+  background-clip: padding-box;
+}
+/* custom scrollbar end*/
+
+:where(.css-dev-only-do-not-override-1b0bdye).ant-layout .ant-layout-sider {
+  background: #00334e !important;
+}
+
+:where(.css-dev-only-do-not-override-1b0bdye).ant-menu-dark,
+:where(.css-dev-only-do-not-override-1b0bdye).ant-menu-dark > .ant-menu {
+  color: rgba(255, 255, 255, 0.65);
+  background: #00334e !important;
+}
+
+:where(.css-dev-only-do-not-override-1b0bdye).ant-layout
+  .ant-layout-sider-trigger {
+  background: #faab00 !important;
+}
+
+.vms-login-page-banner {
+  background-image: url("../assets/banner.jpg");
+}
