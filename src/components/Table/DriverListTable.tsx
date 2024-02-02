@@ -164,6 +164,7 @@ const DriverListTable = () => {
                           className="rounded-full"
                           width={50}
                           src={vehicleDriver?.avatar}
+                          alt="..."
                         />
                       </div>
                     </div>
