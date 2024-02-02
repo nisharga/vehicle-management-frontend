@@ -1,16 +1,10 @@
 "use client";
 import TitleCard from "@/components/Cards/TitleCards/TitleCards";
-import Chart from "chart.js";
 import moment from "moment";
 import Image from "next/image";
-import { useEffect } from "react";
 
 const TopSideButtons = () => {
- 
-
-  const openAddNewLeadModal = () => {
-    
-  };
+  const openAddNewLeadModal = () => {};
 
   return <div className="inline-block float-right"></div>;
 };
@@ -90,8 +84,6 @@ const overviewPage = () => {
     },
   ];
 
-
-
   return (
     <div className="flex flex-col gap-7">
       <span className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
@@ -115,7 +107,7 @@ const overviewPage = () => {
           style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
         >
           <span className="flex flex-col items-start justify-center h-full">
-            <p className="text-gray-600 text-lg">Total Vehicles</p>
+            <p className="text-gray-600 text-lg">Total Vehicles list</p>
             <h1 className="text-3xl text-blue-700 font-bold">5 Cars</h1>
           </span>
           <span
@@ -170,7 +162,7 @@ const overviewPage = () => {
           </span>
         </div>
       </span>
-     
+
       <TitleCard
         title="Driver List"
         topMargin="mt-2"
