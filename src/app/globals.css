@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* custom font start */
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400&display=swap");
+/* custom font send */
+* {
+  font-family: "Lato", sans-serif;
+}
+
+/* custom scrollbar start*/
+/* fixed part */
+::-webkit-scrollbar {
+  background-color: #fff;
+  height: 9px;
+  border: 1px solid #fff;
+  width: 10px;
+}
+
+/* moving part */
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #00334e;
+  border: 2px solid #fff;
+  background-clip: padding-box;
+}
+/* custom scrollbar end*/
+
+:where(.css-dev-only-do-not-override-1b0bdye).ant-layout .ant-layout-sider {
+  background: #00334e !important;
+}
+
+:where(.css-dev-only-do-not-override-1b0bdye).ant-menu-dark,
+:where(.css-dev-only-do-not-override-1b0bdye).ant-menu-dark > .ant-menu {
+  color: rgba(255, 255, 255, 0.65);
+  background: #00334e !important;
+}
+
+:where(.css-dev-only-do-not-override-1b0bdye).ant-menu-dark.ant-menu-inline
+  .ant-menu-sub.ant-menu-inline,
+:where(.css-dev-only-do-not-override-1b0bdye).ant-menu-dark
+  > .ant-menu.ant-menu-inline
+  .ant-menu-sub.ant-menu-inline {
+  background: #011e2e !important;
+}
+
+:where(.css-dev-only-do-not-override-1b0bdye).ant-layout
+  .ant-layout-sider-trigger {
+  background: #faab00 !important;
+}
+
+.vms-login-page-banner {
+  background-image: url("../assets/banner.jpg");
+}
+
+:where(.css-dev-only-do-not-override-1b0bdye).ant-menu-dark
+  .ant-menu-item-selected,
+:where(.css-dev-only-do-not-override-1b0bdye).ant-menu-dark
+  > .ant-menu
+  .ant-menu-item-selected {
+  background-color: #efefef !important;
+  border-radius: 0px !important;
+}
+
+:where(.css-dev-only-do-not-override-1b0bdye).ant-menu-dark
+  .ant-menu-item-selected,
+:where(.css-dev-only-do-not-override-1b0bdye).ant-menu-dark
+  > .ant-menu
+  .ant-menu-item-selected {
+  color: #00334e !important;
+}
