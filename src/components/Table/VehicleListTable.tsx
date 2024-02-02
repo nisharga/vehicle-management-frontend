@@ -1,7 +1,7 @@
 "use client";
 import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
 
-const AddVehicleTable = () => {
+const VehicleListTable = () => {
   const vehiclesFields = [
     {
       id: 1,
@@ -251,7 +251,7 @@ const AddVehicleTable = () => {
                 <input
                   type="text"
                   className="flex-shrink flex-grow flex-auto leading-normal tracking-wide w-px border border-none border-l-0 rounded rounded-l-none px-3 relative focus:outline-none text-xxs lg:text-xs text-gray-500 font-thin"
-                  placeholder="Search"
+                  placeholder={`Search Through ${vehiclesFields.length} Vehicle`}
                 />
               </div>
             </div>
@@ -276,7 +276,7 @@ const AddVehicleTable = () => {
                 <tr>
                   <td
                     key={vehicle?.registration_no}
-                    className="px-6 py-4 whitespace-no-wrap border-b border-gray-500"
+                    className=" px-2  py-2  border-b border-gray-500"
                   >
                     <div className="flex items-center">
                       <div>
@@ -286,18 +286,18 @@ const AddVehicleTable = () => {
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+                  <td className=" px-2  py-2  border-b border-gray-500">
                     <div className="text-sm leading-5 text-blue-900">
                       {vehicle?.purchaseDate}
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
+                  <td className=" px-2  py-2  border-b text-blue-900 border-gray-500 text-sm leading-5">
                     {vehicle?.registrationDate}
                   </td>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
+                  <td className=" px-2  py-2  border-b text-blue-900 border-gray-500 text-sm leading-5">
                     {vehicle?.color}
                   </td>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
+                  <td className=" px-2  py-2  border-b text-blue-900 border-gray-500 text-sm leading-5">
                     <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                       <span
                         aria-hidden
@@ -309,34 +309,34 @@ const AddVehicleTable = () => {
                     </span>
                   </td>
 
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
+                  <td className=" px-2  py-2  border-b border-gray-500 text-blue-900 text-sm leading-5">
                     {vehicle?.price}
                   </td>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
+                  <td className=" px-2  py-2  border-b border-gray-500 text-blue-900 text-sm leading-5">
                     {vehicle?.tax}
                   </td>
 
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
+                  <td className=" px-2  py-2  border-b border-gray-500 text-blue-900 text-sm leading-5">
                     {vehicle?.seatCapacity}
                   </td>
 
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
+                  <td className=" px-2  py-2  border-b border-gray-500 text-blue-900 text-sm leading-5">
                     {vehicle?.isAc}
                   </td>
 
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
+                  <td className=" px-2  py-2  border-b border-gray-500 text-blue-900 text-sm leading-5">
                     {vehicle?.brand}
                   </td>
 
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
+                  <td className=" px-2  py-2  border-b border-gray-500 text-blue-900 text-sm leading-5">
                     {vehicle?.model}
                   </td>
 
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
+                  <td className=" px-2  py-2  border-b border-gray-500 text-blue-900 text-sm leading-5">
                     {vehicle?.fuelType}
                   </td>
 
-                  <td className="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
+                  <td className=" px-2  py-2  text-right border-b border-gray-500 text-sm leading-5">
                     <div className="flex gap-x-1">
                       <button className="px-1 border-secondary border text-secondary rounded transition duration-300 hover:bg-secondary hover:text-white ">
                         <EyeOutlined />
@@ -423,4 +423,4 @@ const AddVehicleTable = () => {
   );
 };
 
-export default AddVehicleTable;
+export default VehicleListTable;

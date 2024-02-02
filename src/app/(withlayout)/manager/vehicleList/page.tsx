@@ -1,9 +1,12 @@
-import AddVehicleTable from "@/components/Table/AddVehicleTable";
+import VehicleListTable from "@/components/Table/VehicleListTable";
 
 const vehicleListPage = () => {
   return (
     <>
-      <AddVehicleTable />
+      <p className="mb-4 flex justify-center text-xl text-secondary">
+        Vehicle List
+      </p>
+      <VehicleListTable />
     </>
   );
 };
