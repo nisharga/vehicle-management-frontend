@@ -153,11 +153,8 @@ const DriverListTable = () => {
 
             <tbody className="bg-white">
               {vehicleDriversList?.map((vehicleDriver) => (
-                <tr>
-                  <td
-                    key={vehicleDriver?.email}
-                    className=" px-2 py-1   border-b border-gray-500"
-                  >
+                <tr key={vehicleDriver?.email}>
+                  <td className=" px-2 py-1   border-b border-gray-500">
                     <div className="flex items-center">
                       <div className="">
                         <Image
