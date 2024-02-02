@@ -1,5 +1,7 @@
 "use client";
 import TitleCard from "@/components/Cards/TitleCards/TitleCards";
+import { MonthlyBarChart } from "@/components/Charts/Bar/MonthlyChart";
+import { CurrentWeekBarChart } from "@/components/Charts/Bar/currentWeekChart";
 import moment from "moment";
 import Image from "next/image";
 
@@ -8,7 +10,6 @@ const TopSideButtons = () => {
 
   return <div className="inline-block float-right"></div>;
 };
-
 
 const overviewPage = () => {
   const drivers: any = [
@@ -85,17 +86,18 @@ const overviewPage = () => {
     },
   ];
 
-
   return (
     <div className="flex flex-col gap-7">
       <span className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         <div
-          className="p-5 flex flex-row gap-5 rounded-md"
+          className="p-5 flex flex-row gap-2 justify-between rounded-md"
           style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
         >
           <span className="flex flex-col items-start justify-center h-full">
             <p className="text-gray-600 text-lg">Total Drivers</p>
-            <h1 className="text-3xl text-blue-700 font-bold">5 drivers</h1>
+            <h1 className="text-2xl text-blue-700 font-bold bg-green-200 p-2 rounded-full">
+              5 drivers
+            </h1>
           </span>
           <span
             style={{ width: "50px" }}
@@ -109,8 +111,10 @@ const overviewPage = () => {
           style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
         >
           <span className="flex flex-col items-start justify-center h-full">
-            <p className="text-gray-600 text-lg">Total Vehicles list</p>
-            <h1 className="text-3xl text-blue-700 font-bold">5 Cars</h1>
+            <p className="text-gray-600 text-lg">Total Vehicles</p>
+            <h1 className="text-2xl text-blue-700 font-bold bg-pink-200 p-2 rounded-full">
+              5 Cars
+            </h1>
           </span>
           <span
             style={{ width: "50px" }}
@@ -162,6 +166,15 @@ const overviewPage = () => {
               </tbody>
             </table>
           </span>
+        </div>
+      </span>
+
+      <span className="flex flex-col lg:flex-row gap-5 justify-between items-center ">
+        <div className="lg:flex-1">
+          <CurrentWeekBarChart />
+        </div>
+        <div className="lg:flex-1">
+          <MonthlyBarChart />
         </div>
       </span>
 
