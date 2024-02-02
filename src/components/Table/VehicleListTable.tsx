@@ -273,11 +273,8 @@ const VehicleListTable = () => {
 
             <tbody className="bg-white">
               {vehicles?.map((vehicle) => (
-                <tr>
-                  <td
-                    key={vehicle?.registration_no}
-                    className=" px-2  py-2  border-b border-gray-500"
-                  >
+                <tr key={vehicle?.registration_no}>
+                  <td className=" px-2  py-2  border-b border-gray-500">
                     <div className="flex items-center">
                       <div>
                         <div className="text-sm leading-5 text-gray-800">
