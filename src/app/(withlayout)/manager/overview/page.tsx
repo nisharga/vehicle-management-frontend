@@ -6,10 +6,10 @@ import Image from "next/image";
 import { useEffect } from "react";
 
 const TopSideButtons = () => {
-  // const dispatch = useDispatch()
+ 
 
   const openAddNewLeadModal = () => {
-    // dispatch(openModal({title : "Add New Lead", bodyType : MODAL_BODY_TYPES.LEAD_ADD_NEW}))
+    
   };
 
   return <div className="inline-block float-right"></div>;
