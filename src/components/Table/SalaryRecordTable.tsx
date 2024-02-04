@@ -1,9 +1,9 @@
 "use client";
-import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
+import { EyeOutlined } from "@ant-design/icons";
 import { Image } from "antd";
 
-const DriverListTable = () => {
-  const DriverListTableFields = [
+const SalaryRecordTable = () => {
+  const SalaryTableFields = [
     {
       id: 0,
       fields: "Photo",
@@ -14,85 +14,62 @@ const DriverListTable = () => {
     },
     {
       id: 2,
-      fields: "Email",
+      fields: "Month",
     },
     {
       id: 3,
-      fields: "Phone",
+      fields: "Position",
     },
     {
       id: 4,
-      fields: "Experience",
+      fields: "Status",
     },
     {
       id: 5,
-      fields: "Rating",
-    },
-    {
-      id: 6,
-      fields: "Join Date",
-    },
-    {
-      id: 7,
-      fields: "Address",
-    },
-    {
-      id: 8,
-      fields: "Actions",
+      fields: "Details",
     },
   ];
 
-  const vehicleDriversList = [
+  const VMSEmployers = [
     {
+      ID: "VMSD-20181",
       name: "John Doe",
-      email: "john@example.com",
-      phone: "123-456-7890",
       avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-      experience: 2,
-      joinDate: "2022-01-01",
-      rating: 4.5,
-      address: "123 Main St, City, Country",
+      position: "junior",
+      salaryStatus: "pending",
+      month: "january-2020",
     },
     {
-      name: "Jane Smith",
-      email: "jane@example.com",
-      phone: "987-654-3210",
+      ID: "VMSD-20182",
+      name: "John Doe",
       avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-      experience: 5,
-      joinDate: "2021-12-15",
-      rating: 4.2,
-      address: "456 Park Ave, City, Country",
+      position: "senior",
+      salaryStatus: "paid",
+      month: "february-2020",
     },
     {
-      name: "Alice Johnson",
-      email: "alice@example.com",
-      phone: "555-555-5555",
+      ID: "VMSD-20181",
+      name: "John Doe",
       avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-      experience: 1,
-      joinDate: "2023-03-10",
-      rating: 4.8,
-      address: "789 Elm St, City, Country",
-    },
-
-    {
-      name: "Bob Williams",
-      email: "bob@example.com",
-      phone: "111-222-3333",
-      avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-      experience: 3,
-      joinDate: "2020-09-20",
-      rating: 4.0,
-      address: "101 Oak St, City, Country",
+      position: "executive",
+      salaryStatus: "pending",
+      month: "March-2020",
     },
     {
-      name: "Emily Brown",
-      email: "emily@example.com",
-      phone: "999-888-7777",
+      ID: "VMSD-20181",
+      name: "John Doe",
       avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-      experience: 4,
-      joinDate: "2023-07-05",
-      rating: 4.6,
-      address: "222 Pine St, City, Country",
+      position: "Manager",
+      salaryStatus: "pending",
+      month: "March-2020",
+    },
+    {
+      ID: "VMSD-20181",
+      name: "John Doe",
+      avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
+      position: "helper",
+      salaryStatus: "pending",
+      month: "March-2020",
     },
   ];
   return (
@@ -131,88 +108,68 @@ const DriverListTable = () => {
                 <input
                   type="text"
                   className="flex-shrink flex-grow flex-auto leading-normal tracking-wide w-px border border-none border-l-0 rounded rounded-l-none px-3 relative focus:outline-none text-xxs lg:text-xs text-gray-500 font-thin"
-                  placeholder={`Search Through ${DriverListTableFields?.length} Driver`}
+                  placeholder={`Search Through ${SalaryTableFields?.length} Driver`}
                 />
               </div>
             </div>
           </div>
 
           <table className="min-w-full">
-            <thead>
-              <tr>
-                {DriverListTableFields?.map((DriverListTableField) => (
+            <thead className="bg-gray-100 rounded-lg">
+              <tr className="">
+                {SalaryTableFields?.map((SalaryTableField) => (
                   <th
-                    key={DriverListTableField?.id}
-                    className="px-6 py-3 border-b-2 border-gray-300 text-left leading-4 text-blue-500 tracking-wider"
+                    key={SalaryTableField?.id}
+                    className="px-2 py-2  border-gray-300 text-left leading-4 text-black tracking-wider"
                   >
-                    {DriverListTableField?.fields}
+                    {SalaryTableField?.fields}
                   </th>
                 ))}
               </tr>
             </thead>
 
             <tbody className="bg-white">
-              {vehicleDriversList?.map((vehicleDriver) => (
-                <tr key={vehicleDriver?.email}>
-                  <td className=" px-2 py-1   border-b border-gray-500">
+              {VMSEmployers?.map((VMSEmployer) => (
+                <tr key={VMSEmployer?.ID} className="border-b border-gray-200">
+                  <td className=" px-2 py-1">
                     <div className="flex items-center">
                       <div className="">
                         <Image
                           className="rounded-full"
                           width={50}
-                          src={vehicleDriver?.avatar}
+                          src={VMSEmployer?.avatar}
                           alt="..."
                         />
                       </div>
                     </div>
                   </td>
-                  <td className=" px-2 py-1   border-b border-gray-500">
-                    <div className="text-sm leading-5 text-blue-900">
-                      {vehicleDriver?.name}
+                  <td className=" px-2 py-1   ">
+                    <div className="text-sm leading-5 ">
+                      {VMSEmployer?.name}
                     </div>
                   </td>
-                  <td className=" px-2 py-1   border-b text-blue-900 border-gray-500 text-sm leading-5">
-                    {vehicleDriver?.email}
+                  <td className=" px-2 py-1 text-sm leading-5">
+                    {VMSEmployer?.month}
                   </td>
-                  <td className=" px-2 py-1   border-b text-blue-900 border-gray-500 text-sm leading-5">
-                    {vehicleDriver?.phone}
+                  <td className=" px-2 py-1     text-sm leading-5">
+                    {VMSEmployer?.position}
                   </td>
-                  <td className=" px-2 py-1   border-b text-blue-900 border-gray-500 text-sm leading-5">
+                  <td className=" px-2 py-1     text-sm leading-5">
                     <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                       <span
                         aria-hidden
                         className="absolute inset-0 bg-green-200 opacity-50 rounded-full"
                       ></span>
                       <span className="relative text-xs">
-                        {vehicleDriver?.experience}
+                        {VMSEmployer?.salaryStatus}
                       </span>
                     </span>
                   </td>
 
-                  <td className=" px-2 py-1   border-b border-gray-500 text-blue-900 text-sm leading-5">
-                    {vehicleDriver?.joinDate}
-                  </td>
-                  <td className=" px-2 py-1   border-b border-gray-500 text-blue-900 text-sm leading-5">
-                    {vehicleDriver?.rating}
-                  </td>
-
-                  <td className=" px-2 py-1   border-b border-gray-500 text-blue-900 text-sm leading-5">
-                    {vehicleDriver?.address}
-                  </td>
-
-                  <td className=" px-2 py-1   text-right border-b border-gray-500 text-sm leading-5">
-                    <div className="flex gap-x-1">
-                      <button className="px-1 border-secondary border text-secondary rounded transition duration-300 hover:bg-secondary hover:text-white ">
-                        <EyeOutlined />
-                      </button>
-
-                      <button className="px-1 border-yellow-600 border text-yellow-600 rounded transition duration-300 hover:bg-yellow-100 hover:text-secondary ">
-                        <EditOutlined />
-                      </button>
-                      <button className="px-1 border-red-600 border text-red-600 rounded transition duration-300 hover:bg-red-100 hover:text-red-600 ">
-                        <DeleteOutlined />
-                      </button>
-                    </div>
+                  <td className=" px-2 py-1 text-sm leading-5">
+                    <button className="px-1 border-secondary border text-secondary rounded transition duration-300 hover:bg-secondary hover:text-white ">
+                      <EyeOutlined />
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -288,4 +245,4 @@ const DriverListTable = () => {
   );
 };
 
-export default DriverListTable;
+export default SalaryRecordTable;

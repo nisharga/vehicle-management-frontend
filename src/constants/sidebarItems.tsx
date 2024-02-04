@@ -9,7 +9,6 @@ import {
   OrderedListOutlined,
   ReadOutlined,
   ScheduleOutlined,
-  SettingOutlined,
   ShopOutlined,
   SolutionOutlined,
   UnorderedListOutlined,
@@ -27,51 +26,28 @@ export const sidebarItems = (role: string) => {
       icon: <AreaChartOutlined />,
       key: `/${role}/overview`,
     },
-    {
-      label: "Report",
-      key: "report",
-      icon: <ReadOutlined />,
-      children: [
-        {
-          label: <Link href={`/${role}/fuelReport`}>Fuel Report</Link>,
-          key: "fuelReport",
-        },
-        {
-          label: (
-            <Link href={`/${role}/expenditureReport`}>Expenditure Report</Link>
-          ),
-          key: "expenditureReport",
-        },
-        {
-          label: <Link href={`/${role}/incomeReport`}>Income Report</Link>,
-          key: "incomeReport",
-        },
-        {
-          label: <Link href={`/${role}/tripReport`}>Trip Report</Link>,
-          key: "tripReport",
-        },
-      ],
-    },
-    {
-      label: "Settings",
-      key: "settings",
-      icon: <SettingOutlined />,
-      children: [
-        {
-          label: "Logout",
-          key: "logout",
-        },
-        {
-          label: "Profile",
-          key: "profile",
-        },
-      ],
-    },
+
+    // {
+    //   label: "Settings",
+    //   key: "settings",
+    //   icon: <SettingOutlined />,
+    //   children: [
+    //     {
+    //       label: "Logout",
+    //       key: "logout",
+    //     },
+    //     {
+    //       label: "Profile",
+    //       key: "profile",
+    //     },
+    //   ],
+    // },
   ];
 
   //.............Manager.......................
   const managerSidebarItems: MenuProps["items"] = [
     ...defaultSidebarItems,
+
     {
       label: <Link href={`/${role}/addVehicle`}>Add Vehicle</Link>,
       icon: <FileAddOutlined />,
@@ -104,6 +80,42 @@ export const sidebarItems = (role: string) => {
     },
 
     {
+      label: "expenses",
+      key: "expenses",
+      icon: <ReadOutlined />,
+      children: [
+        {
+          label: <Link href={`/${role}/trip-cost`}>Trip-Cost</Link>,
+          key: "trip-cost",
+        },
+        {
+          label: <Link href={`/${role}/fuel-cost`}>Fuel-Cost</Link>,
+          key: "fuel-cost",
+        },
+        {
+          label: <Link href={`/${role}/salary`}>Salary</Link>,
+          key: "salary",
+        },
+        {
+          label: <Link href={`/${role}/office-cost`}>Office-Cost</Link>,
+          key: "office-cost",
+        },
+        {
+          label: <Link href={`/${role}/accessories`}>Accessories</Link>,
+          key: "accessories",
+        },
+        {
+          label: <Link href={`/${role}/others`}>Others-cost</Link>,
+          key: "others-cost",
+        },
+        {
+          label: <Link href={`/${role}/expense-report`}>Expense Report</Link>,
+          key: "expensesReport",
+        },
+      ],
+    },
+
+    {
       label: "Inventory",
       key: "inventory",
       icon: <ShopOutlined />,
@@ -113,16 +125,33 @@ export const sidebarItems = (role: string) => {
           key: "tools",
         },
         {
-          label: <Link href={`/${role}/furniture`}>Furniture</Link>,
-          key: "furniture",
-        },
-        {
           label: <Link href={`/${role}/vehicleWheels`}>Vehicle Wheels</Link>,
           key: "vehicleWheels",
         },
+      ],
+    },
+    {
+      label: "Report",
+      key: "report",
+      icon: <ReadOutlined />,
+      children: [
         {
-          label: <Link href={`/${role}/others`}>Others</Link>,
-          key: "others",
+          label: <Link href={`/${role}/fuelReport`}>Fuel Report</Link>,
+          key: "fuelReport",
+        },
+        {
+          label: (
+            <Link href={`/${role}/expenditureReport`}>Expenditure Report</Link>
+          ),
+          key: "expenditureReport",
+        },
+        {
+          label: <Link href={`/${role}/incomeReport`}>Income Report</Link>,
+          key: "incomeReport",
+        },
+        {
+          label: <Link href={`/${role}/tripReport`}>Trip Report</Link>,
+          key: "tripReport",
         },
       ],
     },
@@ -188,9 +217,6 @@ export const sidebarItems = (role: string) => {
 
   //.............Super admin.......................
   const superAdminSidebarItems: MenuProps["items"] = [
-    // ...managerSidebarItems,
-    // ...driverSidebarItems,
-    // ...defaultSidebarItems,
     {
       label: <Link href={`/${role}/roleManage`}>Role Manage</Link>,
       icon: <AppstoreAddOutlined />,
