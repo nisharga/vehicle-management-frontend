@@ -1,9 +1,11 @@
-const addDriverPage = () => {
+
+const UpdateDriverForm = ({ updateID }: any) => {
   return (
-    <div className="">
+    <div>
+          <div className="">
       <form className="bg-white px-10 rounded-lg shadow-sm py-20 md:w-4/5 mx-auto">
         <h2 className="text-2xl font-bold mb-6 text-center text-[#04334E] uppercase">
-          Create Driver
+          Update Driver {updateID}
         </h2>
 
         <div className="flex flex-col justify-center items-center">
@@ -49,7 +51,8 @@ const addDriverPage = () => {
         </div>
       </form>
     </div>
-  );
-};
+    </div>
+  )
+}
 
-export default addDriverPage;
+export default UpdateDriverForm

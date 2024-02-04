@@ -1,100 +1,24 @@
 "use client";
 import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
 import { Image } from "antd";
+import { DriverListTableFields, vehicleDriversList } from "./StaticTableData";
+import Pagination from "../ui/Pagination";
+import ModalBox from "../ModalBox/ModalBox";
+
+import ViewItem from "../ui/ViewItem";
+import { Button, message, Popconfirm } from 'antd';
+import UpdateDriverForm from "../Forms/UpdateDriverForm";
 
 const DriverListTable = () => {
-  const DriverListTableFields = [
-    {
-      id: 0,
-      fields: "Photo",
-    },
-    {
-      id: 1,
-      fields: "Name",
-    },
-    {
-      id: 2,
-      fields: "Email",
-    },
-    {
-      id: 3,
-      fields: "Phone",
-    },
-    {
-      id: 4,
-      fields: "Experience",
-    },
-    {
-      id: 5,
-      fields: "Rating",
-    },
-    {
-      id: 6,
-      fields: "Join Date",
-    },
-    {
-      id: 7,
-      fields: "Address",
-    },
-    {
-      id: 8,
-      fields: "Actions",
-    },
-  ];
-
-  const vehicleDriversList = [
-    {
-      name: "John Doe",
-      email: "john@example.com",
-      phone: "123-456-7890",
-      avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-      experience: 2,
-      joinDate: "2022-01-01",
-      rating: 4.5,
-      address: "123 Main St, City, Country",
-    },
-    {
-      name: "Jane Smith",
-      email: "jane@example.com",
-      phone: "987-654-3210",
-      avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-      experience: 5,
-      joinDate: "2021-12-15",
-      rating: 4.2,
-      address: "456 Park Ave, City, Country",
-    },
-    {
-      name: "Alice Johnson",
-      email: "alice@example.com",
-      phone: "555-555-5555",
-      avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-      experience: 1,
-      joinDate: "2023-03-10",
-      rating: 4.8,
-      address: "789 Elm St, City, Country",
-    },
-
-    {
-      name: "Bob Williams",
-      email: "bob@example.com",
-      phone: "111-222-3333",
-      avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-      experience: 3,
-      joinDate: "2020-09-20",
-      rating: 4.0,
-      address: "101 Oak St, City, Country",
-    },
-    {
-      name: "Emily Brown",
-      email: "emily@example.com",
-      phone: "999-888-7777",
-      avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-      experience: 4,
-      joinDate: "2023-07-05",
-      rating: 4.6,
-      address: "222 Pine St, City, Country",
-    },
-  ];
+  const confirm = (e: any) => {
+    console.log(e);
+    message.success(`${e} Deleted Sucessfully`);
+  };
+  
+  const cancel = (e: React.MouseEvent<HTMLElement>) => {
+    console.log(e);
+    message.error('Click on No');
+  };
   return (
     <div>
       {/* table start */}
@@ -116,14 +40,14 @@ const DriverListTable = () => {
                       <path
                         d="M8.11086 15.2217C12.0381 15.2217 15.2217 12.0381 15.2217 8.11086C15.2217 4.18364 12.0381 1 8.11086 1C4.18364 1 1 4.18364 1 8.11086C1 12.0381 4.18364 15.2217 8.11086 15.2217Z"
                         stroke="#455A64"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                       <path
                         d="M16.9993 16.9993L13.1328 13.1328"
                         stroke="#455A64"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                     </svg>
                   </span>
@@ -154,7 +78,7 @@ const DriverListTable = () => {
             <tbody className="bg-white">
               {vehicleDriversList?.map((vehicleDriver) => (
                 <tr key={vehicleDriver?.email}>
-                  <td className=" px-2 py-1   border-b border-gray-500">
+                  <td className=" px-2 py-1 border-b border-gray-500">
                     <div className="flex items-center">
                       <div className="">
                         <Image
@@ -177,7 +101,7 @@ const DriverListTable = () => {
                   <td className=" px-2 py-1   border-b text-blue-900 border-gray-500 text-sm leading-5">
                     {vehicleDriver?.phone}
                   </td>
-                  <td className=" px-2 py-1   border-b text-blue-900 border-gray-500 text-sm leading-5">
+                  <td className=" px-2 py-1 text-center  border-b text-blue-900 border-gray-500 text-sm leading-5">
                     <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                       <span
                         aria-hidden
@@ -189,29 +113,39 @@ const DriverListTable = () => {
                     </span>
                   </td>
 
-                  <td className=" px-2 py-1   border-b border-gray-500 text-blue-900 text-sm leading-5">
+                  <td className=" px-2 py-1 text-center border-b border-gray-500 text-blue-900 text-sm leading-5">
                     {vehicleDriver?.joinDate}
                   </td>
-                  <td className=" px-2 py-1   border-b border-gray-500 text-blue-900 text-sm leading-5">
+                  <td className=" px-2 py-1 text-center border-b border-gray-500 text-blue-900 text-sm leading-5">
                     {vehicleDriver?.rating}
                   </td>
-
-                  <td className=" px-2 py-1   border-b border-gray-500 text-blue-900 text-sm leading-5">
-                    {vehicleDriver?.address}
-                  </td>
+             
 
                   <td className=" px-2 py-1   text-right border-b border-gray-500 text-sm leading-5">
                     <div className="flex gap-x-1">
-                      <button className="px-1 border-secondary border text-secondary rounded transition duration-300 hover:bg-secondary hover:text-white ">
-                        <EyeOutlined />
-                      </button>
+                    <ModalBox 
+                      btnLabel={ <span className="item justify-center items-center"> <EyeOutlined /> </span> }   
+                       > 
+                        <ViewItem viewID={vehicleDriver?.name} />
+                      </ModalBox>  
 
-                      <button className="px-1 border-yellow-600 border text-yellow-600 rounded transition duration-300 hover:bg-yellow-100 hover:text-secondary ">
-                        <EditOutlined />
-                      </button>
-                      <button className="px-1 border-red-600 border text-red-600 rounded transition duration-300 hover:bg-red-100 hover:text-red-600 ">
-                        <DeleteOutlined />
-                      </button>
+                      <ModalBox btnLabel={ <span className="item justify-center items-center"> <EditOutlined /> </span> }> 
+                        <UpdateDriverForm updateID={vehicleDriver?.name} />
+                      </ModalBox>  
+                      
+                  <Popconfirm
+                    title="Delete the task"
+                    description="Are you sure to delete this task?"
+                    onConfirm={() => confirm(vehicleDriver?.name)}
+                    onCancel={() => cancel}
+                    okText="Yes"
+                    cancelText="No"
+                  >
+                    <Button danger >
+                      <span className="item justify-center items-center"> <DeleteOutlined /> </span>
+                    </Button>
+                  </Popconfirm>
+
                     </div>
                   </td>
                 </tr>
@@ -219,66 +153,7 @@ const DriverListTable = () => {
             </tbody>
           </table>
           <div className="flex justify-center my-4  mx-auto">
-            <nav className="relative z-0 inline-flex shadow-sm">
-              <div>
-                <a
-                  href="#"
-                  className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150"
-                  aria-label="Previous"
-                >
-                  <svg
-                    className="h-5 w-5"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </a>
-              </div>
-              <div>
-                <a
-                  href="#"
-                  className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-blue-700 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-tertiary active:text-gray-700 transition ease-in-out duration-150 hover:bg-tertiary"
-                >
-                  1
-                </a>
-                <a
-                  href="#"
-                  className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-blue-600 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-tertiary active:text-gray-700 transition ease-in-out duration-150 hover:bg-tertiary"
-                >
-                  2
-                </a>
-                <a
-                  href="#"
-                  className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-blue-600 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-tertiary active:text-gray-700 transition ease-in-out duration-150 hover:bg-tertiary"
-                >
-                  3
-                </a>
-              </div>
-              <div v-if="pagination.current_page < pagination.last_page">
-                <a
-                  href="#"
-                  className="-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150"
-                  aria-label="Next"
-                >
-                  <svg
-                    className="h-5 w-5"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </a>
-              </div>
-            </nav>
+            <Pagination/>
           </div>
         </div>
         {/* table end */}
