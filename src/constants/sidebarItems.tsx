@@ -3,17 +3,15 @@ import {
   AreaChartOutlined,
   CarOutlined,
   ExperimentOutlined,
-  EyeOutlined,
-  FileAddOutlined,
-  HistoryOutlined,
-  OrderedListOutlined,
+  EyeOutlined, 
+  HistoryOutlined, 
   ReadOutlined,
   ScheduleOutlined,
   SettingOutlined,
   ShopOutlined,
-  SolutionOutlined,
-  UnorderedListOutlined,
-  UserAddOutlined,
+  SolutionOutlined,  
+  EnvironmentOutlined,
+  TruckOutlined 
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import Link from "next/link";
@@ -72,30 +70,22 @@ export const sidebarItems = (role: string) => {
   //.............Manager.......................
   const managerSidebarItems: MenuProps["items"] = [
     ...defaultSidebarItems,
+     
     {
-      label: <Link href={`/${role}/addVehicle`}>Add Vehicle</Link>,
-      icon: <FileAddOutlined />,
-      key: `/${role}/addVehicle`,
-    },
+      label: <Link href={`/${role}/vehicle`}>Vehicle</Link>,
+      icon: <TruckOutlined />,
+      key: `/${role}/vehicle`,
+    }, 
     {
-      label: <Link href={`/${role}/vehicleList`}>Vehicle List</Link>,
-      icon: <UnorderedListOutlined />,
-      key: `/${role}/vehicleList`,
-    },
-    {
-      label: <Link href={`/${role}/addDriver`}>Add Driver</Link>,
-      icon: <UserAddOutlined />,
-      key: `/${role}/addDriver`,
-    },
-    {
-      label: <Link href={`/${role}/driverList`}>Driver List</Link>,
-      icon: <OrderedListOutlined />,
-      key: `/${role}/driverList`,
-    },
-    {
-      label: <Link href={`/${role}/createTrip`}>Create Trip</Link>,
+      label: <Link href={`/${role}/driver`}>Driver</Link>,
       icon: <CarOutlined />,
-      key: `/${role}/createTrip`,
+      key: `/${role}/driver`,
+    },
+    
+    {
+      label: <Link href={`/${role}/trip`}>Trip</Link>,
+      icon: <EnvironmentOutlined />,
+      key: `/${role}/trip`,
     },
     {
       label: <Link href={`/${role}/manageFuel`}>Manage Fuel</Link>,
