@@ -152,6 +152,7 @@ const DriverListTable = () => {
               ))}
             </tbody>
           </table>
+
           <div className="flex justify-center my-4  mx-auto">
             <Pagination/>
           </div>
