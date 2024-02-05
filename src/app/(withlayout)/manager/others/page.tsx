@@ -1,9 +1,9 @@
-const othersPage = () => {
+const othersCostPage = () => {
   return (
     <div>
-      <p>others....</p>
+      <p>others cost page....</p>
     </div>
   );
 };
 
-export default othersPage;
+export default othersCostPage;

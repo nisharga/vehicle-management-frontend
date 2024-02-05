@@ -3,15 +3,14 @@ import {
   AreaChartOutlined,
   CarOutlined,
   ExperimentOutlined,
-  EyeOutlined, 
-  HistoryOutlined, 
+  EyeOutlined,
+  HistoryOutlined,
   ReadOutlined,
   ScheduleOutlined,
-  SettingOutlined,
   ShopOutlined,
-  SolutionOutlined,  
+  SolutionOutlined,
   EnvironmentOutlined,
-  TruckOutlined 
+  TruckOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import Link from "next/link";
@@ -24,6 +23,99 @@ export const sidebarItems = (role: string) => {
       label: <Link href={`/${role}/overview`}>Overview</Link>,
       icon: <AreaChartOutlined />,
       key: `/${role}/overview`,
+    },
+
+    // {
+    //   label: "Settings",
+    //   key: "settings",
+    //   icon: <SettingOutlined />,
+    //   children: [
+    //     {
+    //       label: "Logout",
+    //       key: "logout",
+    //     },
+    //     {
+    //       label: "Profile",
+    //       key: "profile",
+    //     },
+    //   ],
+    // },
+  ];
+
+  //.............Manager.......................
+  const managerSidebarItems: MenuProps["items"] = [
+    {
+      label: <Link href={`/${role}/vehicle`}>Vehicle</Link>,
+      icon: <TruckOutlined />,
+      key: `/${role}/vehicle`,
+    },
+    {
+      label: <Link href={`/${role}/driver`}>Driver</Link>,
+      icon: <CarOutlined />,
+      key: `/${role}/driver`,
+    },
+
+    {
+      label: <Link href={`/${role}/trip`}>Trip</Link>,
+      icon: <EnvironmentOutlined />,
+      key: `/${role}/trip`,
+    },
+    {
+      label: <Link href={`/${role}/manageFuel`}>Manage Fuel</Link>,
+      icon: <ExperimentOutlined />,
+      key: `/${role}/manageFuel`,
+    },
+
+    {
+      label: "expenses",
+      key: "expenses",
+      icon: <ReadOutlined />,
+      children: [
+        {
+          label: <Link href={`/${role}/trip-cost`}>Trip-Cost</Link>,
+          key: "trip-cost",
+        },
+        {
+          label: <Link href={`/${role}/fuel-cost`}>Fuel-Cost</Link>,
+          key: "fuel-cost",
+        },
+        {
+          label: <Link href={`/${role}/salary`}>Salary</Link>,
+          key: "salary",
+        },
+        {
+          label: <Link href={`/${role}/office-cost`}>Office-Cost</Link>,
+          key: "office-cost",
+        },
+        {
+          label: <Link href={`/${role}/accessories`}>Accessories</Link>,
+          key: "accessories",
+        },
+        {
+          label: <Link href={`/${role}/others`}>Others-cost</Link>,
+          key: "others-cost",
+        },
+        {
+          label: <Link href={`/${role}/expense-report`}>Expense Report</Link>,
+          key: "expensesReport",
+        },
+      ],
+    },
+
+    {
+      label: "Inventory",
+      key: "inventory",
+      icon: <ShopOutlined />,
+      children: [
+        {
+          label: <Link href={`/${role}/tools`}>Tools</Link>,
+          key: "tools",
+        },
+        {
+          label: <Link href={`/${role}/vehicleWheels`}>Vehicle Wheels</Link>,
+          key: "vehicleWheels",
+        },
+      ],
     },
     {
       label: "Report",
@@ -47,72 +139,6 @@ export const sidebarItems = (role: string) => {
         {
           label: <Link href={`/${role}/tripReport`}>Trip Report</Link>,
           key: "tripReport",
-        },
-      ],
-    },
-    {
-      label: "Settings",
-      key: "settings",
-      icon: <SettingOutlined />,
-      children: [
-        {
-          label: "Logout",
-          key: "logout",
-        },
-        {
-          label: "Profile",
-          key: "profile",
-        },
-      ],
-    },
-  ];
-
-  //.............Manager.......................
-  const managerSidebarItems: MenuProps["items"] = [
-    ...defaultSidebarItems,
-     
-    {
-      label: <Link href={`/${role}/vehicle`}>Vehicle</Link>,
-      icon: <TruckOutlined />,
-      key: `/${role}/vehicle`,
-    }, 
-    {
-      label: <Link href={`/${role}/driver`}>Driver</Link>,
-      icon: <CarOutlined />,
-      key: `/${role}/driver`,
-    },
-    
-    {
-      label: <Link href={`/${role}/trip`}>Trip</Link>,
-      icon: <EnvironmentOutlined />,
-      key: `/${role}/trip`,
-    },
-    {
-      label: <Link href={`/${role}/manageFuel`}>Manage Fuel</Link>,
-      icon: <ExperimentOutlined />,
-      key: `/${role}/manageFuel`,
-    },
-
-    {
-      label: "Inventory",
-      key: "inventory",
-      icon: <ShopOutlined />,
-      children: [
-        {
-          label: <Link href={`/${role}/tools`}>Tools</Link>,
-          key: "tools",
-        },
-        {
-          label: <Link href={`/${role}/furniture`}>Furniture</Link>,
-          key: "furniture",
-        },
-        {
-          label: <Link href={`/${role}/vehicleWheels`}>Vehicle Wheels</Link>,
-          key: "vehicleWheels",
-        },
-        {
-          label: <Link href={`/${role}/others`}>Others</Link>,
-          key: "others",
         },
       ],
     },
@@ -178,9 +204,6 @@ export const sidebarItems = (role: string) => {
 
   //.............Super admin.......................
   const superAdminSidebarItems: MenuProps["items"] = [
-    // ...managerSidebarItems,
-    // ...driverSidebarItems,
-    // ...defaultSidebarItems,
     {
       label: <Link href={`/${role}/roleManage`}>Role Manage</Link>,
       icon: <AppstoreAddOutlined />,
