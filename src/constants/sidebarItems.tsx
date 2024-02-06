@@ -16,7 +16,6 @@ import Link from "next/link";
 import { USER_ROLE } from "./role";
 
 export const sidebarItems = (role: string) => {
-  // ....privacyPolicy....
   const privacyPolicySidebarItem: MenuProps["items"] = [
     {
       label: <Link href={`/${role}/privacy`}>Privacy Policy</Link>,
@@ -76,23 +75,6 @@ export const sidebarItems = (role: string) => {
       icon: <AreaChartOutlined />,
       key: `/${role}/overview`,
     },
-    //............default.......................
-
-    // {
-    //   label: "Settings",
-    //   key: "settings",
-    //   icon: <SettingOutlined />,
-    //   children: [
-    //     {
-    //       label: "Logout",
-    //       key: "logout",
-    //     },
-    //     {
-    //       label: "Profile",
-    //       key: "profile",
-    //     },
-    //   ],
-    // },
   ];
 
   //.............Manager.......................
@@ -121,7 +103,7 @@ export const sidebarItems = (role: string) => {
     },
 
     {
-      label: "expenses",
+      label: "Expenses",
       key: "expenses",
       icon: <ReadOutlined />,
       children: [
