@@ -152,7 +152,7 @@ const OfficeCostTable = () => {
                 options={month}
               />
             </div>
-            <CommonButton content="Add Salary" />
+            <CommonButton content="Add Office Cost" />
           </div>
           <br />
           <table className="min-w-full ">
