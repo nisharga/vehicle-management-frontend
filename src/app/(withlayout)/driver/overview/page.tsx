@@ -87,7 +87,7 @@ const overviewPage = () => {
   ];
 
   return (
-    <main className="flex flex-col gap-7">
+    <div className="flex flex-col gap-7">
       <span className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         <div
           className="p-5 flex flex-row gap-2 justify-between rounded-md"
@@ -184,7 +184,7 @@ const overviewPage = () => {
         TopSideButtons={<TopSideButtons />}
       >
         {/* Drivers List in table format loaded from slice after api call */}
-        <section className="overflow-x-auto w-full">
+        <div className="overflow-x-auto w-full">
           <table className="table w-full">
             <thead>
               <tr>
@@ -231,7 +231,7 @@ const overviewPage = () => {
               })}
             </tbody>
           </table>
-        </section>
+        </div>
       </TitleCard>
 
       <TitleCard
@@ -240,7 +240,7 @@ const overviewPage = () => {
         TopSideButtons={<TopSideButtons />}
       >
         {/* vehicles List in table format loaded from slice after api call */}
-        <section className="overflow-x-auto w-full">
+        <div className="overflow-x-auto w-full">
           <table className="table w-full">
             <thead>
               <tr>
@@ -267,9 +267,9 @@ const overviewPage = () => {
               })}
             </tbody>
           </table>
-        </section>
+        </div>
       </TitleCard>
-    </main>
+    </div>
   );
 };
 

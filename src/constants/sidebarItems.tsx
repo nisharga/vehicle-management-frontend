@@ -2,14 +2,13 @@ import {
   AppstoreAddOutlined,
   AreaChartOutlined,
   CarOutlined,
+  EnvironmentOutlined,
   ExperimentOutlined,
   EyeOutlined,
   HistoryOutlined,
   ReadOutlined,
   ScheduleOutlined,
   ShopOutlined,
-  SolutionOutlined,
-  EnvironmentOutlined,
   TruckOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
@@ -17,13 +16,67 @@ import Link from "next/link";
 import { USER_ROLE } from "./role";
 
 export const sidebarItems = (role: string) => {
-  //............default.......................
-  const defaultSidebarItems: MenuProps["items"] = [
+  // ....privacyPolicy....
+  const privacyPolicySidebarItem: MenuProps["items"] = [
+    {
+      label: <Link href={`/${role}/privacy`}>Privacy Policy</Link>,
+      icon: <AreaChartOutlined />,
+      key: `/privacy`,
+    },
+  ];
+  const faqSidebarItem: MenuProps["items"] = [
+    {
+      label: <Link href={`/${role}/faq`}>FAQ</Link>,
+      icon: <AreaChartOutlined />,
+      key: `/${role}/faq`,
+    },
+  ];
+
+  const glarySidebarItem: MenuProps["items"] = [
+    {
+      label: <Link href={`/${role}/gallery`}>Gallery</Link>,
+      icon: <AreaChartOutlined />,
+      key: `/${role}/gallery`,
+    },
+  ];
+
+  const complainSidebarItem: MenuProps["items"] = [
+    {
+      label: <Link href={`/${role}/complain`}>Complain</Link>,
+      icon: <AreaChartOutlined />,
+      key: `/${role}/complain`,
+    },
+  ];
+  const contactSidebarItem: MenuProps["items"] = [
+    {
+      label: <Link href={`/${role}/contact`}>Contact</Link>,
+      icon: <AreaChartOutlined />,
+      key: `/${role}/contact`,
+    },
+  ];
+
+  const taskSidebarItem: MenuProps["items"] = [
+    {
+      label: <Link href={`/${role}/task`}>Task</Link>,
+      icon: <AreaChartOutlined />,
+      key: `/${role}/task`,
+    },
+  ];
+  const profileSidebarItem: MenuProps["items"] = [
+    {
+      label: <Link href={`/${role}/profile`}>Profile</Link>,
+      icon: <AreaChartOutlined />,
+      key: `/${role}/profile`,
+    },
+  ];
+
+  const overviewSidebarItems: MenuProps["items"] = [
     {
       label: <Link href={`/${role}/overview`}>Overview</Link>,
       icon: <AreaChartOutlined />,
       key: `/${role}/overview`,
     },
+    //............default.......................
 
     // {
     //   label: "Settings",
@@ -44,6 +97,7 @@ export const sidebarItems = (role: string) => {
 
   //.............Manager.......................
   const managerSidebarItems: MenuProps["items"] = [
+    ...overviewSidebarItems,
     {
       label: <Link href={`/${role}/vehicle`}>Vehicle</Link>,
       icon: <TruckOutlined />,
@@ -91,10 +145,7 @@ export const sidebarItems = (role: string) => {
           label: <Link href={`/${role}/accessories`}>Accessories</Link>,
           key: "accessories",
         },
-        {
-          label: <Link href={`/${role}/others`}>Others-cost</Link>,
-          key: "others-cost",
-        },
+
         {
           label: <Link href={`/${role}/expense-report`}>Expense Report</Link>,
           key: "expensesReport",
@@ -146,6 +197,7 @@ export const sidebarItems = (role: string) => {
 
   //.........Driver........................
   const driverSidebarItems: MenuProps["items"] = [
+    ...overviewSidebarItems,
     {
       label: <Link href={`/${role}/tripHistory`}>Trip History</Link>,
       icon: <HistoryOutlined />,
@@ -172,29 +224,15 @@ export const sidebarItems = (role: string) => {
     },
 
     {
-      label: "Driver History",
-      key: "driverHistory",
-      icon: <SolutionOutlined />,
-      children: [
-        {
-          label: <Link href={`/${role}/totalTrip`}>Total trip</Link>,
-          key: "totalTrip",
-        },
-        {
-          label: <Link href={`/${role}/shifting`}>Shifting</Link>,
-          key: "shifting",
-        },
-        {
-          label: <Link href={`/${role}/holyday`}>Holyday</Link>,
-          key: "holyday",
-        },
-        {
-          label: <Link href={`/${role}/salaryStatus`}>Salary Status</Link>,
-          key: "salaryStatus",
-        },
-      ],
+      label: <Link href={`/${role}/holyday`}>Holyday</Link>,
+      icon: <ShopOutlined />,
+      key: `/${role}/holyday`,
     },
-
+    {
+      label: <Link href={`/${role}/totalTrip`}>Total trip</Link>,
+      icon: <ShopOutlined />,
+      key: `/${role}/totalTrip`,
+    },
     {
       label: <Link href={`/${role}/inventoryRequest`}>Inventory Request</Link>,
       icon: <ShopOutlined />,
@@ -204,6 +242,7 @@ export const sidebarItems = (role: string) => {
 
   //.............Super admin.......................
   const superAdminSidebarItems: MenuProps["items"] = [
+    ...overviewSidebarItems,
     {
       label: <Link href={`/${role}/roleManage`}>Role Manage</Link>,
       icon: <AppstoreAddOutlined />,
@@ -214,12 +253,19 @@ export const sidebarItems = (role: string) => {
       icon: <EyeOutlined />,
       key: `/${role}/viewProfile`,
     },
+    ...contactSidebarItem,
+    ...privacyPolicySidebarItem,
+    ...glarySidebarItem,
+    ...faqSidebarItem,
+    ...taskSidebarItem,
+    ...complainSidebarItem,
+    ...profileSidebarItem,
   ];
 
   if (role === USER_ROLE.SUPER_ADMIN) return superAdminSidebarItems;
   else if (role === USER_ROLE.MANAGER) return managerSidebarItems;
   else if (role === USER_ROLE.DRIVER) return driverSidebarItems;
   else {
-    defaultSidebarItems;
+    privacyPolicySidebarItem;
   }
 };
