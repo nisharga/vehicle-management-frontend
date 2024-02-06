@@ -1,8 +1,13 @@
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../assets/logo.png";
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: "VMS | Login",
+};
+
+export default function LoginPage() {
   return (
     <>
       <div className="min-h-screen flex items-stretch text-white ">
@@ -81,32 +86,42 @@ export default function Home() {
             <p className="text-gray-200 text-xl">
               Welcome our Vehicle Managment System
             </p>
-            <form action="" className="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
+            <form
+              action=""
+              className="sm:w-2/3 w-full px-4 lg:px-0 mx-auto space-y-2"
+            >
               <div className="pb-2 pt-4">
+                <input
+                  type="text"
+                  name="id"
+                  id="id"
+                  placeholder="Employ Id"
+                  className=" text-gray-700 block w-full p-2 text-lg rounded-md bg-[#eee]"
+                />
+              </div>
+              <div className="pb-2">
                 <input
                   type="email"
                   name="email"
                   id="email"
                   placeholder="Email"
-                  className="block w-full p-4 text-lg rounded-sm bg-[#eee]"
+                  className="text-gray-700 block w-full p-2 text-lg rounded-md bg-[#eee]"
                 />
               </div>
-              <div className="pb-2 pt-4">
+              <div className="pb-2">
                 <input
-                  className="block w-full p-4 text-lg rounded-sm bg-[#eee]"
+                  className="text-gray-700 block w-full p-2 text-lg rounded-md bg-[#eee]"
                   type="password"
                   name="password"
                   id="password"
                   placeholder="Password"
                 />
               </div>
-              <div className="text-right text-gray-400 hover:underline hover:text-gray-100">
-                <a href="#">Forgot your password?</a>
-              </div>
-              <div className="px-4 pb-2 pt-4">
+
+              <div className="px-4 pb-2">
                 <Link
                   href="https://vehicle-management-frontend-seven.vercel.app/manager"
-                  className="uppercase block w-full p-4 text-lg rounded-full bg-brand hover:bg-gray-200 hover:text-secondary focus:outline-none"
+                  className="uppercase block w-full p-2 text-lg rounded-full bg-brand hover:bg-gray-200 hover:text-secondary focus:outline-none"
                 >
                   Login in
                 </Link>
