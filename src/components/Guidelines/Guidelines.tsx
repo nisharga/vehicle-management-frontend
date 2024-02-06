@@ -31,7 +31,7 @@ const Guidelines = ({ heading }: any) => {
     <>
       <h1 className="text-2xl font-bold">{heading} Dashboard of VMS</h1>
       {guidelinesData.map((guideline) => (
-        <p>✓ {guideline.point}</p>
+        <p key={guideline.id}>✓ {guideline.point}</p>
       ))}
     </>
   );
