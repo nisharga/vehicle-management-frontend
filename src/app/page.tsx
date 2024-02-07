@@ -1,9 +1,7 @@
-const page = () => {
-  return (
-    <div>
-      <p>hello.. i am localhost://3000</p>
-    </div>
-  );
+import { redirect } from "next/navigation";
+
+const HomePage = () => {
+  return redirect("/login");
 };
 
-export default page;
+export default HomePage;

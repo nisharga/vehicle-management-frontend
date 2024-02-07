@@ -1,21 +1,21 @@
 "use client";
 import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
-import { vehicles, vehiclesFields } from "./StaticTableData";
-import Pagination from "../ui/Pagination"; 
-import ModalBox from "../ModalBox/ModalBox"; 
-import ViewItem from "../ui/ViewItem";
-import { Button, message, Popconfirm } from 'antd';
+import { Button, Popconfirm, message } from "antd";
 import UpdateVehecleForm from "../Forms/UpdateVehicleForm";
+import ModalBox from "../ModalBox/ModalBox";
+import Pagination from "../ui/Pagination";
+import ViewItem from "../ui/ViewItem";
+import { vehicles, vehiclesFields } from "./StaticTableData";
 
-const VehicleListTable = () => {  
+const VehicleListTable = () => {
   const confirm = (e: any) => {
     console.log(e);
     message.success(`${e} Deleted Sucessfully`);
   };
-  
+
   const cancel = (e: React.MouseEvent<HTMLElement>) => {
     console.log(e);
-    message.error('Click on No');
+    message.error("Click on No");
   };
   return (
     <div>
@@ -62,8 +62,7 @@ const VehicleListTable = () => {
           <table className="min-w-full text-center">
             <thead>
               <tr className="">
-                {
-                (vehiclesFields ?? []).map((vehiclesField) => (
+                {(vehiclesFields ?? []).map((vehiclesField) => (
                   <th
                     key={vehiclesField?.id}
                     className="px-6 py-3 text-center border-b-2 border-gray-300 leading-4 text-blue-500 tracking-wider"
@@ -75,8 +74,7 @@ const VehicleListTable = () => {
             </thead>
 
             <tbody className="bg-white">
-              {
-              (vehicles ?? []).map((vehicle) => (
+              {(vehicles ?? []).map((vehicle) => (
                 <tr key={vehicle?.registration_no}>
                   <td className="px-2 py-2  border-b border-gray-500">
                     <div className="flex items-center justify-center">
@@ -87,7 +85,7 @@ const VehicleListTable = () => {
                       </div>
                     </div>
                   </td>
-                  
+
                   <td className=" px-2  py-2  border-b text-blue-900 border-gray-500 text-sm leading-5">
                     <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                       <span
@@ -118,30 +116,45 @@ const VehicleListTable = () => {
 
                   <td className=" px-2 py-2 text-right border-b border-gray-500 text-sm leading-5">
                     <div className="flex gap-x-1 justify-center">
-                      
-                      
-                      <ModalBox 
-                      btnLabel={ <span className="item justify-center items-center"> <EyeOutlined /> </span> }   
-                       > 
+                      <ModalBox
+                        title="View Details"
+                        btnLabel={
+                          <span className="item justify-center items-center">
+                            <EyeOutlined />
+                          </span>
+                        }
+                      >
                         <ViewItem viewID={vehicle?.registration_no} />
-                      </ModalBox>  
+                      </ModalBox>
 
-                      <ModalBox btnLabel={ <span className="item justify-center items-center"> <EditOutlined /> </span> }> 
-                        <UpdateVehecleForm updateID={vehicle?.registration_no} />
-                      </ModalBox>  
-                      
-                  <Popconfirm
-                    title="Delete the task"
-                    description="Are you sure to delete this task?"
-                    onConfirm={() => confirm(vehicle?.registration_no)}
-                    onCancel={() => cancel}
-                    okText="Yes"
-                    cancelText="No"
-                  >
-                    <Button danger >
-                      <span className="item justify-center items-center"> <DeleteOutlined /> </span>
-                    </Button>
-                  </Popconfirm> 
+                      <ModalBox
+                        title="Edit Vehicle Data"
+                        btnLabel={
+                          <span className="item justify-center items-center">
+                            <EditOutlined />
+                          </span>
+                        }
+                      >
+                        <UpdateVehecleForm
+                          updateID={vehicle?.registration_no}
+                        />
+                      </ModalBox>
+
+                      <Popconfirm
+                        title="Delete the task"
+                        description="Are you sure to delete this task?"
+                        onConfirm={() => confirm(vehicle?.registration_no)}
+                        onCancel={() => cancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Button danger>
+                          <span className="item justify-center items-center">
+                            {" "}
+                            <DeleteOutlined />{" "}
+                          </span>
+                        </Button>
+                      </Popconfirm>
                     </div>
                   </td>
                 </tr>

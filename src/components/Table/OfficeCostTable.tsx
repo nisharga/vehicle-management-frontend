@@ -1,5 +1,6 @@
 "use client";
-import { Select } from "antd";
+import { HolderOutlined } from "@ant-design/icons";
+import { Button, Dropdown, MenuProps, Select } from "antd";
 import CommonButton from "../ui/CommonButton";
 
 const years = [
@@ -43,6 +44,10 @@ const OfficeCostTable = () => {
     {
       id: 2,
       fields: "Cost(Monthly)",
+    },
+    {
+      id: 3,
+      fields: "Edit",
     },
   ];
 
@@ -109,6 +114,36 @@ const OfficeCostTable = () => {
     },
   ];
 
+  const items: MenuProps["items"] = [
+    {
+      key: "1",
+      label: (
+        <Button
+          type="text"
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.aliyun.com"
+        >
+          Edit
+        </Button>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <Button
+          danger
+          type="text"
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.luohanacademy.com"
+        >
+          Delete
+        </Button>
+      ),
+    },
+  ];
+
   //salary calculate
   const totalCost = OfficeCostSectors.reduce((accumulator, currentItem) => {
     return accumulator + currentItem.cost;
@@ -156,12 +191,12 @@ const OfficeCostTable = () => {
           </div>
           <br />
           <table className="min-w-full ">
-            <thead className="bg-gray-200 rounded-lg border-gray-500 border">
+            <thead className="bg-gray-50 rounded-2xl">
               <tr className="">
                 {OfficeCostTableFields?.map((OfficeCostTableField) => (
                   <th
                     key={OfficeCostTableField?.id}
-                    className=" px-2 py-3 border-gray-300 text-left leading-4 text-black tracking-wider"
+                    className=" px-2 py-3 text-left text-black"
                   >
                     {OfficeCostTableField?.fields}
                   </th>
@@ -173,26 +208,29 @@ const OfficeCostTable = () => {
               {OfficeCostSectors?.map((OfficeCostSector, index) => (
                 <tr
                   key={OfficeCostSector?.ID}
-                  className={`${
-                    index % 2 === 0 ? "bg-gray-50" : "bg-white"
-                  } border-b border-gray-200`}
+                  className={`${index % 2 === 0 ? "" : "bg-gray-50"}  `}
                 >
-                  <td className=" px-2 py-1   ">
+                  <td className=" px-2 py-3   ">
                     <div className="text-sm leading-5 ">
                       {OfficeCostSector?.title}
                     </div>
                   </td>
-                  <td className=" px-2 py-1 text-sm leading-5">
+                  <td className=" px-2 py-3 text-sm leading-5">
                     {OfficeCostSector?.description}
                   </td>
-                  <td className=" px-2 py-1     text-sm leading-5">
+                  <td className=" px-2 py-3 text-sm leading-5">
                     {OfficeCostSector?.cost}
+                  </td>
+                  <td className=" px-2 py-3 text-sm leading-5">
+                    <Dropdown menu={{ items }} placement="bottomRight" arrow>
+                      <HolderOutlined />
+                    </Dropdown>
                   </td>
                 </tr>
               ))}
             </tbody>
-            <tfoot className="bg-gray-500 text-white font-bold">
-              <tr className="border-b border-gray-200">
+            <tfoot className="bg-gray-100 font-bold">
+              <tr className="">
                 <td className="  px-2 py-3">
                   <div className="text-sm leading-5 ">Total</div>
                 </td>
@@ -200,6 +238,7 @@ const OfficeCostTable = () => {
                   Total monthly office management cost
                 </td>
                 <td className="  px-2 py-3 text-sm leading-5">{totalCost}</td>
+                <td className="  px-2 py-3 text-sm leading-5"></td>
               </tr>
             </tfoot>
           </table>

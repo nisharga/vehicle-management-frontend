@@ -57,7 +57,7 @@ const Header = () => {
       } sticky top-0 flex flex-wrap
           justify-end
           pr-12
-          text-lg`}
+          text-lg z-50`}
     >
       <div className="w-auto">
         <ul className="gap-x-5 py-3 flex">
