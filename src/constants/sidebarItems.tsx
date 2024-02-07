@@ -103,53 +103,40 @@ export const sidebarItems = (role: string) => {
     },
 
     {
+      label: <Link href={`/${role}/inventory`}>Inventory</Link>,
+      icon: <ShopOutlined />,
+      key: `/${role}/inventory`,
+    },
+
+    {
       label: "Expenses",
       key: "expenses",
       icon: <ReadOutlined />,
       children: [
         {
           label: <Link href={`/${role}/trip-cost`}>Trip-Cost</Link>,
-          key: "trip-cost",
-        },
-        {
-          label: <Link href={`/${role}/fuel-cost`}>Fuel-Cost</Link>,
-          key: "fuel-cost",
+          key: "Trip Cost",
         },
         {
           label: <Link href={`/${role}/salary`}>Salary</Link>,
-          key: "salary",
+          key: "Salary",
         },
         {
           label: <Link href={`/${role}/office-cost`}>Office-Cost</Link>,
-          key: "office-cost",
+          key: "Office Cost",
         },
         {
           label: <Link href={`/${role}/accessories`}>Accessories</Link>,
-          key: "accessories",
+          key: "Accessories",
         },
 
         {
           label: <Link href={`/${role}/expense-report`}>Expense Report</Link>,
-          key: "expensesReport",
+          key: "ExpensesReport",
         },
       ],
     },
 
-    {
-      label: "Inventory",
-      key: "inventory",
-      icon: <ShopOutlined />,
-      children: [
-        {
-          label: <Link href={`/${role}/tools`}>Tools</Link>,
-          key: "tools",
-        },
-        {
-          label: <Link href={`/${role}/vehicleWheels`}>Vehicle Wheels</Link>,
-          key: "vehicleWheels",
-        },
-      ],
-    },
     {
       label: "Report",
       key: "report",

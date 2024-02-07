@@ -44,6 +44,7 @@ const Sidebar = () => {
 
       <div className="demo-logo-vertical" />
       <Menu
+        className="customSidebar"
         theme="dark"
         defaultSelectedKeys={["1"]}
         mode="inline"
