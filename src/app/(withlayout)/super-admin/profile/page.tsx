@@ -5,12 +5,23 @@ import profile from "@/assets/v-profile.png";
 import {
   CameraOutlined,
   EditOutlined,
+  EnvironmentOutlined,
+  FacebookFilled,
+  FacebookOutlined,
+  GithubFilled,
+  MailFilled,
+  MediumSquareFilled,
+  PhoneOutlined,
+  TwitterCircleFilled,
+  TwitterSquareFilled,
   UserAddOutlined,
 } from "@ant-design/icons";
 import { Button, Divider } from "antd";
 
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
+import Form from "@/components/ReusableForms/Form";
+import FormInput from "@/components/ReusableForms/FormInput";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -41,6 +52,16 @@ const ProfilePage = () => {
   const [selectedMenuItem, setSelectedMenuItem] = useState<string | null>(
     "edit-profile"
   );
+
+  const defaultValues = {
+    name: "default",
+    email: "<EMAIL>",
+    phone: "1234567890",
+  };
+
+  const onSubmit = (data: any) => {
+    console.log(data);
+  };
   return (
     <div>
       <h1 className="text-2xl font-bold text-textColor">My Profile</h1>
@@ -49,13 +70,16 @@ const ProfilePage = () => {
           <div className="flex items-center justify-center">
             <div className="w-32 h-32 bg-red-500 rounded-full relative">
               <Image src={profile} alt="profile" fill />
-              <div className="absolute right-1  bottom-0 flex items-center justify-center ring-4 ring-white rounded-full">
-                <Button
-                  shape="circle"
-                  type="primary"
-                  icon={<CameraOutlined />}
-                  className="text-lg"
-                />
+              <div className="absolute right-1  bottom-0 flex justify-center items-center ">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center">
+                  <Button
+                    title="Upload Photo"
+                    shape="circle"
+                    type="primary"
+                    icon={<CameraOutlined />}
+                    className="bg-blue-400 ring-2  ring-white text-center"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -83,7 +107,136 @@ const ProfilePage = () => {
                 set up your personal information
               </p>
               <Divider />
-              <div></div>
+              <div className="w-full md:w-3/5 md:mx-auto">
+                <Form submitHandler={onSubmit} defaultValues={defaultValues}>
+                  <div className="space-y-4">
+                    <div>
+                      <FormInput
+                        name="name"
+                        type="text"
+                        size="large"
+                        label="Name"
+                        prefix={<UserAddOutlined />}
+                      />
+                    </div>
+                    <div>
+                      <FormInput
+                        name="email"
+                        type="email"
+                        size="large"
+                        label="Email"
+                        prefix={<MailFilled />}
+                      />
+                    </div>
+                    <div>
+                      <FormInput
+                        name="phone"
+                        type="text"
+                        size="large"
+                        label="Phone Number"
+                        prefix={<PhoneOutlined />}
+                      />
+                    </div>
+                    <div>
+                      <FormInput
+                        name="address"
+                        type="text"
+                        size="large"
+                        label="Address"
+                        prefix={<EnvironmentOutlined />}
+                      />
+                    </div>
+                    <div>
+                      <FormInput
+                        name="location"
+                        type="text"
+                        size="large"
+                        label="Location"
+                        prefix={<EnvironmentOutlined />}
+                      />
+                    </div>
+                  </div>
+                  <Button
+                    shape="default"
+                    type="primary"
+                    htmlType="submit"
+                    className="bg-textColor mt-3"
+                  >
+                    Update Profile
+                  </Button>
+                </Form>
+              </div>
+            </div>
+          )}
+          {selectedMenuItem === "social-profile" && (
+            <div>
+              <h1 className="text-xl font-semibold">Social Profile</h1>
+              <p className="font-extralight text-sm">
+                Add elsewhere links to your profile
+              </p>
+              <Divider />
+              <div className="w-full md:w-3/5 md:mx-auto">
+                <Form submitHandler={onSubmit} defaultValues={defaultValues}>
+                  <div className="space-y-4">
+                    <div>
+                      <FormInput
+                        name="facebook_url"
+                        type="url"
+                        size="large"
+                        label="Facebook :"
+                        placeholder="Facebook URL"
+                        prefix={
+                          <FacebookFilled className="text-2xl bg-blue-400 text-white outline-none border-none" />
+                        }
+                      />
+                    </div>
+                    <div>
+                      <FormInput
+                        name="twitter_url"
+                        type="url"
+                        size="large"
+                        label="Twitter :"
+                        placeholder="Twitter URL"
+                        prefix={
+                          <TwitterSquareFilled className="text-2xl bg-blue-400 text-white outline-none border-none" />
+                        }
+                      />
+                    </div>
+                    <div>
+                      <FormInput
+                        name="medium_url"
+                        type="url"
+                        size="large"
+                        label="Medium :"
+                        placeholder="Medium Url"
+                        prefix={
+                          <MediumSquareFilled className="text-2xl bg-blue-400 text-white outline-none border-none" />
+                        }
+                      />
+                    </div>
+                    <div>
+                      <FormInput
+                        name="github_url"
+                        type="url"
+                        size="large"
+                        label="Github :"
+                        placeholder="Github URL"
+                        prefix={
+                          <GithubFilled className="text-2xl bg-blue-400 text-white outline-none border-none" />
+                        }
+                      />
+                    </div>
+                  </div>
+                  <Button
+                    shape="default"
+                    type="primary"
+                    htmlType="submit"
+                    className="bg-textColor mt-3"
+                  >
+                    Update Social Profile
+                  </Button>
+                </Form>
+              </div>
             </div>
           )}
         </div>
