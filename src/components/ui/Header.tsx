@@ -1,12 +1,46 @@
 "use client";
-
+import { authKey } from "@/constants/storageKey";
+import { getUserInfo, removeUserInfo } from "@/services/auth.service";
+import {
+  LogoutOutlined,
+  MoonOutlined,
+  SunOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
+import { Avatar, Button, Dropdown, MenuProps, Space, Switch } from "antd";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const Header = () => {
-  // nav color change
+  const { role } = getUserInfo() as any;
+  const router = useRouter();
+  // logout function..................
+  const logOut = () => {
+    removeUserInfo(authKey);
+    router.push("/login");
+  };
+
+  //dropdown items.......................
+  const items: MenuProps["items"] = [
+    {
+      key: "1",
+      label: <Button type="text">Profile</Button>,
+    },
+    {
+      key: "2",
+      label: (
+        <Button onClick={logOut} type="text" danger>
+          <LogoutOutlined />
+          <span className="ml-1"> Logout</span>
+        </Button>
+      ),
+    },
+  ];
+
+  // nav color change..................
   const [color, setColor] = useState(false);
   const changeColor = () => {
-    if (window.scrollY >= 50) {
+    if (window.scrollY >= 60) {
       setColor(true);
     } else {
       setColor(false);
@@ -20,31 +54,39 @@ const Header = () => {
     <nav
       className={`${
         color ? "bg-white shadow-lg" : "bg-white shadow-sm"
-      } sticky top-0 z-[9999] flex flex-wrap
+      } sticky top-0 flex flex-wrap
           justify-end
           pr-12
           text-lg`}
     >
       <div className="w-auto">
-        <ul
-          className="
-              gap-x-5
-              py-5
-              flex"
-        >
+        <ul className="gap-x-5 py-3 flex">
           <li>
             <a className="text-base text-secondary block" href="#">
-              Item 1
+              <Space direction="vertical">
+                <Switch
+                  checkedChildren="বাংলা"
+                  unCheckedChildren="EN"
+                  defaultChecked
+                />
+              </Space>
             </a>
           </li>
           <li>
             <a className="text-base text-secondary block" href="#">
-              item 2
+              <MoonOutlined />
+              <SunOutlined />
             </a>
           </li>
           <li>
             <a className="text-base text-secondary block" href="#">
-              item 3
+              <Dropdown
+                menu={{ items }}
+                placement="bottomRight"
+                arrow={{ pointAtCenter: true }}
+              >
+                <Avatar size="large" icon={<UserOutlined />} />
+              </Dropdown>
             </a>
           </li>
         </ul>

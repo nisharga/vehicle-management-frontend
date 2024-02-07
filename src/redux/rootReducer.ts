@@ -1,3 +1,5 @@
+import { baseApi } from "./api/baseApi";
+
 export const reducer = {
-  // code hare
+  [baseApi.reducerPath]: baseApi.reducer,
 };
