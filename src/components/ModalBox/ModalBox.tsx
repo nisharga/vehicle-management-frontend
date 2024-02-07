@@ -1,29 +1,29 @@
-"use client"
-import React, { useState } from 'react';
-import { Button, Modal } from 'antd';
+"use client";
+import { Button, Modal } from "antd";
+import React, { useState } from "react";
 
-interface IProps{
+interface IProps {
   btnLabel?: React.ReactNode | string;
-  // modalTitle: string;
   children?: React.ReactNode;
+  title?: React.ReactNode;
 }
 
-const ModalBox: React.FC<IProps> = ({btnLabel, children }) => {
-  const [open, setOpen] = useState(false); 
+const ModalBox: React.FC<IProps> = ({ btnLabel, children, title }) => {
+  const [open, setOpen] = useState(false);
   return (
     <>
       <Button type="primary" onClick={() => setOpen(true)}>
         {btnLabel}
       </Button>
       <Modal
-        //title={modalTitle}
-        //width={1000}
-         
         centered
         open={open}
-        onOk={() => setOpen(false)}
         onCancel={() => setOpen(false)}
-        width={1000}
+        title={title || ""}
+        bodyStyle={{ height: 400 }}
+        // style={{ minHeight: "80%" }}
+        width={500}
+        footer={null}
       >
         {children}
       </Modal>
