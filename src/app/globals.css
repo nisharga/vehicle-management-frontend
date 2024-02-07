@@ -85,3 +85,8 @@
 }
 
 /* loading css end */
+
+/*custom button */
+:where(.css-dev-only-do-not-override-1b0bdye).ant-btn {
+  padding: 0px 8px !important;
+}

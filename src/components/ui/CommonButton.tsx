@@ -5,7 +5,7 @@ import { Button } from "antd";
 import { useState } from "react";
 const CommonButton = ({ content }: { content: React.ReactNode }) => {
   type SizeType = ConfigProviderProps["componentSize"];
-  const [size, setSize] = useState<SizeType>("middle"); // default is 'middle'
+  const [size, setSize] = useState<SizeType>("middle");
   return (
     <div>
       <Button

@@ -18,10 +18,10 @@ const VehicleListTable = () => {
     message.error("Click on No");
   };
   return (
-    <div>
-      {/* table start */}
+    <>
       <div className="overflow-x-auto rounded-lg">
         <div className="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg">
+          {/* search bar */}
           <div className="flex justify-center border-b pb-3">
             <div className="inline-flex border rounded w-7/12 px-2 lg:px-6 h-12 bg-transparent">
               <div className="flex flex-wrap items-stretch w-full h-full mb-6 relative">
@@ -59,6 +59,7 @@ const VehicleListTable = () => {
             </div>
           </div>
 
+          {/* table start */}
           <table className="min-w-full text-center">
             <thead>
               <tr className="">
@@ -150,8 +151,7 @@ const VehicleListTable = () => {
                       >
                         <Button danger>
                           <span className="item justify-center items-center">
-                            {" "}
-                            <DeleteOutlined />{" "}
+                            <DeleteOutlined />
                           </span>
                         </Button>
                       </Popconfirm>
@@ -167,7 +167,7 @@ const VehicleListTable = () => {
         </div>
         {/* table end */}
       </div>
-    </div>
+    </>
   );
 };
 
