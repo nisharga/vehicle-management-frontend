@@ -27,37 +27,33 @@ const TripCostPage = () => {
             </thead>
 
             <tbody className="bg-white">
-              {(trips ?? []).map((trips, index) => (
+              {trips?.map((trip, index) => (
                 <tr
-                  key={trips?.startTime}
+                  key={trip?.startTime}
                   className={`${index % 2 === 0 ? "" : "bg-gray-50"}  `}
                 >
                   <td className="px-2 py-3 text-sm leading-5">
-                    {trips?.startLocation}
+                    {trip?.startLocation}
                   </td>
 
                   <td className="px-2 py-3 text-sm leading-5">
-                    {trips?.endLocation}
+                    {trip?.endLocation}
                   </td>
 
                   <td className="px-2 py-3 text-sm leading-5">
-                    {trips?.startTime}
+                    {trip?.startTime}
                   </td>
 
                   <td className=" px-2 py-3 text-sm leading-5">
-                    {trips?.possibleEndTime}
+                    {trip?.possibleEndTime}
                   </td>
 
                   <td className=" px-2 py-3 text-sm leading-5">
-                    {trips?.passengerCount}
+                    {trip?.passengerCount}
                   </td>
 
                   <td className=" px-2 py-3 text-sm leading-5">
-                    {trips?.driver}
-                  </td>
-
-                  <td className=" px-2 py-3 text-sm leading-5">
-                    {trips?.vehicleType}
+                    {trip?.vehicleType}
                   </td>
 
                   <td className="px-2 py-3 text-sm leading-5">
@@ -69,7 +65,7 @@ const TripCostPage = () => {
                           </span>
                         }
                       >
-                        <UpdateTripForm updateID={trips?.startLocation} />
+                        <UpdateTripForm updateID={trip?.startLocation} />
                       </ModalBox>
                     </div>
                   </td>

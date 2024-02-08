@@ -1,4 +1,5 @@
 "use client";
+import CreateTrip from "@/app/(withlayout)/manager/trip/CreateTrip";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Popconfirm, message } from "antd";
 import UpdateTripForm from "../Forms/UpdateTripForm";
@@ -21,10 +22,10 @@ const TripListTable = () => {
       {/* table start */}
       <div className="overflow-x-auto rounded-lg">
         <div className="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg">
-          <div className="pb-3">
-            <div className="inline-flex border rounded w-7/12 px-2 lg:px-6 h-10 bg-transparent">
-              <div className="flex flex-wrap items-stretch w-full h-full mb-6 relative">
-                <div className="flex">
+          <div className="pb-3 flex justify-between">
+            <div className="border rounded w-7/12 px-2 lg:px-6 h-10 bg-transparent">
+              <div className="flex  items-stretch w-full h-full mb-6 relative">
+                <div className="">
                   <span className="flex items-center leading-normal bg-transparent rounded rounded-r-none border border-r-0 border-none lg:px-3 py-2 whitespace-no-wrap text-grey-dark text-sm">
                     <svg
                       width="18"
@@ -56,6 +57,10 @@ const TripListTable = () => {
                 />
               </div>
             </div>
+
+            <ModalBox btnLabel="Create New Trip">
+              <CreateTrip />
+            </ModalBox>
           </div>
 
           <table className="min-w-full">
@@ -72,38 +77,44 @@ const TripListTable = () => {
               </tr>
             </thead>
 
-            <tbody className="bg-white">
+            <tbody className="">
               {(trips ?? []).map((trips, index) => (
                 <tr
                   key={trips?.startTime}
                   className={`${index % 2 === 0 ? "" : "bg-gray-50"}  `}
                 >
                   <td className="px-2 py-3 text-sm leading-5">
+                    {trips?.tripId}
+                  </td>
+
+                  <td className="px-2 py-3 text-sm leading-5">
+                    {trips?.passengerName}
+                  </td>
+
+                  <td className="px-2 py-3 text-sm leading-5">
+                    {trips?.passengerPhone}
+                  </td>
+
+                  <td className=" px-2 py-3 text-sm leading-5">
                     {trips?.startLocation}
                   </td>
 
-                  <td className="px-2 py-3 text-sm leading-5">
+                  <td className=" px-2 py-3 text-sm leading-5">
                     {trips?.endLocation}
                   </td>
 
+                  <td className=" px-2 py-3 text-sm leading-5">
+                    {trips?.tripPeriod}
+                  </td>
+
                   <td className="px-2 py-3 text-sm leading-5">
-                    {trips?.startTime}
-                  </td>
-
-                  <td className=" px-2 py-3 text-sm leading-5">
-                    {trips?.possibleEndTime}
-                  </td>
-
-                  <td className=" px-2 py-3 text-sm leading-5">
-                    {trips?.passengerCount}
-                  </td>
-
-                  <td className=" px-2 py-3 text-sm leading-5">
-                    {trips?.driver}
-                  </td>
-
-                  <td className=" px-2 py-3 text-sm leading-5">
-                    {trips?.vehicleType}
+                    <span
+                      className={`${
+                        trips?.status ? "bg-red-300" : "bg-green-300"
+                      } inline-flex px-2 py-1 leading-none text-primary rounded-lg`}
+                    >
+                      {trips?.status ? "Pending" : "Done"}
+                    </span>
                   </td>
 
                   <td className="px-2 py-3 text-sm leading-5">
@@ -111,8 +122,7 @@ const TripListTable = () => {
                       <ModalBox
                         btnLabel={
                           <span className="item justify-center items-center">
-                            {" "}
-                            <EditOutlined />{" "}
+                            <EditOutlined />
                           </span>
                         }
                       >

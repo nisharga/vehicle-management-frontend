@@ -1,58 +1,61 @@
+import { Button } from "antd";
+import { SubmitHandler } from "react-hook-form";
+import Form from "../ReusableForms/Form";
+import FormInput from "../ReusableForms/FormInput";
 
-const UpdateDriverForm = ({ updateID }: any) => {
+type AddVehicleValues = {
+  name: string;
+  phone: string;
+  experience: string;
+  pdf: string;
+  photo: string;
+};
+
+const UpdateDriverForm = ({ driverData }: any) => {
+  const { name, phone, experience, file } = driverData;
+  const onSubmit: SubmitHandler<AddVehicleValues> = async (data: any) => {
+    console.log("add driver data--->", data);
+  };
   return (
-    <div>
-          <div className="">
-      <form className="bg-white px-10 rounded-lg shadow-sm py-20 md:w-4/5 mx-auto">
-        <h2 className="text-2xl font-bold mb-6 text-center text-[#04334E] uppercase">
-          Update Driver {updateID}
-        </h2>
-
-        <div className="flex flex-col justify-center items-center">
-          <label className="block mb-4 text-lg">
-            Full Name
-            <input
-              className="w-full p-2 lg:h-14 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
+    <>
+      <div className="mx-auto overflow-y-scroll p-5">
+        <Form submitHandler={onSubmit}>
+          <div className="mb-4">
+            <FormInput
+              name="name"
               type="text"
-              id="full_name"
-              name="full_name"
-              required
+              placeholder="Name"
+              value={name}
             />
-          </label>
-          <label className="block mb-4 text-lg">
-            User Email
-            <input
-              className="w-full p-2 lg:h-14 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
-              type="email"
-              id="email"
-              name="email"
-              required
+          </div>
+          <div className="mb-4">
+            <FormInput name="phone" type="text" placeholder="Phone Number" />
+          </div>
+          <div className="mb-4">
+            <FormInput
+              name="experience"
+              type="text"
+              placeholder="Experience Update"
             />
-          </label>
-          <label className="block mb-4 text-lg">
-            Password
-            <input
-              className="w-full p-2 lg:h-14 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
-              type="password"
-              id="password"
-              name="password"
-              required
+          </div>
+          <div className="mb-4">
+            <FormInput
+              name="file"
+              type="text"
+              placeholder="File (pdf)"
+              value={file}
             />
-          </label>
-        </div>
-
-        <div className="w-full flex justify-center items-center mt-6">
-          <button
-            className="lg:h-12 uppercase bg-[#04334E] hover:bg-[#FAAB01] text-white font-bold py-2 px-4 rounded"
-            type="submit"
+          </div>
+          <Button
+            htmlType="submit"
+            className="uppercase text-md rounded-lg bg-brand hover:bg-gray-200 hover:text-secondary"
           >
-            Create Driver
-          </button>
-        </div>
-      </form>
-    </div>
-    </div>
-  )
-}
+            Update
+          </Button>
+        </Form>
+      </div>
+    </>
+  );
+};
 
-export default UpdateDriverForm
+export default UpdateDriverForm;

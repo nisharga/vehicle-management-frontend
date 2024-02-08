@@ -1,5 +1,4 @@
 "use client";
-import type { ConfigProviderProps } from "antd";
 import { Button, Modal } from "antd";
 import React, { useState } from "react";
 
@@ -11,18 +10,14 @@ interface IProps {
 
 const ModalBox: React.FC<IProps> = ({ btnLabel, children, title }) => {
   const [open, setOpen] = useState(false);
-  type SizeType = ConfigProviderProps["componentSize"];
-  const [size, setSize] = useState<SizeType>("middle");
   return (
     <>
       <Button
-        type="primary"
         onClick={() => setOpen(true)}
         style={{
           backgroundColor: "#00334E",
           color: "#eee",
         }}
-        size={size}
       >
         {btnLabel}
       </Button>
@@ -31,9 +26,8 @@ const ModalBox: React.FC<IProps> = ({ btnLabel, children, title }) => {
         open={open}
         onCancel={() => setOpen(false)}
         title={title || ""}
-        bodyStyle={{ height: 400 }}
-        // style={{ minHeight: "80%" }}
-        width={500}
+        bodyStyle={{ height: "100%" }}
+        width={400}
         footer={null}
       >
         {children}
