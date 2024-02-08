@@ -1,3 +1,4 @@
+"use client";
 import UpdateTripForm from "@/components/Forms/UpdateTripForm";
 import ModalBox from "@/components/ModalBox/ModalBox";
 import { tripFields, trips } from "@/components/Table/StaticTableData";
