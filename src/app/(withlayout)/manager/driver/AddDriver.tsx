@@ -1,59 +1,73 @@
- 
+"use client";
 
+import Form from "@/components/ReusableForms/Form";
+import FormInput from "@/components/ReusableForms/FormInput";
+import { Button } from "antd";
+import { SubmitHandler } from "react-hook-form";
+
+type AddVehicleValues = {
+  name: string;
+  email: string;
+  phone: string;
+  joinDate: string;
+  experience: string;
+  nidNumber: string;
+  file: string;
+  profilePic: string;
+};
 const AddDriver = () => {
+  const onSubmit: SubmitHandler<AddVehicleValues> = async (data: any) => {
+    console.log("add driver--->", data);
+  };
   return (
-    <div>
-          <div className="">
-      <form className="bg-white px-10 rounded-lg shadow-sm py-20 md:w-4/5 mx-auto">
-        <h2 className="text-2xl font-bold mb-6 text-center text-[#04334E] uppercase">
-          Create Driver
-        </h2>
-
-        <div className="flex flex-col justify-center items-center">
-          <label className="block mb-4 text-lg">
-            Full Name
-            <input
-              className="w-full p-2 lg:h-14 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
+    <>
+      <p className="font-bold text-black text-[16px] mb-2">Add Driver</p>
+      <div className="mx-auto overflow-y-scroll ">
+        <Form submitHandler={onSubmit}>
+          <div className="mb-4">
+            <FormInput name="name" type="text" placeholder="Driver Name" />
+          </div>
+          <div className="mb-4">
+            <FormInput name="email" type="text" placeholder="Driver Email" />
+          </div>
+          <div className="mb-4">
+            <FormInput name="phone" type="text" placeholder="Phone Number" />
+          </div>
+          <div className="mb-4">
+            <FormInput name="join_date" type="text" placeholder="Join Date" />
+          </div>
+          <div className="mb-4">
+            <FormInput name="nid" type="text" placeholder="NID Number" />
+          </div>
+          <div className="mb-4">
+            <FormInput
+              name="file"
               type="text"
-              id="full_name"
-              name="full_name"
-              required
+              placeholder="CV/Resume/passport/driving license (pdf)"
             />
-          </label>
-          <label className="block mb-4 text-lg">
-            User Email
-            <input
-              className="w-full p-2 lg:h-14 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
-              type="email"
-              id="email"
-              name="email"
-              required
+          </div>
+          <div className="mb-4">
+            <FormInput
+              name="profilePic"
+              type="text"
+              placeholder="Experience (year)"
             />
-          </label>
-          <label className="block mb-4 text-lg">
-            Password
-            <input
-              className="w-full p-2 lg:h-14 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
-              type="password"
-              id="password"
-              name="password"
-              required
-            />
-          </label>
-        </div>
+          </div>
 
-        <div className="w-full flex justify-center items-center mt-6">
-          <button
-            className="lg:h-12 uppercase bg-[#04334E] hover:bg-[#FAAB01] text-white font-bold py-2 px-4 rounded"
-            type="submit"
+          <Button
+            htmlType="submit"
+            className="text-md rounded-lg"
+            style={{
+              backgroundColor: "#00334E",
+              color: "#eee",
+            }}
           >
-            Create Driver
-          </button>
-        </div>
-      </form>
-    </div>
-    </div>
-  )
-}
+            New Driver Add
+          </Button>
+        </Form>
+      </div>
+    </>
+  );
+};
 
-export default AddDriver
+export default AddDriver;
