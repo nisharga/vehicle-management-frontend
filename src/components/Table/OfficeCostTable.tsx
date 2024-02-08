@@ -31,119 +31,120 @@ const month = [
   { value: "November", label: "November" },
   { value: "December", label: "December" },
 ];
+
+const OfficeCostTableFields = [
+  {
+    id: 0,
+    fields: "Items",
+  },
+  {
+    id: 1,
+    fields: "Description",
+  },
+  {
+    id: 2,
+    fields: "Cost(Monthly)",
+  },
+  {
+    id: 3,
+    fields: "Edit",
+  },
+];
+
+const OfficeCostSectors = [
+  {
+    ID: 1,
+    title: "Office Rent",
+    description: "Cost of leasing office space",
+    cost: 1,
+  },
+  {
+    ID: 2,
+    title: "Utilities",
+    description: "Electricity, water, gas",
+    cost: 3,
+  },
+  {
+    ID: 3,
+    title: "Internet and Phone",
+    description: "Internet service provider, phone lines",
+    cost: 2,
+  },
+  {
+    ID: 4,
+    title: "Office Supplies",
+    description: "Pens, paper, printer ink, etc.",
+    cost: 5,
+  },
+  {
+    ID: 5,
+    title: "Cleaning Services",
+    description: "Professional cleaning services",
+    cost: 2,
+  },
+  {
+    ID: 6,
+    title: "Maintenance",
+    description: "Repairs and upkeep for office equipment",
+    cost: 1,
+  },
+  {
+    ID: 7,
+    title: "Insurance",
+    description: "Office insurance premiums",
+    cost: 8,
+  },
+  {
+    ID: 8,
+    title: "Security",
+    description: "Security services or systems",
+    cost: 4,
+  },
+  {
+    ID: 9,
+    title: "Waste Management",
+    description: "Garbage collection and recycling services",
+    cost: 4,
+  },
+  {
+    ID: 10,
+    title: "Miscellaneous Expenses",
+    description: "Any other relevant expenses",
+    cost: 4,
+  },
+];
+
+const items: MenuProps["items"] = [
+  {
+    key: "1",
+    label: (
+      <Button
+        type="text"
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://www.aliyun.com"
+      >
+        Edit
+      </Button>
+    ),
+  },
+  {
+    key: "2",
+    label: (
+      <Button
+        danger
+        type="text"
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://www.luohanacademy.com"
+      >
+        Delete
+      </Button>
+    ),
+  },
+];
+
 const OfficeCostTable = () => {
-  const OfficeCostTableFields = [
-    {
-      id: 0,
-      fields: "Items",
-    },
-    {
-      id: 1,
-      fields: "Description",
-    },
-    {
-      id: 2,
-      fields: "Cost(Monthly)",
-    },
-    {
-      id: 3,
-      fields: "Edit",
-    },
-  ];
-
-  const OfficeCostSectors = [
-    {
-      ID: 1,
-      title: "Office Rent",
-      description: "Cost of leasing office space",
-      cost: 1,
-    },
-    {
-      ID: 2,
-      title: "Utilities",
-      description: "Electricity, water, gas",
-      cost: 3,
-    },
-    {
-      ID: 3,
-      title: "Internet and Phone",
-      description: "Internet service provider, phone lines",
-      cost: 2,
-    },
-    {
-      ID: 4,
-      title: "Office Supplies",
-      description: "Pens, paper, printer ink, etc.",
-      cost: 5,
-    },
-    {
-      ID: 5,
-      title: "Cleaning Services",
-      description: "Professional cleaning services",
-      cost: 2,
-    },
-    {
-      ID: 6,
-      title: "Maintenance",
-      description: "Repairs and upkeep for office equipment",
-      cost: 1,
-    },
-    {
-      ID: 7,
-      title: "Insurance",
-      description: "Office insurance premiums",
-      cost: 8,
-    },
-    {
-      ID: 8,
-      title: "Security",
-      description: "Security services or systems",
-      cost: 4,
-    },
-    {
-      ID: 9,
-      title: "Waste Management",
-      description: "Garbage collection and recycling services",
-      cost: 4,
-    },
-    {
-      ID: 10,
-      title: "Miscellaneous Expenses",
-      description: "Any other relevant expenses",
-      cost: 4,
-    },
-  ];
-
-  const items: MenuProps["items"] = [
-    {
-      key: "1",
-      label: (
-        <Button
-          type="text"
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.aliyun.com"
-        >
-          Edit
-        </Button>
-      ),
-    },
-    {
-      key: "2",
-      label: (
-        <Button
-          danger
-          type="text"
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.luohanacademy.com"
-        >
-          Delete
-        </Button>
-      ),
-    },
-  ];
-
   //salary calculate
   const totalCost = OfficeCostSectors.reduce((accumulator, currentItem) => {
     return accumulator + currentItem.cost;
@@ -210,14 +211,12 @@ const OfficeCostTable = () => {
                   key={OfficeCostSector?.ID}
                   className={`${index % 2 === 0 ? "" : "bg-gray-50"}  `}
                 >
-                  <td className=" px-2 py-3   ">
-                    <div className="text-sm leading-5 ">
-                      {OfficeCostSector?.title}
-                    </div>
-                  </td>
+                  <td className=" px-2 py-3">{OfficeCostSector?.title}</td>
+
                   <td className=" px-2 py-3 text-sm leading-5">
                     {OfficeCostSector?.description}
                   </td>
+
                   <td className=" px-2 py-3 text-sm leading-5">
                     {OfficeCostSector?.cost}
                   </td>
