@@ -20,13 +20,13 @@ const VehicleListTable = () => {
   return (
     <>
       <div className="overflow-x-auto rounded-lg">
-        <div className="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg">
+        <div className="align-middle inline-block min-w-full shadow overflow-hidden bg-whit shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg py-10">
           {/* search bar */}
-          <div className="flex justify-center border-b pb-3">
-            <div className="inline-flex border rounded w-7/12 px-2 lg:px-6 h-12 bg-transparent">
+          <div className="flex justify-start pb-3">
+            <div className="inline-flex border rounded w-7/12  h-10 bg-transparent">
               <div className="flex flex-wrap items-stretch w-full h-full mb-6 relative">
-                <div className="flex">
-                  <span className="flex items-center leading-normal bg-transparent rounded rounded-r-none border border-r-0 border-none lg:px-3 py-2 whitespace-no-wrap text-grey-dark text-sm">
+                <div className="flex bg-slate-400">
+                  <span className="flex items-center leading-normal bg-transparent rounded rounded-r-none border border-r-0 border-none lg:px-3 py-2 whitespace-no-wrap text-grey-dark text-sm ">
                     <svg
                       width="18"
                       height="18"
@@ -37,13 +37,13 @@ const VehicleListTable = () => {
                     >
                       <path
                         d="M8.11086 15.2217C12.0381 15.2217 15.2217 12.0381 15.2217 8.11086C15.2217 4.18364 12.0381 1 8.11086 1C4.18364 1 1 4.18364 1 8.11086C1 12.0381 4.18364 15.2217 8.11086 15.2217Z"
-                        stroke="#455A64"
+                        stroke="#fff"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
                       <path
                         d="M16.9993 16.9993L13.1328 13.1328"
-                        stroke="#455A64"
+                        stroke="#fff"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
@@ -60,13 +60,13 @@ const VehicleListTable = () => {
           </div>
 
           {/* table start */}
-          <table className="min-w-full text-center">
-            <thead>
+          <table className="min-w-full">
+            <thead className="bg-gray-50 rounded-2xl">
               <tr className="">
                 {(vehiclesFields ?? []).map((vehiclesField) => (
                   <th
                     key={vehiclesField?.id}
-                    className="px-6 py-3 text-center border-b-2 border-gray-300 leading-4 text-blue-500 tracking-wider"
+                    className=" px-2 py-3 text-left text-black"
                   >
                     {vehiclesField?.fields}
                   </th>
@@ -74,49 +74,36 @@ const VehicleListTable = () => {
               </tr>
             </thead>
 
-            <tbody className="bg-white">
-              {(vehicles ?? []).map((vehicle) => (
-                <tr key={vehicle?.registration_no}>
-                  <td className="px-2 py-2  border-b border-gray-500">
-                    <div className="flex items-center justify-center">
-                      <div>
-                        <div className="text-sm leading-5 text-gray-800">
-                          {vehicle?.registration_no}
-                        </div>
-                      </div>
-                    </div>
+            <tbody>
+              {(vehicles ?? []).map((vehicle, index) => (
+                <tr
+                  key={vehicle?.registration_no}
+                  className={`${index % 2 === 0 ? "" : "bg-gray-50"}  `}
+                >
+                  <td className="px-2 py-3">{vehicle?.registration_no}</td>
+
+                  <td className="px-2 py-3 text-sm leading-5">
+                    {vehicle?.model}
                   </td>
 
-                  <td className=" px-2  py-2  border-b text-blue-900 border-gray-500 text-sm leading-5">
-                    <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                      <span
-                        aria-hidden
-                        className="absolute inset-0 bg-green-200 opacity-50 rounded-full"
-                      ></span>
-                      <span className="relative text-xs">
-                        {vehicle?.mileage}
-                      </span>
-                    </span>
-                  </td>
-
-                  <td className=" px-2  py-2  border-b border-gray-500 text-blue-900 text-sm leading-5">
+                  <td className="px-2 py-3 text-sm leading-5">
                     {vehicle?.seatCapacity}
                   </td>
 
-                  <td className=" px-2  py-2  border-b border-gray-500 text-blue-900 text-sm leading-5">
-                    {vehicle?.isAc}
+                  <td className=" px-2 py-3 text-sm leading-5">
+                    {vehicle?.tax}
                   </td>
 
-                  <td className=" px-2  py-2  border-b border-gray-500 text-blue-900 text-sm leading-5">
+                  <td className=" px-2 py-3 text-sm leading-5">
                     {vehicle?.brand}
                   </td>
 
-                  <td className=" px-2  py-2  border-b border-gray-500 text-blue-900 text-sm leading-5">
+                  <td className=" px-2 py-3 text-sm leading-5">
                     {vehicle?.fuelType}
                   </td>
 
-                  <td className=" px-2 py-2 text-right border-b border-gray-500 text-sm leading-5">
-                    <div className="flex gap-x-1 justify-center">
+                  <td className="px- py-3 text-sm leading-5">
+                    <div className="flex gap-x-1 ">
                       <ModalBox
                         title="View Details"
                         btnLabel={

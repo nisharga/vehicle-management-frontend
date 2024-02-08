@@ -2,10 +2,9 @@
 import { PlusOutlined } from "@ant-design/icons";
 import type { ConfigProviderProps } from "antd";
 import { Button } from "antd";
-import { useState } from "react";
 const CommonButton = ({ content }: { content: React.ReactNode }) => {
   type SizeType = ConfigProviderProps["componentSize"];
-  const [size, setSize] = useState<SizeType>("middle");
+
   return (
     <div>
       <Button
@@ -14,7 +13,6 @@ const CommonButton = ({ content }: { content: React.ReactNode }) => {
           color: "#eee",
         }}
         icon={<PlusOutlined />}
-        size={size}
       >
         {content}
       </Button>

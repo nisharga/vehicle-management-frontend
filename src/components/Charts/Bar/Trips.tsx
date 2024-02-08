@@ -1,11 +1,11 @@
 "use client";
 import {
-  Chart as ChartJS,
   CategoryScale,
-  LinearScale,
-  Tooltip,
-  PointElement,
+  Chart as ChartJS,
   LineElement,
+  LinearScale,
+  PointElement,
+  Tooltip,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 
@@ -20,7 +20,7 @@ ChartJS.register(
 
 const MyLineChart = () => {
   return (
-    <div>
+    <>
       <Line
         data={{
           labels: [
@@ -40,7 +40,7 @@ const MyLineChart = () => {
           ],
         }}
       />
-    </div>
+    </>
   );
 };
 export default MyLineChart;

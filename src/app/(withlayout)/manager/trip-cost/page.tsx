@@ -1,3 +1,8 @@
+import UpdateTripForm from "@/components/Forms/UpdateTripForm";
+import ModalBox from "@/components/ModalBox/ModalBox";
+import { tripFields, trips } from "@/components/Table/StaticTableData";
+import { EditOutlined } from "@ant-design/icons";
+
 const TripCostPage = () => {
   return (
     <>
@@ -5,74 +10,76 @@ const TripCostPage = () => {
         <p>Trip Cost</p>
       </section>
 
-      <section className="grid lg:grid-cols-2 md:grid-cols-1 bg-white shadow-lg rounded-lg">
-        <div className="align-middle inline-block min-w-full overflow-hidden  px-8 my-5">
-          <p className="text-center text-lg text-textColor">Trip Data</p>
+      <div className="overflow-x-auto rounded-lg">
+        <div className="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg">
           <table className="min-w-full">
-            <thead>
-              <tr className="border-b-2 border-gray-200 text-brand">
-                <th className="px-6 py-3  text-left leading-4  tracking-wider">
-                  From - To
-                </th>
-                <th className="px-6 py-3 border-b-2 text-left leading-4  tracking-wider">
-                  Total Day
-                </th>
-                <th className="px-6 py-3 border-b-2 text-left leading-4 tracking-wider">
-                  Vehicle Type
-                </th>
+            <thead className="bg-gray-50 rounded-2xl">
+              <tr className="">
+                {(tripFields ?? []).map((vehiclesField) => (
+                  <th
+                    key={vehiclesField?.id}
+                    className=" px-2 py-3 text-left text-black"
+                  >
+                    {vehiclesField?.fields}
+                  </th>
+                ))}
               </tr>
             </thead>
 
-            <tbody className="">
-              <tr>
-                <td className=" px-2 py-1 border-b border-gray-500">
-                  <div className="text-sm leading-5">Dhaka - Natore</div>
-                </td>
+            <tbody className="bg-white">
+              {(trips ?? []).map((trips, index) => (
+                <tr
+                  key={trips?.startTime}
+                  className={`${index % 2 === 0 ? "" : "bg-gray-50"}  `}
+                >
+                  <td className="px-2 py-3 text-sm leading-5">
+                    {trips?.startLocation}
+                  </td>
 
-                <td className=" px-2 py-1 border-b border-gray-500  text-sm leading-5">
-                  5
-                </td>
-                <td className=" px-2 py-1 border-b border-gray-500 text-sm leading-5">
-                  Buss (AC)
-                </td>
-              </tr>
+                  <td className="px-2 py-3 text-sm leading-5">
+                    {trips?.endLocation}
+                  </td>
+
+                  <td className="px-2 py-3 text-sm leading-5">
+                    {trips?.startTime}
+                  </td>
+
+                  <td className=" px-2 py-3 text-sm leading-5">
+                    {trips?.possibleEndTime}
+                  </td>
+
+                  <td className=" px-2 py-3 text-sm leading-5">
+                    {trips?.passengerCount}
+                  </td>
+
+                  <td className=" px-2 py-3 text-sm leading-5">
+                    {trips?.driver}
+                  </td>
+
+                  <td className=" px-2 py-3 text-sm leading-5">
+                    {trips?.vehicleType}
+                  </td>
+
+                  <td className="px-2 py-3 text-sm leading-5">
+                    <div className="flex gap-x-1 justify-center">
+                      <ModalBox
+                        btnLabel={
+                          <span className="item justify-center items-center">
+                            <EditOutlined />
+                          </span>
+                        }
+                      >
+                        <UpdateTripForm updateID={trips?.startLocation} />
+                      </ModalBox>
+                    </div>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
-
-        <div className=" text-textColor space-y-2 px-20 my-5">
-          <p className="text-center text-lg">Cost Summery</p>
-          <p className="flex justify-between">
-            <span className="font-bold ">Shipping Cost</span>
-            0.00
-          </p>
-          <p className="flex justify-between">
-            <span className="font-bold ">Tool Cost</span>
-            0.00
-          </p>
-          <p className="flex justify-between">
-            <span className="font-bold ">Driver Cost</span>
-            0.00
-          </p>
-          <p className="flex justify-between">
-            <span className="font-bold ">Helper Cost</span>
-            0.00
-          </p>
-          <p className="flex justify-between">
-            <span className="font-bold ">Launce Cost</span>
-            0.00
-          </p>
-          <p className="flex justify-between">
-            <span className="font-bold ">Vat(%)</span>
-            0.00
-          </p>
-          <hr />
-          <p className="flex justify-between">
-            <span className="font-bold ">Payable Total</span>
-            0.00
-          </p>
-        </div>
-      </section>
+        {/* table end */}
+      </div>
     </>
   );
 };
