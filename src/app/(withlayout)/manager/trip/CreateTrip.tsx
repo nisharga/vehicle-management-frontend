@@ -1,134 +1,92 @@
+"use client";
 
+import Form from "@/components/ReusableForms/Form";
+import FormInput from "@/components/ReusableForms/FormInput";
+import { Button } from "antd";
+import { SubmitHandler } from "react-hook-form";
+
+type CreateTripValue = {
+  passengerName: string;
+  phone: string;
+  tripPeriod: string;
+  tollCost: string;
+  parkingCost: string;
+  startLocation: string;
+  description: string;
+  tripId: string;
+};
 const CreateTrip = () => {
+  const onSubmit: SubmitHandler<CreateTripValue> = async (data: any) => {
+    console.log("trip create Data--->", data);
+  };
   return (
-    <div className="">
-    <form className="bg-white p-8 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-6 text-center text-[#04334E] uppercase">Create a New Trip</h2>
+    <>
+      <p className="font-bold text-black text-[16px] mb-2">Create A New Trip</p>
+      <div className="mx-auto overflow-y-scroll ">
+        <Form submitHandler={onSubmit}>
+          <div className="mb-4">
+            <FormInput
+              name="passengerName"
+              type="text"
+              placeholder="Passenger Name"
+            />
+          </div>
+          <div className="mb-4">
+            <FormInput
+              name="phone"
+              type="phone"
+              placeholder="Passenger Phone"
+            />
+          </div>
+          <div className="mb-4">
+            <FormInput
+              name="tripPeriod"
+              type="date"
+              placeholder="Trip Period"
+            />
+          </div>
+          <div className="mb-4">
+            <FormInput name="tollCost" type="text" placeholder="Toll Cost" />
+          </div>
+          <div className="mb-4">
+            <FormInput
+              name="parkingCost"
+              type="text"
+              placeholder="Parking Cost"
+            />
+          </div>
+          <div className="mb-4">
+            <FormInput
+              name="startLocation"
+              type="text"
+              placeholder="Start Location"
+            />
+          </div>
+          <div className="mb-4">
+            <FormInput
+              name="description"
+              type="comment"
+              placeholder="Description"
+            />
+          </div>
+          <div className="mb-4">
+            <FormInput name="tripId" type="text" placeholder="TripId" />
+          </div>
 
-      <section className="lg:flex lg:items-center lg:justify-between gap-10 lg:w-full mb-4">
-        <label className="block mb-4 lg:w-1/2 text-lg">
-          Start Location
-          <input
-            className="w-full p-2 lg:h-14 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
-            type="text"
-            id="startLocation"
-            name="startLocation"
-            required
-          />
-        </label>
+          <Button
+            htmlType="submit"
+            className="text-md rounded-lg"
+            style={{
+              backgroundColor: "#00334E",
+              color: "#eee",
+            }}
+          >
+            New Driver Add
+          </Button>
+        </Form>
+      </div>
+    </>
+  );
+};
 
-        <label className="block mb-4 lg:w-1/2 text-lg">
-          End Location
-          <input
-            className="w-full lg:h-14 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
-            type="text"
-            id="endLocation"
-            name="endLocation"
-            required
-          />
-        </label>
-      </section>
-      <section className="lg:flex lg:items-center lg:justify-between gap-10 lg:w-full mb-8">
-      <label className="block mb-4 lg:w-1/2 text-lg">
-        Start Time
-        <input
-          className="w-full lg:h-14 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
-          type="datetime-local"
-          id="startTime"
-          name="startTime"
-          required
-        />
-      </label>
-
-      <label className="block mb-4 lg:w-1/2 text-lg">
-        End Time
-        <input
-          className="w-full lg:h-14 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
-          type="datetime-local"
-          id="endTime"
-          name="endTime"
-          required
-        />
-      </label>
-      </section>
-      <section className="lg:flex lg:items-center lg:justify-between gap-10 lg:w-full mb-8">
-      <label className="block mb-4 lg:w-1/2 text-lg">
-        Distance (in km)
-        <input
-          className="w-full lg:h-14  p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
-          type="number"
-          id="distance"
-          name="distance"
-          step="0.1"
-          required
-        />
-      </label>
-
-      <label className="block mb-4 lg:w-1/2 text-lg">
-        Passenger Count
-        <input
-          className="w-full lg:h-14  p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
-          type="number"
-          id="passengerCount"
-          name="passengerCount"
-          required
-        />
-      </label>
-      </section>
-
-      <label className="block mb-4  text-lg ">
-        Expenses
-        <input
-          className="w-full lg:h-14 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
-          type="number"
-          id="expenses"
-          name="expenses"
-          step="0.01"
-          required
-        />
-      </label>
-
-      <section className="lg:flex lg:items-center lg:justify-between gap-10 lg:w-full my-8">
-      <label className="block mb-4 lg:w-1/2 text-lg">
-    Driver
-    <select
-      className="w-full p-2 lg:h-14 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
-      id="fuelType"
-      name="fuelType"
-      required
-    >
-      <option value="petrol">Sofik</option>
-      <option value="diesel">Farok</option>
-      <option value="electric">Kabir</option>
-      <option value="hybrid">Mobarak</option>
-    </select>
-  </label>
-  <label className="block mb-4 lg:w-1/2 text-lg">
-    Vehicle
-    <select
-      className="w-full p-2 lg:h-14 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
-      id="fuelType"
-      name="fuelType"
-      required
-    >
-      <option value="petrol">Toyota Camry</option>
-      <option value="diesel">Micro Bus</option>
-      <option value="electric">BMW Car</option>
-      <option value="hybrid">Nissan Altima</option>
-    </select>
-  </label>
-
-
-      </section>
-      <button
-        className="w-full lg:h-12 uppercase bg-[#04334E] hover:bg-[#FAAB01] text-white font-bold py-2 px-4 rounded"
-        type="submit"
-      >
-        Create Trip
-      </button>
-    </form>
-    </div>
-  )
-}
-
-export default CreateTrip
+export default CreateTrip;

@@ -10,6 +10,7 @@ import ModalBox from "../ModalBox/ModalBox";
 import Pagination from "../ui/Pagination";
 import { DriverListTableFields, vehicleDriversList } from "./StaticTableData";
 
+import AddDriver from "@/app/(withlayout)/manager/driver/AddDriver";
 import { Button, message, Popconfirm } from "antd";
 import UpdateDriverForm from "../Forms/UpdateDriverForm";
 import ViewItem from "../ui/ViewItem";
@@ -29,7 +30,7 @@ const DriverListTable = () => {
       {/* table start */}
       <div className="overflow-x-auto rounded-lg">
         <div className="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg py-10">
-          <div className="border-b pb-3">
+          <div className="pb-3 flex justify-between">
             <div className="inline-flex border rounded w-7/12 px-2 lg:px-6 h-10 bg-transparent">
               <div className="flex flex-wrap items-stretch w-full h-full mb-6 relative">
                 <div className="flex">
@@ -64,6 +65,10 @@ const DriverListTable = () => {
                 />
               </div>
             </div>
+
+            <ModalBox btnLabel="Add Driver">
+              <AddDriver />
+            </ModalBox>
           </div>
 
           <table className="min-w-full">
@@ -80,7 +85,7 @@ const DriverListTable = () => {
               </tr>
             </thead>
 
-            <tbody className="bg-white">
+            <tbody className="">
               {vehicleDriversList?.map((vehicleDriver, index) => (
                 <tr
                   key={vehicleDriver?.email}
@@ -104,10 +109,6 @@ const DriverListTable = () => {
                   <td className="px-2 py-3 text-sm leading-5">
                     {vehicleDriver?.phone}
                   </td>
-                  <td className="px-2 py-3 text-sm leading-5">
-                    {vehicleDriver?.experience}
-                  </td>
-
                   <td className="px-2 py-3 text-sm leading-5">
                     {vehicleDriver?.joinDate}
                   </td>
@@ -134,8 +135,7 @@ const DriverListTable = () => {
                       <ModalBox
                         btnLabel={
                           <span className="item justify-center items-center">
-                            {" "}
-                            <EyeOutlined />{" "}
+                            <EyeOutlined />
                           </span>
                         }
                       >
@@ -146,11 +146,11 @@ const DriverListTable = () => {
                         btnLabel={
                           <span className="item justify-center items-center">
                             {" "}
-                            <EditOutlined />{" "}
+                            <EditOutlined />
                           </span>
                         }
                       >
-                        <UpdateDriverForm updateID={vehicleDriver?.name} />
+                        <UpdateDriverForm driverData={vehicleDriver} />
                       </ModalBox>
 
                       <Popconfirm
