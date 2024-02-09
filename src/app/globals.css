@@ -51,7 +51,22 @@
 }
 
 .vms-login-page-banner {
-  background-image: url("../assets/banner.jpg");
+  background-image: url(../assets/bannar.jpg);
+  overflow: hidden;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.backgroundImage {
+  background: url(../assets/final_bg_bannar.jpg) no-repeat center center fixed;
+
+  overflow: hidden;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 :where(.css-dev-only-do-not-override-1b0bdye).ant-menu-dark
@@ -69,4 +84,24 @@
   > .ant-menu
   .ant-menu-item-selected {
   color: #00334e !important;
+}
+
+/* loading css start */
+.loading .error {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* loading css end */
+
+/*custom button */
+:where(.css-dev-only-do-not-override-1b0bdye).ant-btn {
+  padding: 0px 8px !important;
 }

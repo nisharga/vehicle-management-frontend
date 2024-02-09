@@ -5,15 +5,38 @@ import { sidebarItems } from "@/constants/sidebarItems";
 import { Menu } from "antd";
 import Sider from "antd/es/layout/Sider";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "../../assets/logo.png";
+import { getTokenFromKey } from "@/services/auth.service";
 
-// const role = USER_ROLE.SUPER_ADMIN;
-const role = USER_ROLE.MANAGER;
-// const role = USER_ROLE.DRIVER;
 
-const Sidebar = () => {
+const role = USER_ROLE.ADMIN;
+
+const Sidebar =  () => {
   const [collapsed, setCollapsed] = useState(false);
+  const [currentRole, setCurrentRole] = useState('')
+  const roleFromToekn =  getTokenFromKey()
+
+  useEffect(()=>{
+    // if(roleFromToekn.role === 'ADMIN'){
+    //   roles = 'super-admin'
+    // }else if(roleFromToekn.role === 'MANAGER'){
+    //   roles = 'manager'
+    // } else if(roleFromToekn.role === 'DRIVER'){
+    //   roles = 'driver'
+    // }
+    if (roleFromToekn.role == 'ADMIN') {
+      setCurrentRole('super-admin')
+    }else if(roleFromToekn.role == 'MANAGER'){
+      setCurrentRole('manager')
+    }else if(roleFromToekn.role == 'DRIVER'){
+      setCurrentRole('driver')
+    }
+    // setCurrentRole(roleFromToekn.role)
+  },[roleFromToekn])
+
+  console.log( role,currentRole)
+
   return (
     <Sider
       collapsible
@@ -44,10 +67,11 @@ const Sidebar = () => {
 
       <div className="demo-logo-vertical" />
       <Menu
+        className="customSidebar"
         theme="dark"
         defaultSelectedKeys={["1"]}
         mode="inline"
-        items={sidebarItems(role)}
+        items={sidebarItems(currentRole)}
       />
     </Sider>
   );

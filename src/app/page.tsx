@@ -1,3 +1,7 @@
-export default function Home() {
-  return <div className="">this is home page....</div>;
-}
+import { redirect } from "next/navigation";
+
+const HomePage = () => {
+  return redirect("/login");
+};
+
+export default HomePage;
