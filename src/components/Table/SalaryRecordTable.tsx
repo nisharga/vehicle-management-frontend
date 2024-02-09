@@ -88,7 +88,7 @@ const SalaryRecordTable = () => {
           authorization: `Bearer ${token}`,
         };
         const response = await axios.get(
-          ` http://localhost:3330/api/v1/driver-salary/list?page=${currentPage}&size=${itemsPerPage}&searchTerm=${searchTerm}`,
+          ` https://vahicle-management-backend.vercel.app/api/v1/driver-salary/list?page=${currentPage}&size=${itemsPerPage}&searchTerm=${searchTerm}`,
         
         );
         // console.log(response.data.data.data);
