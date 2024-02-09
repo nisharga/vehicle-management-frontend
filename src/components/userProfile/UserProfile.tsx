@@ -1,5 +1,7 @@
 "use client";
 import profile from "@/assets/v-profile.png";
+import Form from "@/components/ReusableForms/Form";
+import FormInput from "@/components/ReusableForms/FormInput";
 import {
   CameraOutlined,
   EditOutlined,
@@ -12,15 +14,10 @@ import {
   TwitterSquareFilled,
   UserAddOutlined,
 } from "@ant-design/icons";
-import { Button, Divider } from "antd";
+import type { MenuProps } from "antd";
+import { Button, Divider, Menu } from "antd";
 import Image from "next/image";
 import React, { useState } from "react";
-
-import Form from "@/components/ReusableForms/Form";
-import FormInput from "@/components/ReusableForms/FormInput";
-import type { MenuProps } from "antd";
-import { Menu } from "antd";
-
 type MenuItem = Required<MenuProps>["items"][number];
 
 function getItem(

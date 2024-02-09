@@ -3,3 +3,10 @@
 ## Live Link: https://vehicle-management-frontend-seven.vercel.app/login
 
 ## Backend Api Link: https://github.com/19khaled88/vahicle_management_backend
+
+### Teamleader:
+- Md. Omar Faruq
+- Md. Khaled
+- Ripon
+- shafikul islam
+- Kabir
