@@ -3,7 +3,7 @@ import { Bars } from "react-loader-spinner";
 
 const LoadingPage: any = () => {
   return (
-    <div className="loading">
+    <div className="loading mx-auto">
       <Bars
         height="60"
         width="60"
