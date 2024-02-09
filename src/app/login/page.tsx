@@ -2,7 +2,7 @@
 import Form from "@/components/ReusableForms/Form";
 import FormInput from "@/components/ReusableForms/FormInput";
 import { useUserLoginMutation } from "@/redux/api/authApi";
-import { storeUserInfo } from "@/services/auth.service";
+import { getUserInfoFromToken, storeUserInfo } from "@/services/auth.service";
 import { Button, message } from "antd";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -22,11 +22,20 @@ export default function LoginPage() {
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
     try {
       const res = await userLogin({ ...data }).unwrap();
-      if (res?.data?.accessToken) {
-        router.push("/manager");
-        message.success("User log in successful");
-      }
 
+      if (res?.data?.accessToken) {
+        const userInfo = await getUserInfoFromToken(res?.data?.accessToken);
+        if (userInfo?.role === "MANAGER") {
+          router.push("/manager");
+          message.success("Manager log in successful");
+        } else if (userInfo?.role === "DRIVER") {
+          router.push("/driver");
+          message.success("Driver log in successful");
+        } else {
+          router.push("/super-admin");
+          message.success("Admin log in successful");
+        }
+      }
       storeUserInfo({ accessToken: res?.data?.accessToken });
     } catch (err: any) {
       console.error(err.message);
@@ -102,44 +111,46 @@ export default function LoginPage() {
               }}
             />
 
-            <p className="text-gray-200 text-xl">
+            <p className="text-gray-200 text-xl pb-10">
               Welcome our Vehicle Managment System
             </p>
 
             <Form submitHandler={onSubmit}>
-              <div className="w-[60%] ">
-                <FormInput
-                  name="email"
-                  type="email"
-                  size="large"
-                  placeholder="User Email"
-                />
+              <div className="flex flex-col justify-center items-center">
+                <div className="w-[60%] ">
+                  <FormInput
+                    name="email"
+                    type="email"
+                    size="large"
+                    placeholder="User Email"
+                  />
+                </div>
+                <br />
+                <div className=" w-[60%] ">
+                  <FormInput
+                    name="id"
+                    type="text"
+                    size="large"
+                    placeholder="User Id"
+                  />
+                </div>
+                <br />
+                <div className="w-[60%]">
+                  <FormInput
+                    name="password"
+                    type="password"
+                    size="large"
+                    placeholder="User Password"
+                  />
+                </div>
+                <br />
+                <Button
+                  htmlType="submit"
+                  className="uppercase block w-[60%] p-4 text-md rounded-full  bg-brand hover:bg-gray-200 hover:text-secondary focus:outline-none"
+                >
+                 press LogIn
+                </Button>
               </div>
-              <br />
-              <div className=" w-[60%] ">
-                <FormInput
-                  name="id"
-                  type="text"
-                  size="large"
-                  placeholder="User Id"
-                />
-              </div>
-              <br />
-              <div className="w-[60%]">
-                <FormInput
-                  name="password"
-                  type="password"
-                  size="large"
-                  placeholder="User Password"
-                />
-              </div>
-              <br />
-              <Button
-                htmlType="submit"
-                className="uppercase block w-[60%] p-4 text-md rounded-full bg-brand hover:bg-gray-200 hover:text-secondary focus:outline-none"
-              >
-               Press LogIn
-              </Button>
             </Form>
           </div>
         </div>
