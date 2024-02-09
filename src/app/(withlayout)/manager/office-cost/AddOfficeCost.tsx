@@ -15,7 +15,7 @@ type AddVehicleValues = {
   file: string;
   profilePic: string;
 };
-const AddDriver = () => {
+const AddOfficeCost = () => {
   const onSubmit: SubmitHandler<AddVehicleValues> = async (data: any) => {
     console.log("add driver--->", data);
   };
@@ -66,4 +66,4 @@ const AddDriver = () => {
   );
 };
 
-export default AddDriver;
+export default AddOfficeCost;

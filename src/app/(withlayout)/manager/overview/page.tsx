@@ -88,9 +88,9 @@ const overviewPage = () => {
 
   return (
     <main className="flex flex-col gap-7">
-      <span className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         <div
-          className="p-5 flex flex-row gap-2 justify-between rounded-md"
+          className="p-5 flex flex-row gap-2 justify-between rounded-md bg-white"
           style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
         >
           <span className="flex flex-col items-start justify-center h-full">
@@ -107,7 +107,7 @@ const overviewPage = () => {
           </span>
         </div>
         <div
-          className="p-5 flex flex-row gap-5 rounded-md"
+          className="p-5 flex flex-row gap-5 rounded-md bg-white"
           style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
         >
           <span className="flex flex-col items-start justify-center h-full">
@@ -124,7 +124,7 @@ const overviewPage = () => {
           </span>
         </div>
         <div
-          className="p-5 flex flex-row gap-5 rounded-md"
+          className="p-5 flex flex-row gap-5 rounded-md bg-white"
           style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
         >
           <span>
@@ -146,7 +146,7 @@ const overviewPage = () => {
           </span>
         </div>
         <div
-          className="p-5 flex flex-row gap-5 rounded-md"
+          className="p-5 flex flex-row gap-5 rounded-md bg-white"
           style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
         >
           <span>
@@ -167,16 +167,16 @@ const overviewPage = () => {
             </table>
           </span>
         </div>
-      </span>
+      </section>
 
-      <span className="flex flex-col lg:flex-row gap-5 justify-between items-center ">
-        <div className="lg:flex-1">
+      <section className="flex flex-col lg:flex-row gap-5 justify-between items-center">
+        <div className="lg:flex-1 bg-white p-5 rounded-lg">
           <CurrentWeekBarChart />
         </div>
-        <div className="lg:flex-1">
+        <div className="lg:flex-1 bg-white p-5 rounded-lg">
           <MonthlyBarChart />
         </div>
-      </span>
+      </section>
 
       <TitleCard
         title="Driver List"
@@ -184,7 +184,7 @@ const overviewPage = () => {
         TopSideButtons={<TopSideButtons />}
       >
         {/* Drivers List in table format loaded from slice after api call */}
-        <section className="overflow-x-auto w-full">
+        <section className="overflow-x-auto w-full ">
           <table className="table w-full">
             <thead>
               <tr>

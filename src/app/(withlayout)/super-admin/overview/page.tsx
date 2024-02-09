@@ -87,16 +87,16 @@ const overviewPage = () => {
   ];
 
   return (
-    <div className="flex flex-col gap-7">
+    <div className="flex flex-col gap-7  border border-red-500">
       <span className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         <div
-          className="p-5 flex flex-row gap-2 justify-between rounded-md"
+          className="p-5 flex flex-row gap-2 justify-between rounded-md "
           style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
         >
           <span className="flex flex-col items-start justify-center h-full">
             <p className="text-gray-600 text-lg">Total Drivers</p>
             <h1 className="text-2xl text-blue-700 font-bold bg-green-200 p-2 rounded-full">
-              5 drivers
+              6 drivers
             </h1>
           </span>
           <span
