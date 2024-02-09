@@ -138,7 +138,7 @@ export default function LoginPage() {
                 htmlType="submit"
                 className="uppercase block w-[60%] p-4 text-md rounded-full bg-brand hover:bg-gray-200 hover:text-secondary focus:outline-none"
               >
-                LogIn
+               Press LogIn
               </Button>
             </Form>
           </div>
