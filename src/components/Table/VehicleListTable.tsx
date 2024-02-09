@@ -20,7 +20,7 @@ const VehicleListTable = () => {
   return (
     <>
       <div className="overflow-x-auto rounded-lg">
-        <div className="align-middle inline-block min-w-full shadow overflow-hidden bg-whit shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg py-10">
+        <div className="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg py-10">
           {/* search bar */}
           <div className="flex justify-start pb-3">
             <div className="inline-flex border rounded w-7/12  h-10 bg-transparent">

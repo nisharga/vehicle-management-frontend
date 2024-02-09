@@ -64,7 +64,7 @@ const AddVehicle = () => {
 
           <Button
             htmlType="submit"
-            className="uppercase text-md rounded-lg bg-brand hover:bg-gray-200 hover:text-secondary"
+            className="rounded-lg bg-secondary text-[#eee]"
           >
             Add Vehicle
           </Button>
