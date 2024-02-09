@@ -1,4 +1,4 @@
-import AccessoriesCard from "@/components/AccessoriesCard/AccessoriesCard";
+import AccessoriesTable from "@/components/Table/AccessoriesTable";
 const accessoriesPage = () => {
   const vehicleAccessories = [
     {
@@ -185,13 +185,8 @@ const accessoriesPage = () => {
   ];
 
   return (
-    <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1">
-      {vehicleAccessories?.map((vehicleAccessory) => (
-        <AccessoriesCard
-          key={vehicleAccessory?.id}
-          vehicleAccessory={vehicleAccessory}
-        />
-      ))}
+    <div>
+      <AccessoriesTable />
     </div>
   );
 };

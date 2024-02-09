@@ -51,7 +51,22 @@
 }
 
 .vms-login-page-banner {
-  background-image: url("../assets/banner.jpg");
+  background-image: url(../assets/bannar.jpg);
+  overflow: hidden;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.backgroundImage {
+  background: url(../assets/final_bg_bannar.jpg) no-repeat center center fixed;
+
+  overflow: hidden;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 :where(.css-dev-only-do-not-override-1b0bdye).ant-menu-dark

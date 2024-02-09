@@ -8,7 +8,7 @@ const Contents = ({ children }: { children: React.ReactNode }) => {
     <Content>
       <Header />
       <div
-        className="bg-[#F2F2F2] p-8"
+        className="p-8  backgroundImage"
         style={{
           minHeight: "100vh",
         }}
