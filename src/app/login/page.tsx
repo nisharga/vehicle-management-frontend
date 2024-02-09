@@ -2,7 +2,7 @@
 import Form from "@/components/ReusableForms/Form";
 import FormInput from "@/components/ReusableForms/FormInput";
 import { useUserLoginMutation } from "@/redux/api/authApi";
-import {  getUserInfoFromToken, storeUserInfo } from "@/services/auth.service";
+import { getUserInfoFromToken, storeUserInfo } from "@/services/auth.service";
 import { Button, message } from "antd";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -22,16 +22,16 @@ export default function LoginPage() {
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
     try {
       const res = await userLogin({ ...data }).unwrap();
-      
+
       if (res?.data?.accessToken) {
-        const userInfo = await getUserInfoFromToken(res?.data?.accessToken)
-        if(userInfo?.role === 'MANAGER'){
+        const userInfo = await getUserInfoFromToken(res?.data?.accessToken);
+        if (userInfo?.role === "MANAGER") {
           router.push("/manager");
           message.success("Manager log in successful");
-        }else if(userInfo?.role === 'DRIVER'){
+        } else if (userInfo?.role === "DRIVER") {
           router.push("/driver");
           message.success("Driver log in successful");
-        }else {
+        } else {
           router.push("/super-admin");
           message.success("Admin log in successful");
         }
@@ -148,7 +148,7 @@ export default function LoginPage() {
                   htmlType="submit"
                   className="uppercase block w-[60%] p-4 text-md rounded-full  bg-brand hover:bg-gray-200 hover:text-secondary focus:outline-none"
                 >
-                  LogIn
+                 press LogIn
                 </Button>
               </div>
             </Form>
