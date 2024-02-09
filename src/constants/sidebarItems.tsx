@@ -145,10 +145,6 @@ export const sidebarItems = (role: string) => {
           label: <Link href={`/${role}/incomeReport`}>Income Report</Link>,
           key: "incomeReport",
         },
-        {
-          label: <Link href={`/${role}/tripReport`}>Trip Report</Link>,
-          key: "tripReport",
-        },
       ],
     },
     ...privacyPolicySidebarItem,

@@ -1,4 +1,6 @@
 "use client";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 import Pagination from "../ui/Pagination";
 
@@ -21,49 +23,119 @@ const SalaryTableFields = [
   },
 ];
 
-const VMSEmployers = [
-  {
-    ID: "VMSD-20181",
-    name: "John Doe",
-    avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-    position: "junior",
-    salaryStatus: "pending",
-    month: "january-2020",
-  },
-  {
-    ID: "VMSD-20182",
-    name: "John Doe",
-    avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-    position: "senior",
-    salaryStatus: "paid",
-    month: "february-2020",
-  },
-  {
-    ID: "VMSD-20181",
-    name: "John Doe",
-    avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-    position: "executive",
-    salaryStatus: "pending",
-    month: "March-2020",
-  },
-  {
-    ID: "VMSD-20181",
-    name: "John Doe",
-    avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-    position: "Manager",
-    salaryStatus: "pending",
-    month: "March-2020",
-  },
-  {
-    ID: "VMSD-20181",
-    name: "John Doe",
-    avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-    position: "helper",
-    salaryStatus: "pending",
-    month: "March-2020",
-  },
-];
+// const VMSEmployers = [
+//   {
+//     ID: "VMSD-20181",
+//     name: "John Doe",
+//     avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
+//     position: "junior",
+//     salaryStatus: "pending",
+//     month: "january-2020",
+//   },
+//   {
+//     ID: "VMSD-20182",
+//     name: "John Doe",
+//     avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
+//     position: "senior",
+//     salaryStatus: "paid",
+//     month: "february-2020",
+//   },
+//   {
+//     ID: "VMSD-20181",
+//     name: "John Doe",
+//     avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
+//     position: "executive",
+//     salaryStatus: "pending",
+//     month: "March-2020",
+//   },
+//   {
+//     ID: "VMSD-20181",
+//     name: "John Doe",
+//     avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
+//     position: "Manager",
+//     salaryStatus: "pending",
+//     month: "March-2020",
+//   },
+//   {
+//     ID: "VMSD-20181",
+//     name: "John Doe",
+//     avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
+//     position: "helper",
+//     salaryStatus: "pending",
+//     month: "March-2020",
+//   },
+// ];
+
 const SalaryRecordTable = () => {
+  const [VMSEmployers, setVMSEmployers] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [totalPages, setTotalPages] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const itemsPerPage = 5; // Change this value as needed
+  const [commonData, setCommonData] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("accessToken");
+        const headers = {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
+        };
+        const response = await axios.get(
+          ` https://vahicle-management-backend.vercel.app/api/v1/driver-salary/list?page=${currentPage}&size=${itemsPerPage}&searchTerm=${searchTerm}`
+        );
+        // console.log(response.data.data.
+
+        setVMSEmployers(response.data.data.data);
+        setTotalPages(
+          Math.ceil(response?.data?.data?.data?.length / itemsPerPage)
+        );
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [currentPage]); // Re-fetch data when currentPage changes
+
+  const handlePaginationClick = (pageNumber: any) => {
+    setCurrentPage(pageNumber);
+  };
+
+  // Function to handle filtering based on search input
+  const handleSearch = (searchTerm: any) => {
+    const search = searchTerm.target.value;
+    const filtered = VMSEmployers.filter(
+      (i: any) => i.status.toLowerCase() === search.toLowerCase()
+    );
+    setFilteredData(filtered);
+    // console.log(filteredData)
+    // const filtered:any = VMSEmployers.filter((items:any)=> {
+    //  items.status.toLowerCase().includes(search.toLowerCase())
+    // setFilteredData(filtered)
+  };
+  // const filtered = VMSEmployers.filter((item:any) => {
+  //   // You can customize this condition based on your requirements
+  //   return item.status.toLowerCase().includes(searchTerm.toLowerCase());
+  // });
+  // console.log(filtered)
+  // setFilteredData(filtered);
+  // };
+
+  // Your onChange handler for the search input
+  const handleInputChange = (event: any) => {
+    // const searchTerm = event.target.value;
+    // if (!searchTerm) {
+    //   setFilteredData( VMSEmployers);
+    // } else {
+    //   handleSearch(filteredData);
+    // }
+  };
+
   return (
     <div>
       {/* table start */}
@@ -98,6 +170,7 @@ const SalaryRecordTable = () => {
                   </span>
                 </div>
                 <input
+                  onChange={(e) => handleSearch(e)}
                   type="text"
                   className="flex-shrink flex-grow flex-auto leading-normal tracking-wide w-px border border-none border-l-0 rounded rounded-l-none px-3 relative focus:outline-none text-xxs lg:text-xs text-gray-500 font-thin"
                   placeholder={`Search Through ${SalaryTableFields?.length} Driver`}
@@ -119,27 +192,50 @@ const SalaryRecordTable = () => {
                 ))}
               </tr>
             </thead>
-
             <tbody className="bg-white">
-              {VMSEmployers?.map((VMSEmployer, index) => (
-                <tr
-                  key={VMSEmployer?.ID}
-                  className={`${index % 2 === 0 ? "" : "bg-gray-50"}  `}
-                >
-                  <td className="px-2 py-3 text-sm leading-5">
-                    {VMSEmployer?.name}
-                  </td>
-                  <td className="px-2 py-3 text-sm leading-5">
-                    {VMSEmployer?.month}
-                  </td>
-                  <td className="px-2 py-3 text-sm leading-5">
-                    {VMSEmployer?.position}
-                  </td>
-                  <td className="px-2 py-3 text-sm leading-5">
-                    {VMSEmployer?.salaryStatus}
-                  </td>
-                </tr>
-              ))}
+              {filteredData.length === 0
+                ? VMSEmployers?.map((VMSEmployer: any, index) => {
+                    return (
+                      <tr
+                        key={VMSEmployer?.ID}
+                        className={`${index % 2 === 0 ? "" : "bg-gray-50"}  `}
+                      >
+                        <td className="px-2 py-3 text-sm leading-5">
+                          {VMSEmployer?.driver?.name}
+                        </td>
+                        <td className="px-2 py-3 text-sm leading-5">
+                          {VMSEmployer?.month}
+                        </td>
+                        <td className="px-2 py-3 text-sm leading-5">
+                          {VMSEmployer?.position}
+                        </td>
+                        <td className="px-2 py-3 text-sm leading-5">
+                          {VMSEmployer?.status}
+                        </td>
+                      </tr>
+                    );
+                  })
+                : filteredData?.map((VMSEmployer: any, index) => {
+                    return (
+                      <tr
+                        key={VMSEmployer?.ID}
+                        className={`${index % 2 === 0 ? "" : "bg-gray-50"}  `}
+                      >
+                        <td className="px-2 py-3 text-sm leading-5">
+                          {VMSEmployer?.driver?.name}
+                        </td>
+                        <td className="px-2 py-3 text-sm leading-5">
+                          {VMSEmployer?.month}
+                        </td>
+                        <td className="px-2 py-3 text-sm leading-5">
+                          {VMSEmployer?.position}
+                        </td>
+                        <td className="px-2 py-3 text-sm leading-5">
+                          {VMSEmployer?.status}
+                        </td>
+                      </tr>
+                    );
+                  })}
             </tbody>
           </table>
 
