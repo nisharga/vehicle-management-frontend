@@ -91,7 +91,7 @@ const SalaryRecordTable = () => {
           ` https://vahicle-management-backend.vercel.app/api/v1/driver-salary/list?page=${currentPage}&size=${itemsPerPage}&searchTerm=${searchTerm}`,
         
         );
-        // console.log(response.data.data.data);
+        // console.log(response.data.data.
 
         setVMSEmployers(response.data.data.data);
         setTotalPages(
