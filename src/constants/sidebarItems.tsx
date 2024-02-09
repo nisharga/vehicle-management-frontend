@@ -2,14 +2,18 @@ import {
   AppstoreAddOutlined,
   AreaChartOutlined,
   CarOutlined,
+  DollarOutlined,
   EnvironmentOutlined,
   ExperimentOutlined,
   EyeOutlined,
+  FileZipOutlined,
   HistoryOutlined,
-  ReadOutlined,
+  QuestionCircleOutlined,
+  SafetyOutlined,
   ScheduleOutlined,
   ShopOutlined,
   TruckOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import Link from "next/link";
@@ -19,23 +23,15 @@ export const sidebarItems = (role: string) => {
   const privacyPolicySidebarItem: MenuProps["items"] = [
     {
       label: <Link href={`/${role}/privacy`}>Privacy Policy</Link>,
-      icon: <AreaChartOutlined />,
+      icon: <SafetyOutlined />,
       key: `/privacy`,
     },
   ];
   const faqSidebarItem: MenuProps["items"] = [
     {
       label: <Link href={`/${role}/faq`}>FAQ</Link>,
-      icon: <AreaChartOutlined />,
+      icon: <QuestionCircleOutlined />,
       key: `/${role}/faq`,
-    },
-  ];
-
-  const glarySidebarItem: MenuProps["items"] = [
-    {
-      label: <Link href={`/${role}/gallery`}>Gallery</Link>,
-      icon: <AreaChartOutlined />,
-      key: `/${role}/gallery`,
     },
   ];
 
@@ -54,17 +50,10 @@ export const sidebarItems = (role: string) => {
     },
   ];
 
-  const taskSidebarItem: MenuProps["items"] = [
-    {
-      label: <Link href={`/${role}/task`}>Task</Link>,
-      icon: <AreaChartOutlined />,
-      key: `/${role}/task`,
-    },
-  ];
   const profileSidebarItem: MenuProps["items"] = [
     {
       label: <Link href={`/${role}/profile`}>Profile</Link>,
-      icon: <AreaChartOutlined />,
+      icon: <UserOutlined />,
       key: `/${role}/profile`,
     },
   ];
@@ -111,7 +100,7 @@ export const sidebarItems = (role: string) => {
     {
       label: "Expenses",
       key: "expenses",
-      icon: <ReadOutlined />,
+      icon: <DollarOutlined />,
       children: [
         {
           label: <Link href={`/${role}/trip-cost`}>Trip-Cost</Link>,
@@ -140,7 +129,7 @@ export const sidebarItems = (role: string) => {
     {
       label: "Report",
       key: "report",
-      icon: <ReadOutlined />,
+      icon: <FileZipOutlined />,
       children: [
         {
           label: <Link href={`/${role}/fuelReport`}>Fuel Report</Link>,
@@ -162,6 +151,9 @@ export const sidebarItems = (role: string) => {
         },
       ],
     },
+    ...privacyPolicySidebarItem,
+    ...faqSidebarItem,
+    ...profileSidebarItem,
   ];
 
   //.........Driver........................
@@ -224,9 +216,7 @@ export const sidebarItems = (role: string) => {
     },
     ...contactSidebarItem,
     ...privacyPolicySidebarItem,
-    ...glarySidebarItem,
     ...faqSidebarItem,
-    ...taskSidebarItem,
     ...complainSidebarItem,
     ...profileSidebarItem,
   ];
