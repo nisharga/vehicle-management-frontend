@@ -1,5 +1,11 @@
+import Faq from "@/components/faq/Faq";
+
 const page = () => {
-  return <div>faq...</div>;
+  return (
+    <>
+      <Faq />
+    </>
+  );
 };
 
 export default page;

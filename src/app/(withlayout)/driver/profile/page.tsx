@@ -1,7 +1,11 @@
-import React from "react";
+import ProfilePage from "../../super-admin/profile/page";
 
 const page = () => {
-  return <div>profile...</div>;
+  return (
+    <>
+      <ProfilePage />
+    </>
+  );
 };
 
 export default page;

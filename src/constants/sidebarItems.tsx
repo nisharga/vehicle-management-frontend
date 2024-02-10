@@ -195,6 +195,9 @@ export const sidebarItems = (role: string) => {
       icon: <ShopOutlined />,
       key: `/${role}/inventoryRequest`,
     },
+    ...privacyPolicySidebarItem,
+    ...faqSidebarItem,
+    ...profileSidebarItem,
   ];
 
   //.............Super admin.......................
