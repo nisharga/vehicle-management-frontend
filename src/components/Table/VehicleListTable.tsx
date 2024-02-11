@@ -115,8 +115,11 @@ const VehicleListTable = () => {
                         description="Are you sure to delete this task?"
                         onConfirm={() => confirm(vehicle?.registration_no)}
                         onCancel={() => cancel}
-                        okText="Yes"
+                        
+                        
                         cancelText="No"
+                        okText="Delete"
+  okType="danger"
                       >
                         <Button danger>
                           <span className="item justify-center items-center">

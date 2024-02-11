@@ -33,6 +33,7 @@ const UpdateVehecleForm = ({ updateID }: any) => {
               type="text"
               size="large"
               placeholder="Vehicle Brand"
+              defaultValue="Nisharga G"
             />
           </div>
           <div className="mb-4">
