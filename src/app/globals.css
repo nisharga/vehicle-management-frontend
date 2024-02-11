@@ -105,3 +105,8 @@
 :where(.css-dev-only-do-not-override-1b0bdye).ant-btn {
   padding: 0px 8px !important;
 }
+
+.order_details text {
+  font-size: 5px;
+  padding: 5px;
+}
