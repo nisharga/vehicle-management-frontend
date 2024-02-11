@@ -7,7 +7,7 @@ const vehicle = () => {
     <>
       <div className="flex justify-between">
         <h3 className="mb-4 flex justify-center text-xl md:text-3xl text-secondary">
-          Vehicle List
+          Vehicle  
         </h3>
         <ModalBox btnLabel="Add Vehecle">
           <AddVehicle />

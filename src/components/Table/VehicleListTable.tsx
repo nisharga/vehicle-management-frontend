@@ -6,6 +6,7 @@ import ModalBox from "../ModalBox/ModalBox";
 import Pagination from "../ui/Pagination";
 import ViewItem from "../ui/ViewItem";
 import { vehicles, vehiclesFields } from "./StaticTableData";
+import { Icons } from "@/assets/Icons/Icons";
 
 const VehicleListTable = () => {
   const confirm = (e: any) => {
@@ -27,27 +28,7 @@ const VehicleListTable = () => {
               <div className="flex flex-wrap items-stretch w-full h-full mb-6 relative">
                 <div className="flex bg-slate-400">
                   <span className="flex items-center leading-normal bg-transparent rounded rounded-r-none border border-r-0 border-none lg:px-3 py-2 whitespace-no-wrap text-grey-dark text-sm ">
-                    <svg
-                      width="18"
-                      height="18"
-                      className="w-4 lg:w-auto"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M8.11086 15.2217C12.0381 15.2217 15.2217 12.0381 15.2217 8.11086C15.2217 4.18364 12.0381 1 8.11086 1C4.18364 1 1 4.18364 1 8.11086C1 12.0381 4.18364 15.2217 8.11086 15.2217Z"
-                        stroke="#fff"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M16.9993 16.9993L13.1328 13.1328"
-                        stroke="#fff"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
+                    <Icons.SearchIcon/>
                   </span>
                 </div>
                 <input
@@ -106,6 +87,7 @@ const VehicleListTable = () => {
                     <div className="flex gap-x-1 ">
                       <ModalBox
                         title="View Details"
+                        modalWidth={300}
                         btnLabel={
                           <span className="item justify-center items-center">
                             <EyeOutlined />
