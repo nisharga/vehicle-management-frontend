@@ -1,9 +1,11 @@
-const upComingTripPage = () => {
+import UpcomingTripTable from "@/components/Table/UpcomingTrip";
+
+const page = () => {
   return (
     <div>
-      <p>upComingTrip...</p>
+      <UpcomingTripTable />
     </div>
   );
 };
 
-export default upComingTripPage;
+export default page;
