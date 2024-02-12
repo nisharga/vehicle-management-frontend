@@ -1,12 +1,8 @@
 "use client";
 import { authKey } from "@/constants/storageKey";
+import ThemeSwitcher from "@/helpers/ThemeSwitcher/ThemeSwitcher";
 import { getUserInfo, removeUserInfo } from "@/services/auth.service";
-import {
-  LogoutOutlined,
-  MoonOutlined,
-  SunOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
+import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { Avatar, Button, Dropdown, MenuProps, Space, Switch } from "antd";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -53,11 +49,11 @@ const Header = () => {
   return (
     <nav
       className={`${
-        color ? "bg-white shadow-lg" : "bg-white shadow-sm"
+        color ? "bg-white shadow-lg" : "shadow-sm bg-white"
       } sticky top-0 flex flex-wrap
           justify-end
           pr-12
-          text-lg z-50`}
+          text-lg z-50 dark:bg-[#00334E]`}
     >
       <div className="w-auto">
         <ul className="gap-x-5 py-3 flex">
@@ -73,10 +69,7 @@ const Header = () => {
             </a>
           </li>
           <li>
-            <a className="text-base text-secondary block" href="#">
-              <MoonOutlined />
-              <SunOutlined />
-            </a>
+            <ThemeSwitcher />
           </li>
           <li>
             <a className="text-base text-secondary block" href="#">

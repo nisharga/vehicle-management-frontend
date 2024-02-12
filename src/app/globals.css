@@ -45,11 +45,6 @@
   background: #011e2e !important;
 }
 
-:where(.css-dev-only-do-not-override-1b0bdye).ant-layout
-  .ant-layout-sider-trigger {
-  background: #faab00 !important;
-}
-
 .vms-login-page-banner {
   background-image: url(../assets/bannar.jpg);
   overflow: hidden;
@@ -62,6 +57,14 @@
 .backgroundImage {
   background: url(../assets/final_bg_bannar.jpg) no-repeat center center fixed;
 
+  overflow: hidden;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.innerBanner {
+  background: url(../assets/innerBannar.jpg) no-repeat center center fixed;
   overflow: hidden;
   -webkit-background-size: cover;
   -moz-background-size: cover;

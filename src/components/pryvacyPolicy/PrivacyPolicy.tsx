@@ -20,14 +20,8 @@ const PrivacyPolicy = () => {
     },
   ];
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-2">Terms & Conditions</h1>
-      <div className="w-full h-72 bg-purple-200/50 rounded flex justify-center items-center">
-        <h1 className="text-2xl md:text-5xl font-bold text-center px-4">
-          Terms & Conditions
-        </h1>
-      </div>
-      <div className="w-full md:w-3/5 mx-auto h-full bg-white mt-10  md:-mt-20 rounded">
+    <>
+      <div className="w-full md:w-[70%] mx-auto h-full shadow-xl bg-white dark:bg-[#00334E] text-gray-500 dark:text-[#EFEFEF] mt-10 rounded-lg">
         <div className="py-10 px-8">
           {privacyData.map((item, index) => (
             <div key={index}>
@@ -39,7 +33,7 @@ const PrivacyPolicy = () => {
           ))}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

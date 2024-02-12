@@ -3,7 +3,7 @@ import { Bars } from "react-loader-spinner";
 
 const LoadingPage: any = () => {
   return (
-    <div className="loading mx-auto">
+    <div className="loading mx-auto flex justify-center my-[10%]">
       <Bars
         height="60"
         width="60"

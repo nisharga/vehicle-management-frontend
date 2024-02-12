@@ -1,7 +1,9 @@
+import TripHistoryTable from "@/components/Table/TripHistoryTable";
+
 const tripHistoryPage = () => {
   return (
     <div>
-      <p>tripHistory....</p>
+      <TripHistoryTable />
     </div>
   );
 };
