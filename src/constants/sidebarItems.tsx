@@ -7,7 +7,6 @@ import {
   ExperimentOutlined,
   EyeOutlined,
   FileZipOutlined,
-  HistoryOutlined,
   QuestionCircleOutlined,
   SafetyOutlined,
   ScheduleOutlined,
@@ -155,40 +154,21 @@ export const sidebarItems = (role: string) => {
   //.........Driver........................
   const driverSidebarItems: MenuProps["items"] = [
     ...overviewSidebarItems,
-    {
-      label: <Link href={`/${role}/tripHistory`}>Trip History</Link>,
-      icon: <HistoryOutlined />,
-      key: `/${role}/tripHistory`,
-    },
+
     {
       label: "Trip Schedule",
       key: "tripSchedule",
       icon: <ScheduleOutlined />,
       children: [
         {
-          label: <Link href={`/${role}/completeTrip`}>Complete Trip</Link>,
-          key: "completeTrip",
+          label: <Link href={`/${role}/upcomingTrip`}>Upcoming Trip</Link>,
+          key: "upcomingTrip",
         },
         {
-          label: <Link href={`/${role}/upComingTrip`}>Up Coming Trip</Link>,
-          key: "upComingTrip",
-        },
-        {
-          label: <Link href={`/${role}/onGoingTrip`}>On-Going Trip</Link>,
-          key: "onGoingTrip",
+          label: <Link href={`/${role}/tripHistory`}>Trip History</Link>,
+          key: "tripHistory",
         },
       ],
-    },
-
-    {
-      label: <Link href={`/${role}/holyday`}>Holyday</Link>,
-      icon: <ShopOutlined />,
-      key: `/${role}/holyday`,
-    },
-    {
-      label: <Link href={`/${role}/totalTrip`}>Total trip</Link>,
-      icon: <ShopOutlined />,
-      key: `/${role}/totalTrip`,
     },
     {
       label: <Link href={`/${role}/inventoryRequest`}>Inventory Request</Link>,
