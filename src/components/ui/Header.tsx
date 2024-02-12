@@ -60,7 +60,7 @@ const Header = () => {
           text-lg z-50`}
     >
       <div className="w-auto">
-        <ul className="gap-x-5 py-3 flex">
+        <ul className="gap-x-5 py-3 flex flex-row justify-center items-center">
           <li>
             <a className="text-base text-secondary block" href="#">
               <Space direction="vertical">
@@ -73,7 +73,7 @@ const Header = () => {
             </a>
           </li>
           <li>
-            <a className="text-base text-secondary block" href="#">
+            <a className="text-base text-secondary flex flex-row gap-5 justify-center items-center" href="#">
               <MoonOutlined />
               <SunOutlined />
             </a>
