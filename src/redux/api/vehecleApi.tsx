@@ -5,8 +5,8 @@ import { baseApi } from "./baseApi";
 const vehicleApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     vehicleAll: build.query({
-      query: () => ({
-        url: "/vehicle",
+      query: (page) => ({
+        url: `/vehicle?page=${page}&limit=${5}`,
         method: "GET", 
       }), 
       providesTags: [tagTypes.vehicle],
