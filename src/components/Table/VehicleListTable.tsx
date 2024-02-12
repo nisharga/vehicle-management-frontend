@@ -10,7 +10,7 @@ import { Icons } from "@/assets/Icons/Icons";
 import { Pagination } from 'antd';
 import React, { useState, useEffect } from 'react';
 import type { PaginationProps } from 'antd';
-import { useVehicleAllQuery } from "@/redux/api/vehecleApi";
+import { useDeleteVehicleMutation, useVehicleAllQuery } from "@/redux/api/vehecleApi";
 
 interface IProps{
   id: string;
@@ -23,12 +23,14 @@ interface IProps{
 }
 
 const VehicleListTable = () => {
-
   
-
-  const confirm = (e: any) => {
-    console.log(e);
-    message.success(`${e} Deleted Sucessfully`);
+  const [deleteVehicle] = useDeleteVehicleMutation(); 
+  
+  const confirm = async (e: any) => {
+    console.log("🚀 ~ confirm ~ e:", e)
+    const res = await deleteVehicle(e)
+    console.log("🚀 ~ confirm ~ res:", res)
+    // message.success(`${e} Deleted Sucessfully`);
   };
 
   const cancel = (e: React.MouseEvent<HTMLElement>) => {
@@ -43,10 +45,8 @@ const VehicleListTable = () => {
   const onChange: PaginationProps['onChange'] = (page) => {
     setCurrent(page); 
   };
-
-   
+ 
   const { data: vehicle } =  useVehicleAllQuery(current); 
-   console.log(vehicle)
 
   return (
     <>
@@ -124,7 +124,7 @@ const VehicleListTable = () => {
                           </span>
                         }
                       >
-                        <ViewItem viewID={vehicle?.id} />
+                        <ViewItem viewID={vehicle?.id} ItemType="vehicle" />
                       </ModalBox>
 
                       <ModalBox
