@@ -23,49 +23,6 @@ const SalaryTableFields = [
   },
 ];
 
-// const VMSEmployers = [
-//   {
-//     ID: "VMSD-20181",
-//     name: "John Doe",
-//     avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-//     position: "junior",
-//     salaryStatus: "pending",
-//     month: "january-2020",
-//   },
-//   {
-//     ID: "VMSD-20182",
-//     name: "John Doe",
-//     avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-//     position: "senior",
-//     salaryStatus: "paid",
-//     month: "february-2020",
-//   },
-//   {
-//     ID: "VMSD-20181",
-//     name: "John Doe",
-//     avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-//     position: "executive",
-//     salaryStatus: "pending",
-//     month: "March-2020",
-//   },
-//   {
-//     ID: "VMSD-20181",
-//     name: "John Doe",
-//     avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-//     position: "Manager",
-//     salaryStatus: "pending",
-//     month: "March-2020",
-//   },
-//   {
-//     ID: "VMSD-20181",
-//     name: "John Doe",
-//     avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-//     position: "helper",
-//     salaryStatus: "pending",
-//     month: "March-2020",
-//   },
-// ];
-
 const SalaryRecordTable = () => {
   const [VMSEmployers, setVMSEmployers] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -100,7 +57,7 @@ const SalaryRecordTable = () => {
     };
 
     fetchData();
-  }, [currentPage]); // Re-fetch data when currentPage changes
+  }, [currentPage, itemsPerPage, searchTerm]); // Re-fetch data when currentPage changes
 
   const handlePaginationClick = (pageNumber: any) => {
     setCurrentPage(pageNumber);
