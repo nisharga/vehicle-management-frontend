@@ -1,9 +1,9 @@
-import ProfilePage from "../../super-admin/profile/page";
+import UserProfile from "@/components/Profile/UserProfile";
 
 const page = () => {
   return (
     <>
-      <ProfilePage />
+      <UserProfile />
     </>
   );
 };

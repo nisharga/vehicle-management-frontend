@@ -7,9 +7,7 @@ import {
   EditOutlined,
   EnvironmentOutlined,
   FacebookFilled,
-  GithubFilled,
   MailFilled,
-  MediumSquareFilled,
   PhoneOutlined,
   TwitterSquareFilled,
   UserAddOutlined,
@@ -39,20 +37,12 @@ function getItem(
 const items: MenuProps["items"] = [
   getItem("Edit Profile", "edit-profile", <EditOutlined />),
   getItem("Social Profile", "social-profile", <UserAddOutlined />),
-
-  { type: "divider" },
 ];
 
 const UserProfile = () => {
   const [selectedMenuItem, setSelectedMenuItem] = useState<string | null>(
     "edit-profile"
   );
-
-  const defaultValues = {
-    name: "default",
-    email: "<EMAIL>",
-    phone: "1234567890",
-  };
 
   const onSubmit = (data: any) => {
     console.log(data);
@@ -61,7 +51,7 @@ const UserProfile = () => {
     <div>
       <h1 className="text-2xl font-bold text-textColor">My Profile</h1>
       <div className="flex flex-col md:flex-row gap-4 mt-6">
-        <div className="bg-white w-full md:w-72 px-4 py-8 rounded">
+        <div className="bg-white dark:bg-[#00334E] w-full md:w-72 px-4 py-8 rounded">
           <div className="flex items-center justify-center">
             <div className="w-32 h-32 bg-red-500 rounded-full relative">
               <Image src={profile} alt="profile" fill />
@@ -78,32 +68,33 @@ const UserProfile = () => {
               </div>
             </div>
           </div>
-          <div className="text-center my-6">
-            <h1 className="text-lg font-semibold ">Shofikul</h1>
+          <div className="text-center my-6 dark:text-[#EFEFEF]">
+            <h1 className="text-lg font-semibold ">Md. Shofikul</h1>
             <p className="font-light">Full stack developer</p>
           </div>
-          <Divider />
+          <Divider style={{ backgroundColor: "#eee" }} />
           <div>
             <Menu
               onClick={(e) => setSelectedMenuItem(e.key)}
-              style={{ width: 256 }}
+              style={{ width: 230 }}
               defaultSelectedKeys={["1"]}
               defaultOpenKeys={["sub1"]}
-              mode="inline"
+              mode="vertical"
               items={items}
+              className="dark:bg-[#00334E] dark:text-[#EFEFEF] "
             />
           </div>
         </div>
-        <div className="bg-white w-full md:flex-1 px-4 py-8 rounded">
+
+        <div className="bg-white dark:bg-[#00334E]  w-full md:flex-1 px-4 py-8 rounded">
           {selectedMenuItem === "edit-profile" && (
-            <div>
+            <div className="dark:text-[#EFEFEF]">
               <h1 className="text-xl font-semibold">Edit Profile</h1>
-              <p className="font-extralight text-sm">
-                set up your personal information
-              </p>
-              <Divider />
+              <p className="text-sm">set up your personal information</p>
+              <Divider style={{ backgroundColor: "#eee" }} />
+
               <div className="w-full md:w-3/5 md:mx-auto">
-                <Form submitHandler={onSubmit} defaultValues={defaultValues}>
+                <Form submitHandler={onSubmit}>
                   <div className="space-y-4">
                     <div>
                       <FormInput
@@ -111,6 +102,7 @@ const UserProfile = () => {
                         type="text"
                         size="large"
                         label="Name"
+                        placeholder="Your Name"
                         prefix={<UserAddOutlined />}
                       />
                     </div>
@@ -120,6 +112,7 @@ const UserProfile = () => {
                         type="email"
                         size="large"
                         label="Email"
+                        placeholder="Your Email (abc@gmail.com)"
                         prefix={<MailFilled />}
                       />
                     </div>
@@ -129,6 +122,7 @@ const UserProfile = () => {
                         type="text"
                         size="large"
                         label="Phone Number"
+                        placeholder="Phone Number (+880 ...)"
                         prefix={<PhoneOutlined />}
                       />
                     </div>
@@ -138,15 +132,7 @@ const UserProfile = () => {
                         type="text"
                         size="large"
                         label="Address"
-                        prefix={<EnvironmentOutlined />}
-                      />
-                    </div>
-                    <div>
-                      <FormInput
-                        name="location"
-                        type="text"
-                        size="large"
-                        label="Location"
+                        placeholder="Your Address"
                         prefix={<EnvironmentOutlined />}
                       />
                     </div>
@@ -155,7 +141,7 @@ const UserProfile = () => {
                     shape="default"
                     type="primary"
                     htmlType="submit"
-                    className="bg-textColor mt-3"
+                    className="bg-[#003343] text-[#eee] dark:bg-gray-100 dark:text-[#00334E] mt-3"
                   >
                     Update Profile
                   </Button>
@@ -164,14 +150,14 @@ const UserProfile = () => {
             </div>
           )}
           {selectedMenuItem === "social-profile" && (
-            <div>
+            <div className="dark:text-[#EFEFEF]">
               <h1 className="text-xl font-semibold">Social Profile</h1>
               <p className="font-extralight text-sm">
                 Add elsewhere links to your profile
               </p>
-              <Divider />
+              <Divider style={{ backgroundColor: "#eee" }} />
               <div className="w-full md:w-3/5 md:mx-auto">
-                <Form submitHandler={onSubmit} defaultValues={defaultValues}>
+                <Form submitHandler={onSubmit}>
                   <div className="space-y-4">
                     <div>
                       <FormInput
@@ -181,7 +167,7 @@ const UserProfile = () => {
                         label="Facebook :"
                         placeholder="Facebook URL"
                         prefix={
-                          <FacebookFilled className="text-2xl bg-blue-400 text-white outline-none border-none" />
+                          <FacebookFilled className="text-2xl bg-[#00334E] text-white outline-none border-none" />
                         }
                       />
                     </div>
@@ -193,31 +179,7 @@ const UserProfile = () => {
                         label="Twitter :"
                         placeholder="Twitter URL"
                         prefix={
-                          <TwitterSquareFilled className="text-2xl bg-blue-400 text-white outline-none border-none" />
-                        }
-                      />
-                    </div>
-                    <div>
-                      <FormInput
-                        name="medium_url"
-                        type="url"
-                        size="large"
-                        label="Medium :"
-                        placeholder="Medium Url"
-                        prefix={
-                          <MediumSquareFilled className="text-2xl bg-blue-400 text-white outline-none border-none" />
-                        }
-                      />
-                    </div>
-                    <div>
-                      <FormInput
-                        name="github_url"
-                        type="url"
-                        size="large"
-                        label="Github :"
-                        placeholder="Github URL"
-                        prefix={
-                          <GithubFilled className="text-2xl bg-blue-400 text-white outline-none border-none" />
+                          <TwitterSquareFilled className="text-2xl bg-[#00334E] text-white outline-none border-none" />
                         }
                       />
                     </div>
@@ -226,7 +188,7 @@ const UserProfile = () => {
                     shape="default"
                     type="primary"
                     htmlType="submit"
-                    className="bg-textColor mt-3"
+                    className="bg-[#003343] text-[#eee] dark:bg-gray-100 dark:text-[#00334E] mt-3"
                   >
                     Update Social Profile
                   </Button>

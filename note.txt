@@ -1,0 +1,39 @@
+ant button
+-------------------
+<Button shape="default"
+type="primary"
+htmlType="submit"
+className="bg-[#003343] text-[#eee] dark:bg-gray-100 dark:text-[#00334E] mt-3" > Update Profile </Button>
+
+
+
+
+
+searching code
+---------------
+<div className=" pb-3 max-w-[55%] md:max-w-[42%]">
+            <Input
+              size="large"
+              placeholder={`Search by Trip Id / Passenger Name of total ${trips?.length} Trips`}
+              prefix={<SearchOutlined />}
+              onChange={(event) => {
+                setSearchTerm(event?.target?.value);
+              }}
+            />
+          </div>
+
+
+const [searchTerm, setSearchTerm] = useState("");
+const [error, setError] = useState(null);
+
+
+?.filter((value) => {
+            if (searchTerm == "") {
+              return value;
+            } else if (
+              value.((firstName)).toLowerCase().includes(searchTerm.toLowerCase())
+            ) {
+              return value;
+            }
+          })
+
