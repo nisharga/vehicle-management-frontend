@@ -1,31 +1,9 @@
 "use client";
-import { CaretRightOutlined, SmileOutlined } from "@ant-design/icons";
+import { CaretRightOutlined } from "@ant-design/icons";
 import type { CollapseProps } from "antd";
-import { Button, Collapse } from "antd";
+import { Collapse } from "antd";
 import type { CSSProperties } from "react";
 import React from "react";
-
-const feedback = (
-  <>
-    <p className="my-4 font-bold text-textColor">Was this article helpful ?</p>
-    <div className="flex gap-4">
-      <Button
-        style={{ backgroundColor: "#707070" }}
-        type="primary"
-        icon={<SmileOutlined />}
-      >
-        Yes
-      </Button>
-      <Button
-        style={{ backgroundColor: "#707070" }}
-        type="primary"
-        icon={<SmileOutlined />}
-      >
-        No
-      </Button>
-    </div>
-  </>
-);
 
 const getItems: (panelStyle: CSSProperties) => CollapseProps["items"] = (
   panelStyle
@@ -38,14 +16,13 @@ const getItems: (panelStyle: CSSProperties) => CollapseProps["items"] = (
       </p>
     ),
     children: (
-      <div>
+      <div className="">
         <p>
           The VMS is a comprehensive platform designed to simplify vehicle
           management for both individuals and businesses. It offers features
           such as user-friendly dashboard, vehicle profile management,
           maintenance scheduling, fuel expense tracking, and more.
         </p>
-        <div>{feedback}</div>
       </div>
     ),
     style: panelStyle,
@@ -63,7 +40,6 @@ const getItems: (panelStyle: CSSProperties) => CollapseProps["items"] = (
           calculations, simplifies vehicle maintenance, digitizes important
           documents, and ultimately saves both time and cost.
         </p>
-        <div>{feedback}</div>
       </div>
     ),
     style: panelStyle,
@@ -81,7 +57,6 @@ const getItems: (panelStyle: CSSProperties) => CollapseProps["items"] = (
           such as user-friendly dashboard, vehicle profile management,
           maintenance scheduling, fuel expense tracking, and more.
         </p>
-        <div>{feedback}</div>
       </div>
     ),
     style: panelStyle,
@@ -102,7 +77,6 @@ const getItems: (panelStyle: CSSProperties) => CollapseProps["items"] = (
           important information, the VMS simplifies the entire process and helps
           users have a stress-free experience on the road.
         </p>
-        <div>{feedback}</div>
       </div>
     ),
     style: panelStyle,
@@ -123,7 +97,6 @@ const getItems: (panelStyle: CSSProperties) => CollapseProps["items"] = (
           analysis tools, and user permissions and access control, to ensure
           efficient operation and optimization of resources.
         </p>
-        <div>{feedback}</div>
       </div>
     ),
     style: panelStyle,
@@ -140,19 +113,21 @@ const Faq = () => {
     boxShadow: "2px 2px 4px gray",
   };
   return (
-    <div className="flex justify-center">
-      <p className="text-2xl font-bold mb-2">FAQs</p>
-      <div className="w-[70%] h-full p-6 rounded">
-        <Collapse
-          bordered={false}
-          defaultActiveKey={["1"]}
-          expandIcon={({ isActive }) => (
-            <CaretRightOutlined rotate={isActive ? 90 : 0} />
-          )}
-          items={getItems(panelStyle)}
-        />
+    <>
+      <p className="text-2xl font-bold">FAQs</p>
+      <div className="flex justify-center ">
+        <div className="md:w-[70%]  h-full pt-5 rounded">
+          <Collapse
+            bordered={false}
+            defaultActiveKey={["1"]}
+            expandIcon={({ isActive }) => (
+              <CaretRightOutlined rotate={isActive ? 90 : 0} />
+            )}
+            items={getItems(panelStyle)}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
