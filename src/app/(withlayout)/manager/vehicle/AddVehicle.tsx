@@ -46,10 +46,11 @@ const AddVehicle = () => {
     fuelType} 
 
     const resData = await createVehicle(formData)
-    if(resData?.data?.statusCode === 200){
+    if((resData as any).data?.statusCode === 200){
       message.success("Vehicle Created successful");
-    }
-    console.log("Done", resData)
+    }else{
+      message.error("Something went wrong");
+    } 
   };
 
   return (
