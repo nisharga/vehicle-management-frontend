@@ -21,14 +21,14 @@ const PrivacyPolicy = () => {
   ];
   return (
     <>
-      <div className="w-full md:w-[70%] mx-auto h-full shadow-xl bg-white dark:bg-[#00334E] text-gray-500 dark:text-[#EFEFEF] mt-10 rounded-lg">
-        <div className="py-10 px-8">
+      <div className="w-full md:w-[70%] mx-auto h-full shadow-xl bg-white dark:bg-[#00334E] text-gray-500 dark:text-[#EFEFEF] md:mt-10 rounded-lg">
+        <div className="p-5">
           {privacyData.map((item, index) => (
             <div key={index}>
-              <h1 className="text-xl md:text-2xl font-semibold">
-                {item?.title}
+              <h1 className="text-lg md:text-2xl font-semibold">
+                ✔ {item?.title}
               </h1>
-              <p className="leading-6 my-8 font-medium">{item?.description}</p>
+              <p className="text-sm my-5 italic">{item?.description}</p>
             </div>
           ))}
         </div>
