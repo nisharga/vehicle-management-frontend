@@ -1,19 +1,20 @@
 "use client";
 import CreateTrip from "@/app/(withlayout)/manager/trip/CreateTrip";
+import { useDeleteTripMutation, useTripAllQuery } from "@/redux/api/tripApi";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Button, PaginationProps, Popconfirm, message, Pagination } from "antd";
+import { Button, Pagination, PaginationProps, Popconfirm, message } from "antd";
+import { useState } from "react";
 import UpdateTripForm from "../Forms/UpdateTripForm";
 import ModalBox from "../ModalBox/ModalBox";
-import { tripFields, trips } from "./StaticTableData";
-import { useDeleteTripMutation, useTripAllQuery } from "@/redux/api/tripApi";
-import { useState } from "react"; 
+import Heading from "../ui/Heading";
+import { tripFields } from "./StaticTableData";
 
 const TripListTable = () => {
-  const [tripDelete] = useDeleteTripMutation() 
+  const [tripDelete] = useDeleteTripMutation();
 
   const confirm = async (e: any) => {
     const deleteTrip = await tripDelete(e);
-    console.log("🚀 ~ confirm ~ delete:", deleteTrip)
+    console.log("🚀 ~ confirm ~ delete:", deleteTrip);
     message.success(`${e} Deleted Sucessfully`);
   };
 
@@ -26,15 +27,15 @@ const TripListTable = () => {
   const [vehicleData, setVehicleData] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
 
- const onChange: PaginationProps['onChange'] = (page) => {
-   setCurrent(page); 
- };
+  const onChange: PaginationProps["onChange"] = (page) => {
+    setCurrent(page);
+  };
 
-  const {data: trip} = useTripAllQuery(current); 
-  
-   
+  const { data: trip } = useTripAllQuery(current);
+
   return (
     <>
+      <Heading>Trip List</Heading>
       {/* table start */}
       <div className="overflow-x-auto rounded-lg">
         <div className="align-middle inline-block min-w-full shadow overflow-hidden bg-white   px-8 pt-3 rounded-bl-lg rounded-br-lg">
@@ -94,14 +95,12 @@ const TripListTable = () => {
             </thead>
 
             <tbody className="">
-              {(trip?.data?.data ?? []).map((trips : any, index: number) => (
+              {(trip?.data?.data ?? []).map((trips: any, index: number) => (
                 <tr
                   key={trips?.id}
                   className={`${index % 2 === 0 ? "" : "bg-gray-50"}  `}
                 >
-                  <td className="px-2 py-3 text-sm leading-5">
-                    {trips?.id}
-                  </td>
+                  <td className="px-2 py-3 text-sm leading-5">{trips?.id}</td>
 
                   <td className="px-2 py-3 text-sm leading-5">
                     {trips?.passengerName}
@@ -168,10 +167,10 @@ const TripListTable = () => {
             </tbody>
           </table>
           <div className="flex justify-center items-center py-8">
-            <Pagination 
-              current={current} 
-              onChange={onChange} 
-              total={trip?.data?.meta?.total | 15} 
+            <Pagination
+              current={current}
+              onChange={onChange}
+              total={trip?.data?.meta?.total | 15}
             />
           </div>
         </div>
