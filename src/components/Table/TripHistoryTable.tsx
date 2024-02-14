@@ -2,6 +2,8 @@
 import { SearchOutlined } from "@ant-design/icons";
 import { Input, message } from "antd";
 import { useState } from "react";
+
+import Heading from "../ui/Heading";
 import { trips } from "./StaticTableData";
 
 const TripHistoryTable = () => {
@@ -17,8 +19,6 @@ const TripHistoryTable = () => {
 
   //searching code
   const [searchTerm, setSearchTerm] = useState("");
-  console.log("search term-->", searchTerm);
-  const [error, setError] = useState(null);
 
   const tripFields = [
     {
@@ -53,14 +53,16 @@ const TripHistoryTable = () => {
 
   return (
     <>
+      <Heading>
+        <p>Trip History</p>
+      </Heading>
       {/* table start */}
-      <div className="overflow-x-auto rounded-lg">
-        <p className=" py-3 font-bold text-xl">Trip History</p>
+      <div className="overflow-x-auto">
         <div
           className="align-middle inline-block min-w-full shadow 
-        overflow-hidden bg-white dark:bg-[#00334E]  shadow-dashboard px-8 py-3 rounded-lg"
+        overflow-hidden bg-white dark:bg-[#00334E] rounded-tr-2xl rounded-tl-2xl"
         >
-          <div className=" pb-3 max-w-[55%] md:max-w-[42%]">
+          <div className=" my-2 mx-auto max-w-[55%] md:max-w-[42%]">
             <Input
               size="large"
               placeholder={`Search by Trip Id / Passenger Name of total ${trips?.length} Trips`}
@@ -72,7 +74,7 @@ const TripHistoryTable = () => {
           </div>
 
           <table className="min-w-full">
-            <thead className="bg-gray-50 rounded-2xl">
+            <thead className="bg-gray-50 border-b ">
               <tr className="dark:bg-[#145374]">
                 {(tripFields ?? [])?.map((vehiclesField) => (
                   <th

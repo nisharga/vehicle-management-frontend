@@ -1,15 +1,19 @@
 "use client";
 import CreateTrip from "@/app/(withlayout)/manager/trip/CreateTrip";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Button, Popconfirm, message } from "antd";
+import { Button, PaginationProps, Popconfirm, message, Pagination } from "antd";
 import UpdateTripForm from "../Forms/UpdateTripForm";
 import ModalBox from "../ModalBox/ModalBox";
-import Pagination from "../ui/Pagination";
 import { tripFields, trips } from "./StaticTableData";
+import { useDeleteTripMutation, useTripAllQuery } from "@/redux/api/tripApi";
+import { useState } from "react"; 
 
 const TripListTable = () => {
-  const confirm = (e: any) => {
-    console.log(e);
+  const [tripDelete] = useDeleteTripMutation() 
+
+  const confirm = async (e: any) => {
+    const deleteTrip = await tripDelete(e);
+    console.log("🚀 ~ confirm ~ delete:", deleteTrip)
     message.success(`${e} Deleted Sucessfully`);
   };
 
@@ -17,11 +21,23 @@ const TripListTable = () => {
     console.log(e);
     message.error("Click on No");
   };
+
+  const [current, setCurrent] = useState(1);
+  const [vehicleData, setVehicleData] = useState(null);
+  const [isFetching, setIsFetching] = useState(false);
+
+ const onChange: PaginationProps['onChange'] = (page) => {
+   setCurrent(page); 
+ };
+
+  const {data: trip} = useTripAllQuery(current); 
+  
+   
   return (
     <>
       {/* table start */}
       <div className="overflow-x-auto rounded-lg">
-        <div className="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg">
+        <div className="align-middle inline-block min-w-full shadow overflow-hidden bg-white   px-8 pt-3 rounded-bl-lg rounded-br-lg">
           <div className="pb-3 flex justify-between">
             <div className="border rounded w-7/12 px-2 lg:px-6 h-10 bg-transparent">
               <div className="flex  items-stretch w-full h-full mb-6 relative">
@@ -53,7 +69,7 @@ const TripListTable = () => {
                 <input
                   type="text"
                   className="flex-shrink flex-grow flex-auto leading-normal tracking-wide w-px border border-none border-l-0 rounded rounded-l-none px-3 relative focus:outline-none text-xxs lg:text-xs text-gray-500 font-thin"
-                  placeholder={`Search Through ${trips?.length} Vehicle`}
+                  placeholder={`Search Through ${trip?.data?.meta?.total} Vehicle`}
                 />
               </div>
             </div>
@@ -78,13 +94,13 @@ const TripListTable = () => {
             </thead>
 
             <tbody className="">
-              {(trips ?? []).map((trips, index) => (
+              {(trip?.data?.data ?? []).map((trips : any, index: number) => (
                 <tr
-                  key={trips?.startTime}
+                  key={trips?.id}
                   className={`${index % 2 === 0 ? "" : "bg-gray-50"}  `}
                 >
                   <td className="px-2 py-3 text-sm leading-5">
-                    {trips?.tripId}
+                    {trips?.id}
                   </td>
 
                   <td className="px-2 py-3 text-sm leading-5">
@@ -132,9 +148,10 @@ const TripListTable = () => {
                       <Popconfirm
                         title="Delete the task"
                         description="Are you sure to delete this task?"
-                        onConfirm={() => confirm(trips?.startLocation)}
+                        onConfirm={() => confirm(trips?.id)}
                         onCancel={() => cancel}
-                        okText="Yes"
+                        okText="Delete"
+                        okType="danger"
                         cancelText="No"
                       >
                         <Button danger>
@@ -150,8 +167,12 @@ const TripListTable = () => {
               ))}
             </tbody>
           </table>
-          <div className="flex justify-center my-4 mx-auto">
-            <Pagination />
+          <div className="flex justify-center items-center py-8">
+            <Pagination 
+              current={current} 
+              onChange={onChange} 
+              total={trip?.data?.meta?.total | 15} 
+            />
           </div>
         </div>
         {/* table end */}
