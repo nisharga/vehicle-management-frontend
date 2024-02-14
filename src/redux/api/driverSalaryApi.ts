@@ -1,41 +1,42 @@
+import { tagTypes } from "../tagTypes";
 import { baseApi } from "./baseApi";
 
-const driverUrl = "/driver-salary";
+const driverSalaryUrl = "/driver-salary";
 
 const driverSalaryApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     createDriverSalary: build.mutation({
       query: (data: any) => ({
-        url: `${driverUrl}/create`,
+        url: `${driverSalaryUrl}/create`,
         method: "POST",
         data: data,
       }),
     }),
     getAllDriverSalary: build.query({
-      query: (params: any) => ({
-        url: `${driverUrl}/list`,
+      query: (page) => ({
+        url: `${driverSalaryUrl}/list?page=${page}&limit=${5}`,
         method: "GET",
-        params,
       }),
-      // providesTags: [tagTypes.driverSalary],
+      providesTags: [tagTypes.driverSalary],
     }),
     getSingleDriverSalary: build.query({
       query: (id: any) => ({
-        url: `${driverUrl}/${id}`,
+        url: `${driverSalaryUrl}/single/${id}`,
         method: "GET",
       }),
       // providesTags: [tagTypes.driverSalary],
     }),
     updateDriverSalary: build.mutation({
-      query: (id: any) => ({
-        url: `${driverUrl}/update/${id}`,
+      query: (data) => ({
+        url: `${driverSalaryUrl}/update/${data?.id}`,
         method: "PATCH",
+        data: data?.data,
       }),
       // providesTags: [tagTypes.driverSalary],
     }),
     deleteDriverSalary: build.mutation({
       query: (id: any) => ({
-        url: `${driverUrl}/delete/${id}`,
+        url: `${driverSalaryUrl}/delete/${id}`,
         method: "DELETE",
       }),
       // providesTags: [tagTypes.driverSalary],

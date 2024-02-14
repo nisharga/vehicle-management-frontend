@@ -16,32 +16,27 @@ const UpdateDriverSalaryForm = ({ updateID }: any) => {
   const { data: driverSalary } = useGetSingleDriverSalaryQuery(updateID);
   const [updateDriverSalary] = useUpdateDriverSalaryMutation();
 
-  const onSubmit = async (data: any) => {
-    const color = data?.color;
-    const seatCapacity = Number(data?.seatCapacity);
-    const model = data?.model;
-    const tax = Number(data?.tax);
-    const updatedData = { color, seatCapacity, model, tax };
+  const defaultValues = {
+    amount: driverSalary?.data?.amount,
+    month: driverSalary?.data?.month,
+    position: driverSalary?.data?.position,
+    status: driverSalary?.data?.status,
+  };
 
-    if (!data.color || !data.seatCapacity || !data.model || !data.tax) {
-      message.error("Every field must be filled");
-    } else {
-      const res = await updateDriverSalary({ updateID, updatedData });
-      console.log(res);
-    }
+  const onSubmit = async (data: any) => {
+    const res = await updateDriverSalary({ id: updateID, data });
   };
 
   return (
     <>
       <div className="mx-auto overflow-y-scroll ">
-        <Form submitHandler={onSubmit}>
+        <Form submitHandler={onSubmit} defaultValues={defaultValues}>
           <div className="mb-4">
             <FormInput
               name="amount"
               type="number"
               size="large"
               placeholder="Enter Salary Amount"
-              value={driverSalary?.data?.amount}
             />
           </div>
           <div className="mb-4">
@@ -61,6 +56,14 @@ const UpdateDriverSalaryForm = ({ updateID }: any) => {
               placeholder="Enter Driver Position"
             />
           </div>
+          <div className="mb-4">
+            <FormInput
+              name="startLocation"
+              type="text"
+              size="large"
+              placeholder="Enter Start Location"
+            />
+          </div>
 
           <div className="mb-4">
             <FormSelectField
@@ -75,20 +78,11 @@ const UpdateDriverSalaryForm = ({ updateID }: any) => {
             />
           </div>
 
-          <div className="mb-4">
-            <FormInput
-              name="startLocation"
-              type="text"
-              size="large"
-              placeholder="Enter Start Location"
-            />
-          </div>
-
           <Button
             htmlType="submit"
             className="uppercase text-md rounded-lg bg-brand hover:bg-gray-200 hover:text-secondary"
           >
-            Update Trip Cost
+            Update Driver Salary
           </Button>
         </Form>
       </div>

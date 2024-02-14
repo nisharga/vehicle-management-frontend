@@ -38,6 +38,7 @@ const SalaryTable = () => {
   };
 
   const { data: driverSalary, isLoading } = useGetAllDriverSalaryQuery(current);
+  console.log("driver salary", driverSalary);
 
   return (
     <>
@@ -85,10 +86,8 @@ const SalaryTable = () => {
                     key={driverSalary?.id}
                     className={`${index % 2 === 0 ? "" : "bg-gray-50"}  `}
                   >
-                    <td className="px-2 py-3">{driverSalary?.passengerName}</td>
-
                     <td className="px-2 py-3 text-sm leading-5">
-                      {driverSalary?.name}
+                      {driverSalary?.driver?.name}
                     </td>
 
                     <td className="px-2 py-3 text-sm leading-5">

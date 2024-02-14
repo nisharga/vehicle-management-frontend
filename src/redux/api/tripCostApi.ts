@@ -27,9 +27,10 @@ const tripCostApi = baseApi.injectEndpoints({
       providesTags: [tagTypes.tripCost],
     }),
     updateTripCost: build.mutation({
-      query: (id: any) => ({
-        url: `${tripCostUrl}/update/${id}`,
+      query: (data) => ({
+        url: `${tripCostUrl}/update/${data?.id}`,
         method: "PATCH",
+        data: data?.data,
       }),
       invalidatesTags: [tagTypes.tripCost],
     }),

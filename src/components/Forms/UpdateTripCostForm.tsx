@@ -21,27 +21,28 @@ type AddVehicleValues = {
 
 const UpdateTripCostForm = ({ updateID }: any) => {
   const { data: tripCost } = useGetSingleTripCostQuery(updateID);
+  console.log("update trip cost", tripCost);
   const [updateTripCost] = useUpdateTripCostMutation();
 
-  const onSubmit: SubmitHandler<AddVehicleValues> = async (data: any) => {
-    const color = data?.color;
-    const seatCapacity = Number(data?.seatCapacity);
-    const model = data?.model;
-    const tax = Number(data?.tax);
-    const updatedData = { color, seatCapacity, model, tax };
+  const defaultValues = {
+    phone: tripCost?.data?.phone,
+    trip_period: tripCost?.data?.trip_period,
+    tollCost: tripCost?.data?.tollCost,
+    parkingCost: tripCost?.data?.parkingCost,
+    startLocation: tripCost?.data?.startLocation,
+  };
 
-    if (!data.color || !data.seatCapacity || !data.model || !data.tax) {
-      message.error("Every field must be filled");
-    } else {
-      const res = await updateTripCost({ updateID, updatedData });
-      console.log(res);
-    }
+  const onSubmit: SubmitHandler<AddVehicleValues> = async (data: any) => {
+    data.tollCost = parseInt(data.tollCost);
+    data.parkingCost = parseInt(data.parkingCost);
+    const res = await updateTripCost({ id:updateID, data });
+    console.log(res);
   };
 
   return (
     <>
       <div className="mx-auto overflow-y-scroll ">
-        <Form submitHandler={onSubmit}>
+        <Form submitHandler={onSubmit} defaultValues={defaultValues}>
           <div className="mb-4">
             <FormInput
               name="phone"
