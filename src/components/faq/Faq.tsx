@@ -4,6 +4,7 @@ import type { CollapseProps } from "antd";
 import { Collapse } from "antd";
 import type { CSSProperties } from "react";
 import React from "react";
+import Heading from "../ui/Heading";
 
 const getItems: (panelStyle: CSSProperties) => CollapseProps["items"] = (
   panelStyle
@@ -114,7 +115,9 @@ const Faq = () => {
   };
   return (
     <>
-      <p className="text-2xl font-bold">FAQs</p>
+      <Heading>
+        <p>FAQ</p>
+      </Heading>
       <div className="flex justify-center ">
         <div className="md:w-[70%]  h-full pt-5 rounded">
           <Collapse
