@@ -29,6 +29,63 @@ export const vehiclesFields = [
   },
 ];
 
+export const tripCostFields = [
+  {
+    id: 1,
+    fields: "Passenger Name",
+  },
+  {
+    id: 2,
+    fields: "Phone Number",
+  },
+  {
+    id: 3,
+    fields: "Trip period",
+  },
+  {
+    id: 4,
+    fields: "Toll Cost",
+  },
+  {
+    id: 5,
+    fields: "Parking Cost",
+  },
+  {
+    id: 6,
+    fields: "Start Location",
+  },
+  {
+    id: 7,
+    fields: "Action",
+  },
+];
+export const driverSalaryFields = [
+  {
+    id: 1,
+    fields: "Name",
+  },
+  {
+    id: 2,
+    fields: "Amount",
+  },
+  {
+    id: 3,
+    fields: "Month",
+  },
+  {
+    id: 4,
+    fields: "Position",
+  },
+  {
+    id: 5,
+    fields: "Status",
+  },
+  {
+    id: 6,
+    fields: "Action",
+  },
+];
+
 export const vehicles = [
   {
     registration_no: "ABC123",
