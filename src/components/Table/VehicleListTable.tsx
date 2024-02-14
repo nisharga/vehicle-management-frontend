@@ -31,9 +31,7 @@ const VehicleListTable = (e: any) => {
 
   const confirm = async (e: any) => {
     const res = await deleteVehicle(e);  
-    if(res.data.statusCode === 200){
-      message.success(`Deleted Sucessfully`);
-    } 
+      message.success(`Deleted Sucessfully`); 
   };
 
   const cancel = (e: React.MouseEvent<HTMLElement>) => {
