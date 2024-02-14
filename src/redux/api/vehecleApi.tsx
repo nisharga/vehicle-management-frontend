@@ -27,16 +27,16 @@ const vehicleApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.vehicle],
     }),
     updateSingleVehicle: build.mutation({
-      query: ({id, ...patch }) => ({
-        url: "/vehicle/:id",
+      query: ({id, ...data}) => ({
+        url: `/vehicle/${id}`,
         method: "PATCH", 
-        data: patch,
+        data: data,
       }),
       invalidatesTags: [tagTypes.vehicle],
     }),
     deleteVehicle: build.mutation({
       query: (id) => ({
-        url: "/vehicle/:id",
+        url: `/vehicle/${id}`,
         method: "DELETE",  
       }),
       invalidatesTags: [tagTypes.vehicle],

@@ -1,11 +1,21 @@
 "use client";
-
-import { HolderOutlined } from "@ant-design/icons";
-import { Button, Dropdown, Image, MenuProps } from "antd";
-import CommonButton from "../ui/CommonButton";
-{
-  /* <Image className="rounded-lg" width={70} src={image} alt="..." /> */
-}
+import AddAccessory from "@/app/(withlayout)/manager/accessories/AddAccessory";
+import {
+  useDeleteAccessoryMutation,
+  useGetAccessoryAllQuery,
+} from "@/redux/api/accessoryApi";
+import {
+  Button,
+  Dropdown,
+  Image,
+  Menu,
+  Modal,
+  Pagination,
+  PaginationProps,
+} from "antd";
+import { useState } from "react";
+import UpdateAccessory from "../Forms/UpdateAccessory";
+import ModalBox from "../ModalBox/ModalBox";
 
 const accessoriesTableFields = [
   {
@@ -38,98 +48,76 @@ const accessoriesTableFields = [
   },
 ];
 
-const accessoriesList = [
-  {
-    ID: 1,
-    image: "https://i.ibb.co/sw7mvs5/pic10.jpg",
-    productName: "Gash cylinder",
-    quantity: 10,
-    purchaseDate: "5/12/2020",
-    expirationDate: "10/12/2025",
-    price: 1500,
-  },
-  {
-    ID: 2,
-    image: "https://i.ibb.co/sw7mvs5/pic10.jpg",
-    productName: "Gash cylinder",
-    quantity: 10,
-    purchaseDate: "5/12/2020",
-    expirationDate: "10/12/2025",
-    price: 1500,
-  },
-  {
-    ID: 3,
-    image: "https://i.ibb.co/sw7mvs5/pic10.jpg",
-    productName: "Gash cylinder",
-    quantity: 10,
-    purchaseDate: "5/12/2020",
-    expirationDate: "10/12/2025",
-    price: 1500,
-  },
-  {
-    ID: 4,
-    image: "https://i.ibb.co/sw7mvs5/pic10.jpg",
-    productName: "Gash cylinder",
-    quantity: 10,
-    purchaseDate: "5/12/2020",
-    expirationDate: "10/12/2025",
-    price: 1500,
-  },
-  {
-    ID: 5,
-    image: "https://i.ibb.co/sw7mvs5/pic10.jpg",
-    productName: "Gash cylinder",
-    quantity: 10,
-    purchaseDate: "5/12/2020",
-    expirationDate: "10/12/2025",
-    price: 1500,
-  },
-  {
-    ID: 6,
-    image: "https://i.ibb.co/sw7mvs5/pic10.jpg",
-    productName: "Gash cylinder",
-    quantity: 10,
-    purchaseDate: "5/12/2020",
-    expirationDate: "10/12/2025",
-    price: 1500,
-  },
-];
-
-const items: MenuProps["items"] = [
-  {
-    key: "1",
-    label: (
-      <Button
-        type="text"
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://www.aliyun.com"
-      >
-        Edit
-      </Button>
-    ),
-  },
-  {
-    key: "2",
-    label: (
-      <Button
-        danger
-        type="text"
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://www.luohanacademy.com"
-      >
-        Delete
-      </Button>
-    ),
-  },
-];
 const AccessoriesTable = () => {
+  const [current, setCurrent] = useState(1);
+  const [updateID, setUpdateID] = useState(null);
+  const {
+    data: accessory,
+    isLoading,
+    error,
+    refetch,
+  } = useGetAccessoryAllQuery(current);
+
+  const [deleteAccessory] = useDeleteAccessoryMutation();
+  const accessoryData = accessory?.data?.data;
+
+  const onChange: PaginationProps["onChange"] = (page) => {
+    setCurrent(page);
+  };
+  const handleDelete = (id: any) => {
+    // console.log(accessoryId)
+    Modal.confirm({
+      title: "Confirm Delete",
+      content: "Are you sure you want to delete this accessory?",
+      okText: "Delete",
+      okType: "danger",
+      cancelText: "Cancel",
+      onOk: async () => {
+        await deleteAccessory(id)
+          .then(() => {
+            Modal.success({
+              title: "Accessory Deleted",
+              content: "The accessory has been successfully deleted.",
+            });
+            // Refetch data
+            refetch();
+          })
+          .catch((error: any) => {
+            // Error message
+            Modal.error({
+              title: "Delete Failed",
+              okType: "danger",
+              cancelText: "Cancel",
+              content:
+                "An error occurred while deleting the accessory. Please try again later.",
+            });
+            console.error("Delete error:", error);
+          });
+      },
+    });
+  };
+
+  const items = (accessoryId: any) => (
+    <Menu>
+      <Menu.Item key="1">
+        <ModalBox btnLabel="Update">
+          <UpdateAccessory updateID={accessoryId} />
+        </ModalBox>
+      </Menu.Item>
+      <Menu.Item key="2" onClick={() => handleDelete(accessoryId)}>
+        <Button danger type="text">
+          Delete
+        </Button>
+      </Menu.Item>
+    </Menu>
+  );
   return (
     <>
       <div className="overflow-x-auto rounded-lg">
-        <div className="align-middle inline-block min-w-full shadow overflow-hidden bg-white   px-8 pt-3 rounded-bl-lg rounded-br-lg py-10">
-          <p className="text-center text-xl">Vehicle Accessories</p>
+        <div className="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg py-10">
+          <p className="my-3 text-xl uppercase font-serif">
+            Vehicle Accessories
+          </p>
 
           {/* search bar */}
           <div className="flex justify-between border-b pb-3">
@@ -163,11 +151,15 @@ const AccessoriesTable = () => {
                 <input
                   type="text"
                   className="flex-shrink flex-grow flex-auto leading-normal tracking-wide w-px border border-none border-l-0 rounded rounded-l-none px-3 relative focus:outline-none text-xxs lg:text-xs text-gray-500 font-thin"
-                  placeholder={`Search Through ${accessoriesList?.length} Vehicle`}
+                  placeholder={`Search Through ${
+                    accessoryData?.length ?? "0"
+                  } Vehicle`}
                 />
               </div>
             </div>
-            <CommonButton content="Add Accessories" />
+            <ModalBox btnLabel="Add Accessories">
+              <AddAccessory />
+            </ModalBox>
           </div>
 
           <br />
@@ -186,45 +178,61 @@ const AccessoriesTable = () => {
             </thead>
 
             <tbody className="bg-white">
-              {accessoriesList?.map((accessories, index) => (
-                <tr
-                  key={accessories?.ID}
-                  className={`${index % 2 === 0 ? "" : "bg-gray-50"}  `}
-                >
-                  <td className=" px-2 py-1">
-                    <Image
-                      className="rounded-lg"
-                      width={50}
-                      src={accessories?.image}
-                      alt="..."
-                    />
-                  </td>
+              {accessoryData?.map((accessories: any, index: any) => {
+                const dummyImg =
+                  "https://img.freepik.com/free-vector/car-wheel-realistic_1284-4977.jpg?w=740&t=st=1707802295~exp=1707802895~hmac=b5f07472817317de3b3460a5b32b3e681dd1d2b5f888354dc68ac47ab97ccf92";
+                const accessoryId = accessories?.id;
+                return (
+                  <tr
+                    key={accessories?.ID}
+                    className={`${index % 2 === 0 ? "" : "bg-gray-50"}  `}
+                  >
+                    <td className=" px-2 py-1">
+                      <Image
+                        className="rounded-lg"
+                        width={50}
+                        src={!accessories?.image ? dummyImg : ""}
+                        alt="..."
+                      />
+                    </td>
 
-                  <td className=" px-2 py-3 text-sm leading-5">
-                    {accessories?.productName}
-                  </td>
+                    <td className=" px-2 py-3 text-sm leading-5">
+                      {accessories?.accessory_name}
+                    </td>
 
-                  <td className=" px-2 py-3 text-sm leading-5">
-                    {accessories?.quantity}
-                  </td>
-                  <td className=" px-2 py-3 text-sm leading-5">
-                    {accessories?.purchaseDate}
-                  </td>
-                  <td className=" px-2 py-3 text-sm leading-5">
-                    {accessories?.expirationDate}
-                  </td>
-                  <td className=" px-2 py-3 text-sm leading-5">
-                    {accessories?.price}
-                  </td>
-                  <td className=" px-2 py-3 text-sm leading-5">
-                    <Dropdown menu={{ items }} placement="bottomRight" arrow>
-                      <HolderOutlined />
-                    </Dropdown>
-                  </td>
-                </tr>
-              ))}
+                    <td className=" px-2 py-3 text-sm leading-5">
+                      {accessories?.quantity}
+                    </td>
+                    <td className=" px-2 py-3 text-sm leading-5">
+                      {accessories?.purchase_date?.slice(0, 10)}
+                    </td>
+                    <td className=" px-2 py-3 text-sm leading-5">
+                      {accessories?.expire_date?.slice(0, 10)}
+                    </td>
+                    <td className=" px-2 py-3 text-sm leading-5">
+                      {accessories?.amount}
+                    </td>
+                    <td className=" px-2 py-3 text-sm leading-5">
+                      <Dropdown
+                        overlay={() => items(accessoryId)}
+                        placement="bottomRight"
+                        arrow
+                      >
+                        <Button>Action</Button>
+                      </Dropdown>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
+          <div className="flex justify-center items-center py-8">
+            <Pagination
+              current={current}
+              onChange={onChange}
+              total={accessoryData?.meta?.total | 30}
+            />
+          </div>
         </div>
         {/* table end */}
       </div>

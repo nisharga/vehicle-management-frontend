@@ -1,14 +1,15 @@
 "use client";
+import { Icons } from "@/assets/Icons/Icons";
+import {
+  useDeleteVehicleMutation,
+  useVehicleAllQuery,
+} from "@/redux/api/vehecleApi";
 import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
-import { Button, Popconfirm, message } from "antd";
+import type { PaginationProps } from "antd";
+import { Button, Pagination, Popconfirm, message } from "antd";
+import React, { useState } from "react";
 import UpdateVehecleForm from "../Forms/UpdateVehicleForm";
 import ModalBox from "../ModalBox/ModalBox";
-///import Pagination from "../ui/Pagination";
-import { Icons } from "@/assets/Icons/Icons";
-import { useVehicleAllQuery } from "@/redux/api/vehecleApi";
-import type { PaginationProps } from "antd";
-import { Pagination } from "antd";
-import React, { useState } from "react";
 import ViewItem from "../ui/ViewItem";
 import { vehiclesFields } from "./StaticTableData";
 
@@ -22,10 +23,15 @@ interface IProps {
   fuelType: string;
 }
 
-const VehicleListTable = () => {
-  const confirm = (e: any) => {
-    console.log(e);
-    message.success(`${e} Deleted Sucessfully`);
+const VehicleListTable = (e: any) => {
+  console.log(e);
+  const [deleteVehicle] = useDeleteVehicleMutation();
+  message.success(`${e} Deleted Sucessfully`);
+
+  const confirm = async (e: any) => {
+    console.log("🚀 ~ confirm ~ e:", e);
+    const res = await deleteVehicle(e);
+    console.log("🚀 ~ confirm ~ res:", res);
   };
 
   const cancel = (e: React.MouseEvent<HTMLElement>) => {
@@ -42,7 +48,6 @@ const VehicleListTable = () => {
   };
 
   const { data: vehicle } = useVehicleAllQuery(current);
-  console.log(vehicle);
 
   return (
     <>
@@ -123,7 +128,7 @@ const VehicleListTable = () => {
                             </span>
                           }
                         >
-                          <ViewItem viewID={vehicle?.id} />
+                          <ViewItem viewID={vehicle?.id} ItemType="vehicle" />
                         </ModalBox>
 
                         <ModalBox
