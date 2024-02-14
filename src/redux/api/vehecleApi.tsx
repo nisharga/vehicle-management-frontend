@@ -13,7 +13,7 @@ const vehicleApi = baseApi.injectEndpoints({
     }),
     getSingleVehicle: build.query({
       query: (id) => ({
-        url: `/vehicle/${id}`,
+        url: `/vehicle/single/${id}`,
         method: "GET", 
       }),
       providesTags: [tagTypes.vehicle],
@@ -28,7 +28,7 @@ const vehicleApi = baseApi.injectEndpoints({
     }),
     updateSingleVehicle: build.mutation({
       query: ({id, ...data}) => ({
-        url: `/vehicle/${id}`,
+        url: `/vehicle/update/${id}`,
         method: "PATCH", 
         data: data,
       }),
@@ -36,7 +36,7 @@ const vehicleApi = baseApi.injectEndpoints({
     }),
     deleteVehicle: build.mutation({
       query: (id) => ({
-        url: `/vehicle/${id}`,
+        url: `/vehicle/delete/${id}`,
         method: "DELETE",  
       }),
       invalidatesTags: [tagTypes.vehicle],

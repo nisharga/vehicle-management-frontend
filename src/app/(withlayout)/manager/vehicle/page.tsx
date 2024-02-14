@@ -11,7 +11,7 @@ const Vehicle = () => {
         <h3 className="mb-4 flex justify-center text-xl md:text-3xl text-secondary">
           Vehicle
         </h3>
-        <ModalBox btnLabel="Add Vehicle">
+        <ModalBox btnLabel="Add Vehicle" modalWidth={570}>
           <AddVehicle />
         </ModalBox>
       </div>

@@ -24,14 +24,16 @@ interface IProps {
 }
 
 const VehicleListTable = (e: any) => {
-  console.log(e);
+  
   const [deleteVehicle] = useDeleteVehicleMutation();
-  message.success(`${e} Deleted Sucessfully`);
+  
+  
 
   const confirm = async (e: any) => {
-    console.log("🚀 ~ confirm ~ e:", e);
-    const res = await deleteVehicle(e);
-    console.log("🚀 ~ confirm ~ res:", res);
+    const res = await deleteVehicle(e);  
+    if(res.data.statusCode === 200){
+      message.success(`Deleted Sucessfully`);
+    } 
   };
 
   const cancel = (e: React.MouseEvent<HTMLElement>) => {
