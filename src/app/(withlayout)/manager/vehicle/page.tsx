@@ -1,21 +1,23 @@
+// vehicle.jsx
+
+import ModalBox from "@/components/ModalBox/ModalBox";
 import VehicleListTable from "@/components/Table/VehicleListTable";
-import ModalBox from "./../../../../components/ModalBox/ModalBox";
 import AddVehicle from "./AddVehicle";
 
-const vehicle = () => {
+const Vehicle = () => {
   return (
     <>
       <div className="flex justify-between">
         <h3 className="mb-4 flex justify-center text-xl md:text-3xl text-secondary">
-          Vehicle  
+          Vehicle
         </h3>
-        <ModalBox btnLabel="Add Vehecle">
+        <ModalBox btnLabel="Add Vehicle" modalWidth={570}>
           <AddVehicle />
         </ModalBox>
       </div>
-      <VehicleListTable />
+      <VehicleListTable /> {/* Ensure correct usage */}
     </>
   );
 };
 
-export default vehicle;
+export default Vehicle;

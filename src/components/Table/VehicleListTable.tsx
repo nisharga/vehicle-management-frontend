@@ -1,18 +1,19 @@
 "use client";
+import { Icons } from "@/assets/Icons/Icons";
+import {
+  useDeleteVehicleMutation,
+  useVehicleAllQuery,
+} from "@/redux/api/vehecleApi";
 import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
-import { Button, Popconfirm, message } from "antd";
+import type { PaginationProps } from "antd";
+import { Button, Pagination, Popconfirm, message } from "antd";
+import React, { useState } from "react";
 import UpdateVehecleForm from "../Forms/UpdateVehicleForm";
 import ModalBox from "../ModalBox/ModalBox";
-///import Pagination from "../ui/Pagination";
 import ViewItem from "../ui/ViewItem";
 import { vehiclesFields } from "./StaticTableData";
-import { Icons } from "@/assets/Icons/Icons";
-import { Pagination } from 'antd';
-import React, { useState, useEffect } from 'react';
-import type { PaginationProps } from 'antd';
-import { useDeleteVehicleMutation, useVehicleAllQuery } from "@/redux/api/vehecleApi";
 
-interface IProps{
+interface IProps {
   id: string;
   registrationNo: string;
   model: string;
@@ -22,15 +23,15 @@ interface IProps{
   fuelType: string;
 }
 
-const VehicleListTable = () => {
+const VehicleListTable = (e: any) => {
   
-  const [deleteVehicle] = useDeleteVehicleMutation(); 
+  const [deleteVehicle] = useDeleteVehicleMutation();
   
+  
+
   const confirm = async (e: any) => {
-    console.log("🚀 ~ confirm ~ e:", e)
-    const res = await deleteVehicle(e)
-    console.log("🚀 ~ confirm ~ res:", res)
-    // message.success(`${e} Deleted Sucessfully`);
+    const res = await deleteVehicle(e);  
+      message.success(`Deleted Sucessfully`); 
   };
 
   const cancel = (e: React.MouseEvent<HTMLElement>) => {
@@ -38,33 +39,35 @@ const VehicleListTable = () => {
     message.error("Click on No");
   };
 
-   const [current, setCurrent] = useState(1);
-   const [vehicleData, setVehicleData] = useState(null);
-   const [isFetching, setIsFetching] = useState(false);
+  const [current, setCurrent] = useState(1);
+  const [vehicleData, setVehicleData] = useState(null);
+  const [isFetching, setIsFetching] = useState(false);
 
-  const onChange: PaginationProps['onChange'] = (page) => {
-    setCurrent(page); 
+  const onChange: PaginationProps["onChange"] = (page) => {
+    setCurrent(page);
   };
- 
-  const { data: vehicle } =  useVehicleAllQuery(current); 
+
+  const { data: vehicle } = useVehicleAllQuery(current);
 
   return (
     <>
       <div className="overflow-x-auto rounded-lg">
-        <div className="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg py-10">
+        <div className="align-middle inline-block min-w-full shadow overflow-hidden bg-white   px-8 pt-3 rounded-bl-lg rounded-br-lg py-10">
           {/* search bar */}
           <div className="flex justify-start pb-3">
             <div className="inline-flex border rounded w-7/12  h-10 bg-transparent">
               <div className="flex flex-wrap items-stretch w-full h-full mb-6 relative">
                 <div className="flex bg-slate-400">
                   <span className="flex items-center leading-normal bg-transparent rounded rounded-r-none border border-r-0 border-none lg:px-3 py-2 whitespace-no-wrap text-grey-dark text-sm ">
-                    <Icons.SearchIcon/>
+                    <Icons.SearchIcon />
                   </span>
                 </div>
                 <input
                   type="text"
                   className="flex-shrink flex-grow flex-auto leading-normal tracking-wide w-px border border-none border-l-0 rounded rounded-l-none px-3 relative focus:outline-none text-xxs lg:text-xs text-gray-500 font-thin"
-                  placeholder={`Search Through ${vehicle?.data?.meta?.total | 0} Vehicle`}
+                  placeholder={`Search Through ${
+                    vehicle?.data?.meta?.total | 0
+                  } Vehicle`}
                 />
               </div>
             </div>
@@ -86,85 +89,87 @@ const VehicleListTable = () => {
             </thead>
 
             <tbody>
-              {((vehicle as any)?.data?.data ?? []).map((vehicle: IProps, index: number) => (
-                <tr
-                  key={vehicle?.id}
-                  className={`${index % 2 === 0 ? "" : "bg-gray-50"}  `}
-                >
-                  <td className="px-2 py-3">{vehicle?.registrationNo}</td>
+              {((vehicle as any)?.data?.data ?? []).map(
+                (vehicle: IProps, index: number) => (
+                  <tr
+                    key={vehicle?.id}
+                    className={`${index % 2 === 0 ? "" : "bg-gray-50"}  `}
+                  >
+                    <td className="px-2 py-3">{vehicle?.registrationNo}</td>
 
-                  <td className="px-2 py-3 text-sm leading-5">
-                    {vehicle?.model}
-                  </td>
+                    <td className="px-2 py-3 text-sm leading-5">
+                      {vehicle?.model}
+                    </td>
 
-                  <td className="px-2 py-3 text-sm leading-5">
-                    {vehicle?.seatCapacity}
-                  </td>
+                    <td className="px-2 py-3 text-sm leading-5">
+                      {vehicle?.seatCapacity}
+                    </td>
 
-                  <td className=" px-2 py-3 text-sm leading-5">
-                    {vehicle?.tax}
-                  </td>
+                    <td className=" px-2 py-3 text-sm leading-5">
+                      {vehicle?.tax}
+                    </td>
 
-                  <td className=" px-2 py-3 text-sm leading-5">
-                    {vehicle?.brand}
-                  </td>
+                    <td className=" px-2 py-3 text-sm leading-5">
+                      {vehicle?.brand}
+                    </td>
 
-                  <td className=" px-2 py-3 text-sm leading-5">
-                    {vehicle?.fuelType}
-                  </td>
+                    <td className=" px-2 py-3 text-sm leading-5">
+                      {vehicle?.fuelType}
+                    </td>
 
-                  <td className="px- py-3 text-sm leading-5">
-                    <div className="flex gap-x-1 ">
-                      <ModalBox
-                        title="View Details"
-                        modalWidth={300}
-                        btnLabel={
-                          <span className="item justify-center items-center">
-                            <EyeOutlined />
-                          </span>
-                        }
-                      >
-                        <ViewItem viewID={vehicle?.id} ItemType="vehicle" />
-                      </ModalBox>
+                    <td className="px- py-3 text-sm leading-5">
+                      <div className="flex gap-x-1 ">
+                        <ModalBox
+                          title="View Details"
+                          modalWidth={300}
+                          btnLabel={
+                            <span className="item justify-center items-center">
+                              <EyeOutlined />
+                            </span>
+                          }
+                        >
+                          <ViewItem viewID={vehicle?.id} ItemType="vehicle" />
+                        </ModalBox>
 
-                      <ModalBox
-                        title="Edit Vehicle Data"
-                        btnLabel={
-                          <span className="item justify-center items-center">
-                            <EditOutlined />
-                          </span>
-                        }
-                      >
-                        <UpdateVehecleForm
-                          updateID={vehicle?.id}
-                        />
-                      </ModalBox>
+                        <ModalBox
+                          title="Edit Vehicle Data"
+                          btnLabel={
+                            <span className="item justify-center items-center">
+                              <EditOutlined />
+                            </span>
+                          }
+                        >
+                          <UpdateVehecleForm updateID={vehicle?.id} />
+                        </ModalBox>
 
-                      <Popconfirm
-                        title="Delete the task"
-                        description="Are you sure to delete this task?"
-                        onConfirm={() => confirm(vehicle?.id)}
-                        onCancel={() => cancel} 
-                        cancelText="No"
-                        okText="Delete"
-                        okType="danger"
-                      >
-                        <Button danger>
-                          <span className="item justify-center items-center">
-                            <DeleteOutlined />
-                          </span>
-                        </Button>
-                      </Popconfirm>
-
-
-                    </div>
-                  </td>
-                </tr>
-              ))}
+                        <Popconfirm
+                          title="Delete the task"
+                          description="Are you sure to delete this task?"
+                          onConfirm={() => confirm(vehicle?.id)}
+                          onCancel={() => cancel}
+                          cancelText="No"
+                          okText="Delete"
+                          okType="danger"
+                        >
+                          <Button danger>
+                            <span className="item justify-center items-center">
+                              <DeleteOutlined />
+                            </span>
+                          </Button>
+                        </Popconfirm>
+                      </div>
+                    </td>
+                  </tr>
+                )
+              )}
             </tbody>
           </table>
           <div className="flex justify-center items-center py-8">
-            <Pagination current={current} onChange={onChange} total={vehicle?.data?.meta?.total | 30} />
+            <Pagination
+              current={current}
+              onChange={onChange}
+              total={vehicle?.data?.meta?.total | 30}
+            />
           </div>
         </div>
         {/* table end */}

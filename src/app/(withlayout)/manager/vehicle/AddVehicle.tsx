@@ -66,6 +66,8 @@ const AddVehicle = () => {
               placeholder="Vehicle Registration No"
             />
           </div>
+          <div className="md:flex md:gap-4 md:items-center ">
+          <p className='mb-4'>Purchase:</p>
           <div className="mb-4">
             <FormInput
               name="purchaseDate"
@@ -74,6 +76,7 @@ const AddVehicle = () => {
               placeholder="Purchase Date"
             />
           </div>
+          <p className='mb-4'>Registration:</p>
           <div className="mb-4">
             <FormInput
               name="registrationDate"
@@ -82,7 +85,7 @@ const AddVehicle = () => {
               placeholder="Registration Date"
             />
           </div>
- 
+          </div>
           <div className="mb-4">
             <FormInput
               name="color"
@@ -100,7 +103,7 @@ const AddVehicle = () => {
               placeholder="Mileage" 
             />
           </div> 
- 
+          <div className="md:flex md:gap-4 md:items-center">
           <div className="mb-4">
             <FormInput
               name="price"
@@ -118,6 +121,7 @@ const AddVehicle = () => {
               placeholder="Vehicle Tax"
             />
           </div> 
+        </div> 
           
           <div className="mb-4">
             <FormInput
@@ -166,7 +170,7 @@ const AddVehicle = () => {
 
           </div>
 
-
+          <div className="md:flex md:gap-4 md:items-center ">
           <div className="mb-4">
             <FormInput
               name="brand"
@@ -183,6 +187,7 @@ const AddVehicle = () => {
               size="large"
               placeholder="Vehicle model"
             />
+          </div>
           </div>
           
           <div className="mb-4 flex justify-between gap-1">

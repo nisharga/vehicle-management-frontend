@@ -5,7 +5,6 @@ import {
   DollarOutlined,
   EnvironmentOutlined,
   ExperimentOutlined,
-  EyeOutlined,
   FileZipOutlined,
   QuestionCircleOutlined,
   SafetyOutlined,
@@ -175,9 +174,8 @@ export const sidebarItems = (role: string) => {
       icon: <ShopOutlined />,
       key: `/${role}/inventoryRequest`,
     },
-    ...privacyPolicySidebarItem,
     ...faqSidebarItem,
-    ...profileSidebarItem,
+    ...privacyPolicySidebarItem,
   ];
 
   //.............Super admin.......................
@@ -188,11 +186,7 @@ export const sidebarItems = (role: string) => {
       icon: <AppstoreAddOutlined />,
       key: `/${role}/roleManage`,
     },
-    {
-      label: <Link href={`/${role}/viewProfile`}>View Profile</Link>,
-      icon: <EyeOutlined />,
-      key: `/${role}/viewProfile`,
-    },
+
     ...contactSidebarItem,
     ...privacyPolicySidebarItem,
     ...faqSidebarItem,

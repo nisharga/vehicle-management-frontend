@@ -4,6 +4,7 @@ import { Timeline } from "antd";
 
 const ViewItem = ({ viewID }: any, ItemType: string) => {
   const { data: vehicle } =  useGetSingleVehicleQuery(viewID);
+  
   const purchaseDate = formatDateToRegularDate(vehicle?.data?.purchaseDate)
   const registrationDate = formatDateToRegularDate(vehicle?.data?.registrationDate)
   return (

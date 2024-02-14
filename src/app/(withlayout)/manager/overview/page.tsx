@@ -1,8 +1,5 @@
 "use client";
-import TitleCard from "@/components/Cards/TitleCards/TitleCards";
-import { MonthlyBarChart } from "@/components/Charts/Bar/MonthlyChart";
-import { CurrentWeekBarChart } from "@/components/Charts/Bar/currentWeekChart";
-import moment from "moment";
+
 import Image from "next/image";
 
 const TopSideButtons = () => {
@@ -169,106 +166,7 @@ const overviewPage = () => {
         </div>
       </section>
 
-      <section className="flex flex-col lg:flex-row gap-5 justify-between items-center">
-        <div className="lg:flex-1 bg-white p-5 rounded-lg">
-          <CurrentWeekBarChart />
-        </div>
-        <div className="lg:flex-1 bg-white p-5 rounded-lg">
-          <MonthlyBarChart />
-        </div>
-      </section>
-
-      <TitleCard
-        title="Driver List"
-        topMargin="mt-2"
-        TopSideButtons={<TopSideButtons />}
-      >
-        {/* Drivers List in table format loaded from slice after api call */}
-        <section className="overflow-x-auto w-full ">
-          <table className="table w-full">
-            <thead>
-              <tr>
-                <th className="text-left">Avatar</th>
-                <th className="text-left">First Name</th>
-                <th className="text-left">Last Name</th>
-                <th className="text-left">Email Id</th>
-                <th className="text-left">Join Date</th>
-              </tr>
-            </thead>
-            <tbody className="">
-              {drivers.map((l: any, k: any) => {
-                return (
-                  <tr key={k} className="p-5">
-                    <td className="text-left">
-                      <div className="flex items-center space-x-3">
-                        <div className="avatar w-full">
-                          <div
-                            className="mask mask-squircle w-full h-12"
-                            style={{ width: "50px" }}
-                          >
-                            <Image
-                              src={l.avatar}
-                              alt="Avatar"
-                              width={150}
-                              height={100}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="font-bold text-left">{l.first_name}</td>
-                    <td className="text-sm opacity-50 text-left">
-                      {l.last_name}
-                    </td>
-                    <td className="text-left">{l.email}</td>
-                    <td className="text-left">
-                      {moment(new Date())
-                        .add(-5 * (k + 2), "days")
-                        .format("DD MMM YY")}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </section>
-      </TitleCard>
-
-      <TitleCard
-        title="Vehicle List"
-        topMargin="mt-2"
-        TopSideButtons={<TopSideButtons />}
-      >
-        {/* vehicles List in table format loaded from slice after api call */}
-        <section className="overflow-x-auto w-full">
-          <table className="table w-full">
-            <thead>
-              <tr>
-                <th className="text-left">Brand</th>
-                <th className="text-left">model</th>
-                <th className="text-left">color</th>
-                <th className="text-left">mileage</th>
-                <th className="text-left">seatCapacicty</th>
-                <th className="text-left">A/C</th>
-              </tr>
-            </thead>
-            <tbody className="">
-              {vehicles.map((l: any, k: any) => {
-                return (
-                  <tr key={k} className="p-5">
-                    <td className="text-left h-12">{l.brand}</td>
-                    <td className="font-bold text-left">{l.model}</td>
-                    <td className="text-sm opacity-50 text-left">{l.color}</td>
-                    <td className="text-left">{l.mileage}</td>
-                    <td className="text-left"> {l.seatCapacicty} </td>
-                    <td className="text-left"> {l.isAc} </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </section>
-      </TitleCard>
+      <section className="flex flex-col lg:flex-row gap-5 justify-between items-center"></section>
     </main>
   );
 };

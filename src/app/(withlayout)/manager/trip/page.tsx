@@ -4,7 +4,7 @@ const page = () => {
   return (
     <div>
       <h3 className="mb-4 flex text-xl md:text-3xl text-secondary">
-        Trip List
+        Trip
       </h3>
       <TripListTable />
     </div>
