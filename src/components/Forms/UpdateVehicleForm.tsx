@@ -30,6 +30,7 @@ const UpdateVehecleForm = ({ updateID }: any) => {
     }else{
       const res = await updateVehicle({updateID, updatedData})
       console.log(res)
+      message.success(`${e} Deleted Sucessfully`); 
     }
   };
   
