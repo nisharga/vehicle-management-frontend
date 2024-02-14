@@ -102,7 +102,7 @@ const UpcomingTripTable = () => {
                     return value;
                   }
                 })
-                .map((trips, index) => (
+                ?.map((trips, index) => (
                   <tr
                     key={trips?.startTime}
                     className={`${

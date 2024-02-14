@@ -1,4 +1,5 @@
-// UpcomingTripTable.tsx
+"use client";
+
 import Heading from "@/components/ui/Heading";
 
 const UpcomingTripTable = () => {
