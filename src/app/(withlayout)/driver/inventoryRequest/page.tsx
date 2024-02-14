@@ -1,8 +1,14 @@
+import InventoryRequestForm from "@/components/Forms/InventoryRequestForm";
+import Heading from "@/components/ui/Heading";
+
 const inventoryRequestPage = () => {
   return (
-    <div>
-      <p>inventoryRequest...</p>
-    </div>
+    <>
+      <Heading>
+        <p>Inventory Request</p>
+      </Heading>
+      <InventoryRequestForm />
+    </>
   );
 };
 

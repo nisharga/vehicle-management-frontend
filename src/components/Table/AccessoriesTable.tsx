@@ -1,13 +1,21 @@
 "use client";
-import React, { useState } from "react";
-import { Button, Dropdown, Image, Menu, Modal, Pagination, PaginationProps } from "antd";
-import CommonButton from "../ui/CommonButton";
-import { useDeleteAccessoryMutation, useGetAccessoryAllQuery } from "@/redux/api/accessoryApi";
 import AddAccessory from "@/app/(withlayout)/manager/accessories/AddAccessory";
-import ModalBox from "../ModalBox/ModalBox";
+import {
+  useDeleteAccessoryMutation,
+  useGetAccessoryAllQuery,
+} from "@/redux/api/accessoryApi";
+import {
+  Button,
+  Dropdown,
+  Image,
+  Menu,
+  Modal,
+  Pagination,
+  PaginationProps,
+} from "antd";
+import { useState } from "react";
 import UpdateAccessory from "../Forms/UpdateAccessory";
-import { EditOutlined } from "@ant-design/icons";
-import UpdateVehecleForm from "../Forms/UpdateVehicleForm";
+import ModalBox from "../ModalBox/ModalBox";
 
 const accessoriesTableFields = [
   {
@@ -43,57 +51,63 @@ const accessoriesTableFields = [
 const AccessoriesTable = () => {
   const [current, setCurrent] = useState(1);
   const [updateID, setUpdateID] = useState(null);
-  const { data: accessory, isLoading, error, refetch } = useGetAccessoryAllQuery(
-    current
-  );
+  const {
+    data: accessory,
+    isLoading,
+    error,
+    refetch,
+  } = useGetAccessoryAllQuery(current);
 
-  const [deleteAccessory]= useDeleteAccessoryMutation()
+  const [deleteAccessory] = useDeleteAccessoryMutation();
   const accessoryData = accessory?.data?.data;
 
-  const onChange: PaginationProps['onChange'] = (page) => {
-    setCurrent(page); 
+  const onChange: PaginationProps["onChange"] = (page) => {
+    setCurrent(page);
   };
-    const handleDelete =  (id: any) => {
-      // console.log(accessoryId)
-      Modal.confirm({
-        title: 'Confirm Delete',
-        content: 'Are you sure you want to delete this accessory?',
-        okText: 'Delete',
-        okType: 'danger',
-        cancelText: 'Cancel',
-        onOk: async () => {
+  const handleDelete = (id: any) => {
+    // console.log(accessoryId)
+    Modal.confirm({
+      title: "Confirm Delete",
+      content: "Are you sure you want to delete this accessory?",
+      okText: "Delete",
+      okType: "danger",
+      cancelText: "Cancel",
+      onOk: async () => {
         await deleteAccessory(id)
-            .then(() => {
-              Modal.success({
-                title: 'Accessory Deleted',
-                content: 'The accessory has been successfully deleted.',
-              });
-              // Refetch data
-              refetch();
-            })
-            .catch((error:any) => {
-              // Error message
-              Modal.error({
-                title: 'Delete Failed',
-                okType: 'danger',
-                cancelText: 'Cancel',
-                content: 'An error occurred while deleting the accessory. Please try again later.',
-              });
-              console.error('Delete error:', error);
+          .then(() => {
+            Modal.success({
+              title: "Accessory Deleted",
+              content: "The accessory has been successfully deleted.",
             });
-        },
-      });
-    };
+            // Refetch data
+            refetch();
+          })
+          .catch((error: any) => {
+            // Error message
+            Modal.error({
+              title: "Delete Failed",
+              okType: "danger",
+              cancelText: "Cancel",
+              content:
+                "An error occurred while deleting the accessory. Please try again later.",
+            });
+            console.error("Delete error:", error);
+          });
+      },
+    });
+  };
 
   const items = (accessoryId: any) => (
     <Menu>
-      <Menu.Item key="1" >
-      <ModalBox  btnLabel="Update">
-              <UpdateAccessory updateID={accessoryId} />
-            </ModalBox>
+      <Menu.Item key="1">
+        <ModalBox btnLabel="Update">
+          <UpdateAccessory updateID={accessoryId} />
+        </ModalBox>
       </Menu.Item>
       <Menu.Item key="2" onClick={() => handleDelete(accessoryId)}>
-        <Button danger type="text">Delete</Button>
+        <Button danger type="text">
+          Delete
+        </Button>
       </Menu.Item>
     </Menu>
   );
@@ -167,7 +181,7 @@ const AccessoriesTable = () => {
               {accessoryData?.map((accessories: any, index: any) => {
                 const dummyImg =
                   "https://img.freepik.com/free-vector/car-wheel-realistic_1284-4977.jpg?w=740&t=st=1707802295~exp=1707802895~hmac=b5f07472817317de3b3460a5b32b3e681dd1d2b5f888354dc68ac47ab97ccf92";
-                  const accessoryId = accessories?.id;
+                const accessoryId = accessories?.id;
                 return (
                   <tr
                     key={accessories?.ID}
@@ -199,10 +213,12 @@ const AccessoriesTable = () => {
                       {accessories?.amount}
                     </td>
                     <td className=" px-2 py-3 text-sm leading-5">
-                      <Dropdown  overlay={() => items(accessoryId)} placement="bottomRight" arrow>
-                        <Button>
-                          Action
-                        </Button>
+                      <Dropdown
+                        overlay={() => items(accessoryId)}
+                        placement="bottomRight"
+                        arrow
+                      >
+                        <Button>Action</Button>
                       </Dropdown>
                     </td>
                   </tr>
@@ -211,7 +227,11 @@ const AccessoriesTable = () => {
             </tbody>
           </table>
           <div className="flex justify-center items-center py-8">
-            <Pagination current={current} onChange={onChange} total={accessoryData?.meta?.total | 30} />
+            <Pagination
+              current={current}
+              onChange={onChange}
+              total={accessoryData?.meta?.total | 30}
+            />
           </div>
         </div>
         {/* table end */}
