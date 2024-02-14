@@ -21,7 +21,7 @@ const TripListTable = () => {
     <>
       {/* table start */}
       <div className="overflow-x-auto rounded-lg">
-        <div className="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg">
+        <div className="align-middle inline-block min-w-full shadow overflow-hidden bg-white   px-8 pt-3 rounded-bl-lg rounded-br-lg">
           <div className="pb-3 flex justify-between">
             <div className="border rounded w-7/12 px-2 lg:px-6 h-10 bg-transparent">
               <div className="flex  items-stretch w-full h-full mb-6 relative">

@@ -12,7 +12,7 @@ const TripCostPage = () => {
       </section>
 
       <div className="overflow-x-auto rounded-lg">
-        <div className="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg">
+        <div className="align-middle inline-block min-w-full shadow overflow-hidden bg-white   px-8 pt-3 rounded-bl-lg rounded-br-lg">
           <table className="min-w-full">
             <thead className="bg-gray-50 rounded-2xl">
               <tr className="">
