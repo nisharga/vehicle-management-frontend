@@ -1,37 +1,27 @@
 "use client";
-import { Icons } from "@/assets/Icons/Icons";
-import {
-  useDeleteVehicleMutation,
-  useVehicleAllQuery,
-} from "@/redux/api/vehecleApi";
 import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
-import type { PaginationProps } from "antd";
-import { Button, Pagination, Popconfirm, message } from "antd";
-import React, { useState } from "react";
-import UpdateVehecleForm from "../Forms/UpdateVehicleForm";
+import { Button, Popconfirm, message } from "antd";
 import ModalBox from "../ModalBox/ModalBox";
-import ViewItem from "../ui/ViewItem";
-import { vehiclesFields } from "./StaticTableData";
+import { Icons } from "@/assets/Icons/Icons";
+import { Pagination } from "antd";
+import React, { useState } from "react";
+import type { PaginationProps } from "antd";
+import {
+  useDeleteDriverSalaryMutation,
+  useGetAllDriverSalaryQuery,
+} from "@/redux/api/driverSalaryApi";
+import { driverSalaryFields } from "./StaticTableData";
+import ViewDriverSalary from "../ui/ViewdriverSalary";
+import UpdateDriverSalaryForm from "../Forms/UpdateDriverSalaryForm";
 
-interface IProps {
-  id: string;
-  registrationNo: string;
-  model: string;
-  seatCapacity: string;
-  tax: string;
-  brand: string;
-  fuelType: string;
-}
-
-const VehicleListTable = (e: any) => {
-  
-  const [deleteVehicle] = useDeleteVehicleMutation();
-  
-  
+const SalaryTable = () => {
+  const [deleteDriverSalary] = useDeleteDriverSalaryMutation();
 
   const confirm = async (e: any) => {
-    const res = await deleteVehicle(e);  
-      message.success(`Deleted Sucessfully`); 
+    console.log("🚀 ~ confirm ~ e:", e);
+    const res = await deleteDriverSalary(e);
+    console.log("🚀 ~ confirm ~ res:", res);
+    // message.success(`${e} Deleted Sucessfully`);
   };
 
   const cancel = (e: React.MouseEvent<HTMLElement>) => {
@@ -47,12 +37,13 @@ const VehicleListTable = (e: any) => {
     setCurrent(page);
   };
 
-  const { data: vehicle } = useVehicleAllQuery(current);
+  const { data: driverSalary, isLoading } = useGetAllDriverSalaryQuery(current);
+  console.log("driver salary", driverSalary);
 
   return (
     <>
       <div className="overflow-x-auto rounded-lg">
-        <div className="align-middle inline-block min-w-full shadow overflow-hidden bg-white   px-8 pt-3 rounded-bl-lg rounded-br-lg py-10">
+        <div className="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg py-10">
           {/* search bar */}
           <div className="flex justify-start pb-3">
             <div className="inline-flex border rounded w-7/12  h-10 bg-transparent">
@@ -66,8 +57,8 @@ const VehicleListTable = (e: any) => {
                   type="text"
                   className="flex-shrink flex-grow flex-auto leading-normal tracking-wide w-px border border-none border-l-0 rounded rounded-l-none px-3 relative focus:outline-none text-xxs lg:text-xs text-gray-500 font-thin"
                   placeholder={`Search Through ${
-                    vehicle?.data?.meta?.total | 0
-                  } Vehicle`}
+                    driverSalary?.data?.meta?.total | 0
+                  } data`}
                 />
               </div>
             </div>
@@ -77,45 +68,42 @@ const VehicleListTable = (e: any) => {
           <table className="min-w-full">
             <thead className="bg-gray-50 rounded-2xl">
               <tr className="">
-                {(vehiclesFields ?? []).map((vehiclesField) => (
+                {(driverSalaryFields ?? []).map((driverSalaryField) => (
                   <th
-                    key={vehiclesField?.id}
+                    key={driverSalaryField?.id}
                     className=" px-2 py-3 text-left text-black"
                   >
-                    {vehiclesField?.fields}
+                    {driverSalaryField?.fields}
                   </th>
                 ))}
               </tr>
             </thead>
 
             <tbody>
-              {((vehicle as any)?.data?.data ?? []).map(
-                (vehicle: IProps, index: number) => (
-                  
+              {((driverSalary as any)?.data?.data ?? []).map(
+                (driverSalary: any, index: number) => (
                   <tr
-                    key={vehicle?.id}
+                    key={driverSalary?.id}
                     className={`${index % 2 === 0 ? "" : "bg-gray-50"}  `}
                   >
-                    <td className="px-2 py-3">{vehicle?.registrationNo}</td>
-
                     <td className="px-2 py-3 text-sm leading-5">
-                      {vehicle?.model}
+                      {driverSalary?.driver?.name}
                     </td>
 
                     <td className="px-2 py-3 text-sm leading-5">
-                      {vehicle?.seatCapacity}
+                      {driverSalary?.amount}
                     </td>
 
                     <td className=" px-2 py-3 text-sm leading-5">
-                      {vehicle?.tax}
+                      {driverSalary?.month}
                     </td>
 
                     <td className=" px-2 py-3 text-sm leading-5">
-                      {vehicle?.brand}
+                      {driverSalary?.position}
                     </td>
 
                     <td className=" px-2 py-3 text-sm leading-5">
-                      {vehicle?.fuelType}
+                      {driverSalary?.status}
                     </td>
 
                     <td className="px- py-3 text-sm leading-5">
@@ -129,24 +117,27 @@ const VehicleListTable = (e: any) => {
                             </span>
                           }
                         >
-                          <ViewItem viewID={vehicle?.id} ItemType="vehicle" />
+                          <ViewDriverSalary
+                            viewID={driverSalary?.id}
+                            ItemType="driverSalary"
+                          />
                         </ModalBox>
 
                         <ModalBox
-                          title="Edit Vehicle Data"
+                          title="Edit driverSalary Data"
                           btnLabel={
                             <span className="item justify-center items-center">
                               <EditOutlined />
                             </span>
                           }
                         >
-                          <UpdateVehecleForm updateID={vehicle?.id} />
+                          <UpdateDriverSalaryForm updateID={driverSalary?.id} />
                         </ModalBox>
 
                         <Popconfirm
                           title="Delete the task"
                           description="Are you sure to delete this task?"
-                          onConfirm={() => confirm(vehicle?.id)}
+                          onConfirm={() => confirm(driverSalary?.id)}
                           onCancel={() => cancel}
                           cancelText="No"
                           okText="Delete"
@@ -161,7 +152,6 @@ const VehicleListTable = (e: any) => {
                       </div>
                     </td>
                   </tr>
-                  
                 )
               )}
             </tbody>
@@ -170,7 +160,7 @@ const VehicleListTable = (e: any) => {
             <Pagination
               current={current}
               onChange={onChange}
-              total={vehicle?.data?.meta?.total | 30}
+              total={driverSalary?.data?.meta?.total | 30}
             />
           </div>
         </div>
@@ -180,4 +170,4 @@ const VehicleListTable = (e: any) => {
   );
 };
 
-export default VehicleListTable;
+export default SalaryTable;

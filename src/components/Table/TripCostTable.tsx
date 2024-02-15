@@ -1,37 +1,49 @@
 "use client";
+import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
+import { Button, Popconfirm, message } from "antd";
+import UpdateVehecleForm from "../Forms/UpdateVehicleForm";
+import ModalBox from "../ModalBox/ModalBox";
+///import Pagination from "../ui/Pagination";
+import ViewItem from "../ui/ViewItem";
 import { Icons } from "@/assets/Icons/Icons";
+import { Pagination } from "antd";
+import React, { useState, useEffect } from "react";
+import type { PaginationProps } from "antd";
 import {
   useDeleteVehicleMutation,
   useVehicleAllQuery,
 } from "@/redux/api/vehecleApi";
-import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
-import type { PaginationProps } from "antd";
-import { Button, Pagination, Popconfirm, message } from "antd";
-import React, { useState } from "react";
-import UpdateVehecleForm from "../Forms/UpdateVehicleForm";
-import ModalBox from "../ModalBox/ModalBox";
-import ViewItem from "../ui/ViewItem";
-import { vehiclesFields } from "./StaticTableData";
+import { tripCostFields } from "./StaticTableData";
+import {
+  useDeleteTripCostMutation,
+  useGetAllTripCostQuery,
+} from "@/redux/api/tripCostApi";
+import ViewTripCost from "../ui/ViewTripCost";
+import LoadingPage from "../ui/LoadingPage";
+import UpdateTripCostForm from "../Forms/UpdateTripCostForm";
 
-interface IProps {
+type TripCost = {
   id: string;
-  registrationNo: string;
-  model: string;
-  seatCapacity: string;
-  tax: string;
-  brand: string;
-  fuelType: string;
-}
+  passengerName: string;
+  phone: string;
+  trip_period: string;
+  tollCost?: number | null;
+  parkingCost?: number | null;
+  startLocation: string;
+  description?: string | null;
+  trip_id: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
 
-const VehicleListTable = (e: any) => {
-  
-  const [deleteVehicle] = useDeleteVehicleMutation();
-  
-  
+const TripCostTable = () => {
+  const [deleteTripCost] = useDeleteTripCostMutation();
 
   const confirm = async (e: any) => {
-    const res = await deleteVehicle(e);  
-      message.success(`Deleted Sucessfully`); 
+    console.log("🚀 ~ confirm ~ e:", e);
+    const res = await deleteTripCost(e);
+    console.log("🚀 ~ confirm ~ res:", res);
+    // message.success(`${e} Deleted Sucessfully`);
   };
 
   const cancel = (e: React.MouseEvent<HTMLElement>) => {
@@ -47,12 +59,12 @@ const VehicleListTable = (e: any) => {
     setCurrent(page);
   };
 
-  const { data: vehicle } = useVehicleAllQuery(current);
+  const { data: tripCost, isLoading } = useGetAllTripCostQuery(current);
 
   return (
     <>
       <div className="overflow-x-auto rounded-lg">
-        <div className="align-middle inline-block min-w-full shadow overflow-hidden bg-white   px-8 pt-3 rounded-bl-lg rounded-br-lg py-10">
+        <div className="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg py-10">
           {/* search bar */}
           <div className="flex justify-start pb-3">
             <div className="inline-flex border rounded w-7/12  h-10 bg-transparent">
@@ -66,8 +78,8 @@ const VehicleListTable = (e: any) => {
                   type="text"
                   className="flex-shrink flex-grow flex-auto leading-normal tracking-wide w-px border border-none border-l-0 rounded rounded-l-none px-3 relative focus:outline-none text-xxs lg:text-xs text-gray-500 font-thin"
                   placeholder={`Search Through ${
-                    vehicle?.data?.meta?.total | 0
-                  } Vehicle`}
+                    tripCost?.data?.meta?.total | 0
+                  } data`}
                 />
               </div>
             </div>
@@ -77,45 +89,44 @@ const VehicleListTable = (e: any) => {
           <table className="min-w-full">
             <thead className="bg-gray-50 rounded-2xl">
               <tr className="">
-                {(vehiclesFields ?? []).map((vehiclesField) => (
+                {(tripCostFields ?? []).map((tripCostField) => (
                   <th
-                    key={vehiclesField?.id}
+                    key={tripCostField?.id}
                     className=" px-2 py-3 text-left text-black"
                   >
-                    {vehiclesField?.fields}
+                    {tripCostField?.fields}
                   </th>
                 ))}
               </tr>
             </thead>
 
             <tbody>
-              {((vehicle as any)?.data?.data ?? []).map(
-                (vehicle: IProps, index: number) => (
-                  
+              {((tripCost as any)?.data?.data ?? []).map(
+                (tripCost: any, index: number) => (
                   <tr
-                    key={vehicle?.id}
+                    key={tripCost?.id}
                     className={`${index % 2 === 0 ? "" : "bg-gray-50"}  `}
                   >
-                    <td className="px-2 py-3">{vehicle?.registrationNo}</td>
+                    <td className="px-2 py-3">{tripCost?.passengerName}</td>
 
                     <td className="px-2 py-3 text-sm leading-5">
-                      {vehicle?.model}
+                      {tripCost?.phone}
                     </td>
 
                     <td className="px-2 py-3 text-sm leading-5">
-                      {vehicle?.seatCapacity}
+                      {tripCost?.trip_period}
                     </td>
 
                     <td className=" px-2 py-3 text-sm leading-5">
-                      {vehicle?.tax}
+                      {tripCost?.tollCost}
                     </td>
 
                     <td className=" px-2 py-3 text-sm leading-5">
-                      {vehicle?.brand}
+                      {tripCost?.parkingCost}
                     </td>
 
                     <td className=" px-2 py-3 text-sm leading-5">
-                      {vehicle?.fuelType}
+                      {tripCost?.startLocation}
                     </td>
 
                     <td className="px- py-3 text-sm leading-5">
@@ -129,24 +140,27 @@ const VehicleListTable = (e: any) => {
                             </span>
                           }
                         >
-                          <ViewItem viewID={vehicle?.id} ItemType="vehicle" />
+                          <ViewTripCost
+                            viewID={tripCost?.id}
+                            ItemType="tripCost"
+                          />
                         </ModalBox>
 
                         <ModalBox
-                          title="Edit Vehicle Data"
+                          title="Edit tripCost Data"
                           btnLabel={
                             <span className="item justify-center items-center">
                               <EditOutlined />
                             </span>
                           }
                         >
-                          <UpdateVehecleForm updateID={vehicle?.id} />
+                          <UpdateTripCostForm updateID={tripCost?.id} />
                         </ModalBox>
 
                         <Popconfirm
                           title="Delete the task"
                           description="Are you sure to delete this task?"
-                          onConfirm={() => confirm(vehicle?.id)}
+                          onConfirm={() => confirm(tripCost?.id)}
                           onCancel={() => cancel}
                           cancelText="No"
                           okText="Delete"
@@ -161,7 +175,6 @@ const VehicleListTable = (e: any) => {
                       </div>
                     </td>
                   </tr>
-                  
                 )
               )}
             </tbody>
@@ -170,7 +183,7 @@ const VehicleListTable = (e: any) => {
             <Pagination
               current={current}
               onChange={onChange}
-              total={vehicle?.data?.meta?.total | 30}
+              total={tripCost?.data?.meta?.total | 30}
             />
           </div>
         </div>
@@ -180,4 +193,4 @@ const VehicleListTable = (e: any) => {
   );
 };
 
-export default VehicleListTable;
+export default TripCostTable;

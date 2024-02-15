@@ -2,31 +2,31 @@ import { tagTypes } from "../tagTypes";
 import { baseApi } from "./baseApi";
 
 
-const tripApi = baseApi.injectEndpoints({
+const driverApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    tripAll: build.query({
+    getAllDriver: build.query({
       query: (page) => ({
-        url: `/trip/list?page=${page}&limit=${5}`,
+        url: `/driver?page=${page}&limit=${5}`,
         method: "GET", 
       }), 
-      providesTags: [tagTypes.trip],
+      providesTags: [tagTypes.driver],
     }),
-    tripSingle: build.query({
+    getSingleDriver: build.query({
       query: (id) => ({
         url: `/trip/single/${id}`,
         method: "GET", 
       }), 
       providesTags: [tagTypes.trip],
     }),
-    createTrip: build.mutation({
+    createDriver: build.mutation({
       query: (createData) => ({
-        url: "/trip/create",
+        url: "/driver",
         method: "POST",
         data: createData,
       }),
-      invalidatesTags: [tagTypes.trip],
+      invalidatesTags: [tagTypes.driver],
     }),
-    updateSingleTrip: build.mutation({
+    updateDriver: build.mutation({
       query: ({id, ...data}) => ({
         url: `/trip/update/${id}`,
         method: "PATCH", 
@@ -34,20 +34,20 @@ const tripApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.vehicle],
     }),
-    deleteTrip: build.mutation({
+    deleteDriver: build.mutation({
       query: (id) => ({
         url: `/trip/delete/${id}`,
         method: "DELETE",  
       }),
-      invalidatesTags: [tagTypes.trip],
+      invalidatesTags: [tagTypes.driver],
     }),
   }),
 });
 
 export const {
-    useTripAllQuery,
-    useTripSingleQuery,
-    useCreateTripMutation,
-    useUpdateSingleTripMutation,
-    useDeleteTripMutation
-} = tripApi;
+    useGetAllDriverQuery,
+    useGetSingleDriverQuery,
+    useCreateDriverMutation,
+    useUpdateDriverMutation,
+    useDeleteDriverMutation,
+} = driverApi;

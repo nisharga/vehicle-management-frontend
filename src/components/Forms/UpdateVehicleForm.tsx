@@ -29,7 +29,8 @@ const UpdateVehecleForm = ({ updateID }: any) => {
       message.error("Every field must be filled")
     }else{
       const res = await updateVehicle({updateID, updatedData})
-      console.log(res)
+      console.log(updateID, updatedData)
+      message.success(`Updated Sucessfully`); 
     }
   };
   
