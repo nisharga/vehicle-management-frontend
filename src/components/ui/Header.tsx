@@ -2,7 +2,7 @@
 import { USER_ROLE } from "@/constants/role";
 import { authKey } from "@/constants/storageKey";
 import ThemeSwitcher from "@/helpers/ThemeSwitcher/ThemeSwitcher";
-import { getUserInfo, removeUserInfo } from "@/services/auth.service";
+import { getUserInfo, getUserInfoFromToken, removeUserInfo } from "@/services/auth.service";
 import { LogoutOutlined, UserOutlined,MoonOutlined,SunOutlined } from "@ant-design/icons";
 import { Avatar, Button, Dropdown, MenuProps, Space, Switch } from "antd";
 import Link from "next/link";
@@ -11,6 +11,7 @@ import { useState } from "react";
 
 const Header = () => {
   const { role } = getUserInfo() as any;
+  
   const userRole = USER_ROLE;
   const router = useRouter();
   // logout function..................

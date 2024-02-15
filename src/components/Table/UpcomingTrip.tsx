@@ -1,17 +1,46 @@
 "use client";
 import { SearchOutlined } from "@ant-design/icons";
 import { Input, message } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Heading from "../ui/Heading";
 import { trips } from "./StaticTableData";
+import { getUserInfo } from "@/services/auth.service";
+import { useUpcomingTripQuery } from "@/redux/api/tripApi";
+
 
 const UpcomingTripTable = () => {
+  const [current, setCurrent] = useState(1);
+  const [upcoming, setUpcoming] = useState([{
+    id:'',
+    passengerName:'',
+    passengerPhone:'',
+    startLocation: "",
+    tripPeriod:"",
+    endLocation:"",
+    status:''
+  }])
+  // const { role,id } = getUserInfo() as any;
+  // useEffect(()=>{
+    
+  // },[role,id])
+
+  const { data:upcomingTrip , isLoading } = useUpcomingTripQuery(current);
+
+  useEffect(()=>{
+    if(upcomingTrip != undefined){
+      setUpcoming(upcomingTrip.data)
+    }
+    
+  },[upcomingTrip])
+  
+  console.log(upcoming,trips)
+  
   const confirm = (e: any) => {
     console.log(e);
     message.success(`${e} Deleted Sucessfully`);
   };
-
+ 
   const cancel = (e: React.MouseEvent<HTMLElement>) => {
     console.log(e);
     message.error("Click on No");
@@ -64,7 +93,7 @@ const UpcomingTripTable = () => {
           <div className="mx-auto max-w-[55%] md:max-w-[42%] my-2">
             <Input
               size="large"
-              placeholder={`Search by Trip Id / Passenger Name of total ${trips?.length} Trips`}
+              placeholder={`Search by Trip Id / Passenger Name of total ${upcoming?.length} Trips`}
               prefix={<SearchOutlined />}
               onChange={(event) => {
                 setSearchTerm(event?.target?.value);
@@ -87,12 +116,12 @@ const UpcomingTripTable = () => {
             </thead>
 
             <tbody className="dark:text-[#E8E8E8]">
-              {(trips ?? [])
+              {(upcoming ?? [])
                 ?.filter((value) => {
                   if (searchTerm == "") {
                     return value;
                   } else if (
-                    value?.tripId
+                    value?.id
                       .toLowerCase()
                       .includes(searchTerm.toLowerCase()) ||
                     value?.passengerName
@@ -102,44 +131,44 @@ const UpcomingTripTable = () => {
                     return value;
                   }
                 })
-                ?.map((trips, index) => (
+                ?.map((trip, index) => (
                   <tr
-                    key={trips?.startTime}
+                    key={index}
                     className={`${
                       index % 2 === 0 ? "" : "bg-gray-50 dark:bg-[#145374]"
                     }  `}
                   >
                     <td className="px-2 py-3 text-sm leading-5">
-                      {trips?.tripId}
+                      {trip?.id}
                     </td>
 
                     <td className="px-2 py-3 text-sm leading-5">
-                      {trips?.passengerName}
+                      {trip?.passengerName}
                     </td>
 
                     <td className="px-2 py-3 text-sm leading-5">
-                      {trips?.passengerPhone}
+                      {trip?.passengerPhone}
                     </td>
 
                     <td className=" px-2 py-3 text-sm leading-5">
-                      {trips?.startLocation}
+                      {trip?.startLocation}
                     </td>
 
                     <td className=" px-2 py-3 text-sm leading-5">
-                      {trips?.endLocation}
+                      {trip?.endLocation}
                     </td>
 
                     <td className=" px-2 py-3 text-sm leading-5">
-                      {trips?.tripPeriod}
+                      {trip?.tripPeriod}
                     </td>
 
                     <td className="px-2 py-3 text-sm leading-5">
                       <span
                         className={`${
-                          trips?.status ? "bg-red-300" : "bg-green-300"
+                          trip?.status === 'UPCOMMING' ? "bg-green-300" : "bg-red-300"  
                         } inline-flex px-2 py-1 leading-none dark:text-[#00334E] rounded-lg`}
                       >
-                        {trips?.status ? "Pending" : "Done"}
+                        {trip?.status}
                       </span>
                     </td>
                   </tr>

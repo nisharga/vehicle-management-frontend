@@ -35,7 +35,7 @@ const Sidebar =  () => {
     // setCurrentRole(roleFromToekn.role)
   },[roleFromToekn])
 
-  console.log( role,currentRole)
+  
 
   return (
     <Sider

@@ -105,7 +105,7 @@ const TripHistoryTable = () => {
                 })
                 ?.map((trips, index) => (
                   <tr
-                    key={trips?.startTime}
+                    key={index}
                     className={`${
                       index % 2 === 0 ? "" : "bg-gray-50 dark:bg-[#145374]"
                     }  `}
