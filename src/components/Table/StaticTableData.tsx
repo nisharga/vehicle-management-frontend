@@ -342,34 +342,30 @@ export const vehicleDriversList = [
 export const tripFields = [
   {
     id: 0,
-    fields: "TripId",
+    fields: "Start Location",
   },
   {
     id: 1,
-    fields: "Passenger Name",
+    fields: "End Location",
   },
   {
     id: 2,
-    fields: "Passenger Phone",
+    fields: "Start Time",
   },
   {
     id: 3,
-    fields: "Trip Period",
+    fields: "End Time",
   },
   {
     id: 4,
-    fields: "Start-Location",
+    fields: "Passenger Count",
   },
   {
-    id: 8,
-    fields: "End-Location",
-  },
+    id: 5,
+    fields: "Trip Rent",
+  }, 
   {
-    id: 10,
-    fields: "Status",
-  },
-  {
-    id: 11,
+    id: 6,
     fields: "Action",
   },
 ];

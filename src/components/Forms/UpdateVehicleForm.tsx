@@ -12,40 +12,45 @@ type AddVehicleValues = {
   seatCapacity: string;
 };
 
-const UpdateVehecleForm = ({ updateID }: any) => {
+const UpdateVehecleForm = ({ updateID }: any) => { 
   const { data: vehicle } =  useGetSingleVehicleQuery(updateID); 
+     
   const  [updateVehicle] =  useUpdateSingleVehicleMutation(); 
   
- 
+   const defaultValues = {
+     color: vehicle?.data?.color,
+     seatCapacity: vehicle?.data?.seatCapacity,
+     model: vehicle?.data?.model, 
+     tax: vehicle?.data?.tax,
+   };
 
   const onSubmit: SubmitHandler<AddVehicleValues> = async (data: any) => {
-   const color = data?.color;
-   const seatCapacity = Number(data?.seatCapacity);
-   const model = data?.model;
-   const tax = Number(data?.tax);
-   const updatedData = {color, seatCapacity, model, tax}
+       
+   data.seatCapacity = parseInt(data.seatCapacity);
+   data.tax = parseInt(data.tax); 
+   data.registrationNo =  vehicle?.data?.registrationNo;
 
-     if(!data.color || !data.seatCapacity || !data.model || !data.tax){
-      message.error("Every field must be filled")
-    }else{
-      const res = await updateVehicle({updateID, updatedData})
-      console.log(updateID, updatedData)
-      message.success(`Updated Sucessfully`); 
-    }
+  console.log(data, updateID) 
+
+   const res = await updateVehicle({id: updateID, data})
+
+   console.log("🚀 ~ constonSubmit:SubmitHandler<AddVehicleValues>= ~ res:", res)
+
+   
   };
   
   return (
     <>
       <div className="mx-auto overflow-y-scroll ">
-        <Form submitHandler={onSubmit}>
+        <Form submitHandler={onSubmit} defaultValues={defaultValues}>
           <div className="mb-4">
-            <FormInput
+           <FormInput
               name="registrationNo"
               type="text"
               size="large"
               placeholder="Vehicle License Number"
               value={vehicle?.data?.registrationNo}
-            />
+            />  
           </div>
           <div className="mb-4">
             <FormInput
