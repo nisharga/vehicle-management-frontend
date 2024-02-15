@@ -165,7 +165,7 @@ const UpcomingTripTable = () => {
                     <td className="px-2 py-3 text-sm leading-5">
                       <span
                         className={`${
-                          trip?.status === 'UPCOMMING' ? "bg-green-300" : "bg-red-300"  
+                          trip?.status === 'UPCOMMING' ? "bg-orange-300" : "bg-red-300"  
                         } inline-flex px-2 py-1 leading-none dark:text-[#00334E] rounded-lg`}
                       >
                         {trip?.status}
