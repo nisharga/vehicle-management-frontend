@@ -1,9 +1,9 @@
 import { useGetSingleDriverSalaryQuery } from "@/redux/api/driverSalaryApi";
 import { Timeline } from "antd";
 
-const ViewDriverSalary = ({ driverSalaryId }: any, ItemType: string) => {
-  console.log(driverSalaryId, "tripCostId");
-  const { data: driverSalary } = useGetSingleDriverSalaryQuery(driverSalaryId);
+const ViewDriverSalary = ({ viewID }: any, ItemType: string) => {
+  console.log(viewID, "tripCostId");
+  const { data: driverSalary } = useGetSingleDriverSalaryQuery(viewID);
   console.log("single trip cost", driverSalary);
   // const purchaseDate = formatDateToRegularDate(vehicle?.data?.purchaseDate);
   // const registrationDate = formatDateToRegularDate(
@@ -19,7 +19,7 @@ const ViewDriverSalary = ({ driverSalaryId }: any, ItemType: string) => {
         <Timeline
           items={[
             {
-              children: `Name: ${driverSalary?.data?.passengerName}`,
+              children: `Name: ${driverSalary?.data?.driver?.name}`,
             },
             {
               children: `Amount: ${driverSalary?.data?.amount}`,

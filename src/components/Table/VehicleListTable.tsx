@@ -140,7 +140,7 @@ const VehicleListTable = (e: any) => {
                             </span>
                           }
                         >
-                          <UpdateVehecleForm updateID={vehicle?.id} />
+                          <UpdateVehecleForm vehicleData={vehicle} />
                         </ModalBox>
 
                         <Popconfirm

@@ -188,7 +188,7 @@ const DriverListTable = () => {
                           </span>
                         }
                       >
-                        <UpdateDriverForm driverData={driver} />
+                        <UpdateDriverForm driverData={drivers} />
                       </ModalBox>
 
                       <Popconfirm
