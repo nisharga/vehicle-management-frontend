@@ -1,7 +1,10 @@
 import Form from "@/components/ReusableForms/Form";
 import FormInput from "@/components/ReusableForms/FormInput";
-import { useUpdateSingleVehicleMutation, useGetSingleVehicleQuery } from "@/redux/api/vehecleApi";
-import { Button, message } from "antd"; 
+import {
+  useUpdateSingleVehicleMutation,
+  useGetSingleVehicleQuery,
+} from "@/redux/api/vehecleApi";
+import { Button, message } from "antd";
 import { SubmitHandler } from "react-hook-form";
 
 type AddVehicleValues = {
@@ -12,52 +15,48 @@ type AddVehicleValues = {
   seatCapacity: string;
 };
 
-const UpdateVehecleForm = ({ updateID }: any) => { 
-  const { data: vehicle } =  useGetSingleVehicleQuery(updateID); 
-     
-  const  [updateVehicle] =  useUpdateSingleVehicleMutation(); 
-  
-   const defaultValues = {
-     color: vehicle?.data?.color,
-     seatCapacity: vehicle?.data?.seatCapacity,
-     model: vehicle?.data?.model, 
-     tax: vehicle?.data?.tax,
-   };
+const UpdateVehecleForm = ({ vehicleData }: any) => {
+  console.log(vehicleData);
+  const { color, seatCapacity, model, tax, registrationNo, id } = vehicleData;
+  const [updateVehicle] = useUpdateSingleVehicleMutation();
+
+  const defaultValues = {
+    registrationNo: registrationNo,
+    color: color,
+    seatCapacity: seatCapacity,
+    model: model,
+    tax: tax,
+  };
 
   const onSubmit: SubmitHandler<AddVehicleValues> = async (data: any) => {
-       
-   data.seatCapacity = parseInt(data.seatCapacity);
-   data.tax = parseInt(data.tax); 
-   data.registrationNo =  vehicle?.data?.registrationNo;
-
-  console.log(data, updateID) 
-
-   const res = await updateVehicle({id: updateID, data})
-
-   console.log("🚀 ~ constonSubmit:SubmitHandler<AddVehicleValues>= ~ res:", res)
-
-   
+    data.seatCapacity = parseInt(data.seatCapacity);
+    data.tax = parseInt(data.tax);
+    //  data.registrationNo =  vehicle?.data?.registrationNo;
+    // console.log(data, updateID)
+    const res = await updateVehicle({ id, ...data });
+    if ((res as any)?.data?.statusCode === 200) {
+      message.success("Vehicle updated successfully");
+    }
   };
-  
+
   return (
     <>
       <div className="mx-auto overflow-y-scroll ">
         <Form submitHandler={onSubmit} defaultValues={defaultValues}>
           <div className="mb-4">
-           <FormInput
+            <FormInput
               name="registrationNo"
               type="text"
               size="large"
               placeholder="Vehicle License Number"
-              value={vehicle?.data?.registrationNo}
-            />  
+            />
           </div>
           <div className="mb-4">
             <FormInput
               name="color"
               type="text"
               size="large"
-              placeholder="Vehicle Color" 
+              placeholder="Vehicle Color"
             />
           </div>
 
@@ -75,7 +74,7 @@ const UpdateVehecleForm = ({ updateID }: any) => {
               name="model"
               type="text"
               size="large"
-              placeholder="Vehicle Model" 
+              placeholder="Vehicle Model"
             />
           </div>
 
@@ -84,10 +83,10 @@ const UpdateVehecleForm = ({ updateID }: any) => {
               name="tax"
               type="text"
               size="large"
-              placeholder="Vehicle tax" 
+              placeholder="Vehicle tax"
             />
           </div>
-           
+
           <Button
             htmlType="submit"
             className="uppercase text-md rounded-lg bg-brand hover:bg-gray-200 hover:text-secondary"
