@@ -259,7 +259,7 @@ export const DriverListTableFields = [
   },
   {
     id: 5,
-    fields: "Join Date",
+    fields: "License No",
   },
   {
     id: 4,
@@ -271,12 +271,8 @@ export const DriverListTableFields = [
   },
   {
     id: 7,
-    fields: "Driver In(pdf)",
-  },
-  {
-    id: 8,
     fields: "Actions",
-  },
+  } 
 ];
 
 export const vehicleDriversList = [
