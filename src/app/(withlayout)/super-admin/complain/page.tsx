@@ -1,7 +1,9 @@
+import Upcoming from "@/components/ui/Upcoming";
+
 const page = () => {
   return (
     <div>
-      <p>compline..</p>
+      <Upcoming />
     </div>
   );
 };

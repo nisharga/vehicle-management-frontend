@@ -150,6 +150,7 @@ export const sidebarItems = (role: string) => {
         },
       ],
     },
+    ...contactSidebarItem,
     ...privacyPolicySidebarItem,
     ...faqSidebarItem,
     ...profileSidebarItem,
@@ -179,6 +180,7 @@ export const sidebarItems = (role: string) => {
       icon: <ShopOutlined />,
       key: `/${role}/inventoryRequest`,
     },
+    ...contactSidebarItem,
     ...faqSidebarItem,
     ...privacyPolicySidebarItem,
   ];

@@ -12,11 +12,11 @@ import { DriverListTableFields, vehicleDriversList } from "./StaticTableData";
 
 import AddDriver from "@/app/(withlayout)/manager/driver/AddDriver";
 import { Button, message, Popconfirm, Pagination } from "antd";
-import UpdateDriverForm from "../Forms/UpdateDriverForm";
-import ViewItem from "../ui/ViewItem";
+import UpdateDriverForm from "../Forms/UpdateDriverForm"; 
 import { useDeleteVehicleMutation } from "@/redux/api/vehecleApi";
 import { useDeleteDriverMutation, useGetAllDriverQuery } from "@/redux/api/driverApi";
 import { useState } from "react";
+import ViewItemDriver from "../ui/ViewItemDriver";
 
 
 interface IProps {
@@ -40,6 +40,7 @@ const DriverListTable = () => {
 
   const confirm = async (e: any) => {
     const res = await deleteDriver(e);  
+      console.log("🚀 ~ confirm ~ res:", res)
       message.success(`Deleted Sucessfully`); 
   };
 
@@ -58,8 +59,7 @@ const DriverListTable = () => {
 
   const { data: driver } = useGetAllDriverQuery(current);
   
-  console.log("🚀 ~ DriverListTable ~ driver:", driver)
-
+   
   return (
     <>
       {/* table start */}
@@ -122,8 +122,8 @@ const DriverListTable = () => {
 
             <tbody className="">
       {
-        ((driver as any)?.data?.data ?? []).map((drivers: IProps, index: number) => (
-          <tr
+        ((driver as any)?.data ?? []).map((drivers: IProps, index: number) => (
+              <tr
                   key={drivers?.id}
                   className={`${index % 2 === 0 ? "" : "bg-gray-50"}  `}
                 >
@@ -177,7 +177,7 @@ const DriverListTable = () => {
                           </span>
                         }
                       >
-                        <ViewItem viewID={driver?.id} />
+                        <ViewItemDriver viewID={drivers?.id} ItemType="driver"/>
                       </ModalBox>
 
                       <ModalBox
@@ -194,9 +194,10 @@ const DriverListTable = () => {
                       <Popconfirm
                         title="Delete the task"
                         description="Are you sure to delete this task?"
-                        onConfirm={() => confirm(driver?.id)}
+                        onConfirm={() => confirm(drivers?.id)}
                         onCancel={() => cancel}
-                        okText="Yes"
+                        okText="Delete"
+                          okType="danger"
                         cancelText="No"
                       >
                         <Button danger>
