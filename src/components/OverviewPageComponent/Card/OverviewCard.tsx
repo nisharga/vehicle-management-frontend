@@ -57,6 +57,7 @@ const DriverOverviewCard = () => {
             {isVisible && <CountUp start={10} end={200} duration={10} />}
           </p>
         </div>
+
         <div className="p-1 border-r bg-white dark:bg-[#00334E] flex justify-between ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -79,6 +80,7 @@ const DriverOverviewCard = () => {
             {isVisible && <CountUp start={100} end={5000} duration={10} />}
           </p>
         </div>
+
         <div className="p-1 bg-white dark:bg-[#00334E] flex justify-between ">
           <svg
             xmlns="http://www.w3.org/2000/svg"

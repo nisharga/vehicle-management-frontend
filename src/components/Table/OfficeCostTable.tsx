@@ -1,7 +1,9 @@
 "use client";
+import AddOfficeCost from "@/app/(withlayout)/manager/office-cost/AddOfficeCost";
 import { HolderOutlined } from "@ant-design/icons";
 import { Button, Dropdown, MenuProps, Select } from "antd";
-import CommonButton from "../ui/CommonButton";
+import ModalBox from "../ModalBox/ModalBox";
+import Heading from "../ui/Heading";
 
 const years = [
   {
@@ -152,10 +154,15 @@ const OfficeCostTable = () => {
 
   return (
     <>
-      <div className="overflow-x-auto rounded-lg">
-        <div className="align-middle inline-block min-w-full shadow overflow-hidden bg-white   px-8 pt-3 rounded-bl-lg rounded-br-lg py-10">
-          <p className="text-center text-xl">Office Cost</p>
-          <div className="flex justify-between gap-x-5">
+      <Heading>
+        <p>Office Cost</p>
+      </Heading>
+      <div className="overflow-x-auto rounded-tl-xl rounded-tr-xl">
+        <div
+          className="align-middle inline-block min-w-full shadow 
+          overflow-hidden bg-white dark:bg-[#00334E]"
+        >
+          <div className="flex justify-between p-2">
             <div className="flex gap-x-5">
               <Select
                 showSearch
@@ -188,16 +195,19 @@ const OfficeCostTable = () => {
                 options={month}
               />
             </div>
-            <CommonButton content="Add Office Cost" />
+
+            <ModalBox btnLabel="Add Office Cost">
+              <AddOfficeCost />
+            </ModalBox>
           </div>
           <br />
           <table className="min-w-full ">
-            <thead className="bg-gray-50 rounded-2xl">
-              <tr className="">
+            <thead className="bg-gray-50 rounded-2xl border-b">
+              <tr className="dark:bg-[#145374]">
                 {OfficeCostTableFields?.map((OfficeCostTableField) => (
                   <th
                     key={OfficeCostTableField?.id}
-                    className=" px-2 py-3 text-left text-black"
+                    className="px-2 py-3 text-left text-black dark:text-[#E8E8E8]"
                   >
                     {OfficeCostTableField?.fields}
                   </th>
@@ -205,13 +215,17 @@ const OfficeCostTable = () => {
               </tr>
             </thead>
 
-            <tbody className="bg-white">
+            <tbody className="dark:text-[#E8E8E8]">
               {OfficeCostSectors?.map((OfficeCostSector, index) => (
                 <tr
                   key={OfficeCostSector?.ID}
-                  className={`${index % 2 === 0 ? "" : "bg-gray-50"}  `}
+                  className={`${
+                    index % 2 === 0 ? "" : "bg-gray-50 dark:bg-[#145374]"
+                  }  `}
                 >
-                  <td className=" px-2 py-3">{OfficeCostSector?.title}</td>
+                  <td className="px-2 py-3 text-sm leading-5">
+                    {OfficeCostSector?.title}
+                  </td>
 
                   <td className=" px-2 py-3 text-sm leading-5">
                     {OfficeCostSector?.description}
@@ -228,16 +242,16 @@ const OfficeCostTable = () => {
                 </tr>
               ))}
             </tbody>
-            <tfoot className="bg-gray-100 font-bold">
-              <tr className="">
+            <tfoot className="bg-gray-100 font-bold  border-t">
+              <tr className="dark:bg-[#145374]">
                 <td className="  px-2 py-3">
                   <div className="text-sm leading-5 ">Total</div>
                 </td>
-                <td className="  px-2 py-3 text-sm leading-5">
+                <td className="px-2 py-3 text-sm leading-5">
                   Total monthly office management cost
                 </td>
-                <td className="  px-2 py-3 text-sm leading-5">{totalCost}</td>
-                <td className="  px-2 py-3 text-sm leading-5"></td>
+                <td className="px-2 py-3 text-sm leading-5">{totalCost}</td>
+                <td className="px-2 py-3 text-sm leading-5"></td>
               </tr>
             </tfoot>
           </table>

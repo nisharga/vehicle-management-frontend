@@ -4,6 +4,7 @@ import {
   PhoneOutlined,
   SendOutlined,
 } from "@ant-design/icons";
+import { Image } from "antd";
 
 const ContactCard = ({ contacts }: any) => {
   const {
@@ -27,11 +28,7 @@ const ContactCard = ({ contacts }: any) => {
           />
         </div>
         <div className="mx-auto w-32 h-32 relative -mt-16 border-4 border-white rounded-full overflow-hidden">
-          <img
-            className="object-cover object-center h-32"
-            src={Avatar}
-            alt="..."
-          />
+          <Image src={Avatar} alt="..." />
         </div>
         <div className="text-center mt-2 ">
           <h2 className="text-xl dark:text-gray-300 font-semibold">

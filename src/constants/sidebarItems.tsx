@@ -6,10 +6,12 @@ import {
   EnvironmentOutlined,
   ExperimentOutlined,
   FileZipOutlined,
+  PhoneOutlined,
   QuestionCircleOutlined,
   SafetyOutlined,
   ScheduleOutlined,
   ShopOutlined,
+  SubnodeOutlined,
   TruckOutlined,
   UserOutlined,
 } from "@ant-design/icons";
@@ -33,17 +35,10 @@ export const sidebarItems = (role: string) => {
     },
   ];
 
-  const complainSidebarItem: MenuProps["items"] = [
-    {
-      label: <Link href={`/${role}/complain`}>Complain</Link>,
-      icon: <AreaChartOutlined />,
-      key: `/${role}/complain`,
-    },
-  ];
   const contactSidebarItem: MenuProps["items"] = [
     {
       label: <Link href={`/${role}/contact`}>Contact</Link>,
-      icon: <AreaChartOutlined />,
+      icon: <PhoneOutlined />,
       key: `/${role}/contact`,
     },
   ];
@@ -116,34 +111,18 @@ export const sidebarItems = (role: string) => {
           label: <Link href={`/${role}/accessories`}>Accessories</Link>,
           key: "Accessories",
         },
-
-        {
-          label: <Link href={`/${role}/expense-report`}>Expense Report</Link>,
-          key: "ExpensesReport",
-        },
       ],
     },
 
     {
-      label: "Report",
-      key: "report",
+      label: <Link href={`/${role}/inventoryRequest`}>Inventory Request</Link>,
+      icon: <SubnodeOutlined />,
+      key: `/${role}/inventoryRequest`,
+    },
+    {
+      label: <Link href={`/${role}/report`}>Report</Link>,
       icon: <FileZipOutlined />,
-      children: [
-        {
-          label: <Link href={`/${role}/fuelReport`}>Fuel Report</Link>,
-          key: "fuelReport",
-        },
-        {
-          label: (
-            <Link href={`/${role}/expenditureReport`}>Expenditure Report</Link>
-          ),
-          key: "expenditureReport",
-        },
-        {
-          label: <Link href={`/${role}/incomeReport`}>Income Report</Link>,
-          key: "incomeReport",
-        },
-      ],
+      key: `/${role}/report`,
     },
     ...contactSidebarItem,
     ...privacyPolicySidebarItem,
@@ -192,7 +171,6 @@ export const sidebarItems = (role: string) => {
     ...contactSidebarItem,
     ...privacyPolicySidebarItem,
     ...faqSidebarItem,
-    ...complainSidebarItem,
     ...profileSidebarItem,
   ];
 

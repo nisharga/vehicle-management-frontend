@@ -1,5 +1,7 @@
 const Heading = ({ children }: any) => {
-  return <div className="text-xl font-bold mt-16 mb-5">{children}</div>;
+  return (
+    <div className="text-xl font-bold mt-12 mb-5 font-serif">{children}</div>
+  );
 };
 
 export default Heading;

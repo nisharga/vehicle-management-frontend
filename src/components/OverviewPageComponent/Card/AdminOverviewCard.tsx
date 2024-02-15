@@ -83,7 +83,7 @@ const AdminOverviewCard = () => {
             )}
           </p>
         </div>
-        <div className="p-1 bg-white dark:bg-[#00334E] flex justify-between ">
+        <div className="p-1 border-r bg-white dark:bg-[#00334E] flex justify-between ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"

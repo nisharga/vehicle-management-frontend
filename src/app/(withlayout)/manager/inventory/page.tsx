@@ -1,7 +1,7 @@
 const toolsPage = () => {
   return (
     <div>
-      <p>inventory</p>
+      <p>inventory...</p>
     </div>
   );
 };
