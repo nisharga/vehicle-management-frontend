@@ -13,10 +13,10 @@ const driverApi = baseApi.injectEndpoints({
     }),
     getSingleDriver: build.query({
       query: (id) => ({
-        url: `/trip/single/${id}`,
+        url: `/driver/single/${id}`,
         method: "GET", 
       }), 
-      providesTags: [tagTypes.trip],
+      providesTags: [tagTypes.driver],
     }),
     createDriver: build.mutation({
       query: (createData) => ({
@@ -28,15 +28,15 @@ const driverApi = baseApi.injectEndpoints({
     }),
     updateDriver: build.mutation({
       query: ({id, ...data}) => ({
-        url: `/trip/update/${id}`,
+        url: `/driver/update/${id}`,
         method: "PATCH", 
         data: data,
       }),
-      invalidatesTags: [tagTypes.vehicle],
+      invalidatesTags: [tagTypes.driver],
     }),
     deleteDriver: build.mutation({
       query: (id) => ({
-        url: `/trip/delete/${id}`,
+        url: `/driver/delete/${id}`,
         method: "DELETE",  
       }),
       invalidatesTags: [tagTypes.driver],
