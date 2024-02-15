@@ -91,6 +91,7 @@ const VehicleListTable = (e: any) => {
             <tbody>
               {((vehicle as any)?.data?.data ?? []).map(
                 (vehicle: IProps, index: number) => (
+                  
                   <tr
                     key={vehicle?.id}
                     className={`${index % 2 === 0 ? "" : "bg-gray-50"}  `}
@@ -160,6 +161,7 @@ const VehicleListTable = (e: any) => {
                       </div>
                     </td>
                   </tr>
+                  
                 )
               )}
             </tbody>
