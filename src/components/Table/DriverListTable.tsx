@@ -5,26 +5,61 @@ import {
   EditOutlined,
   EyeOutlined,
 } from "@ant-design/icons";
-import { Image } from "antd";
+import { Image, PaginationProps } from "antd";
 import ModalBox from "../ModalBox/ModalBox";
-import Pagination from "../ui/Pagination";
+
 import { DriverListTableFields, vehicleDriversList } from "./StaticTableData";
 
 import AddDriver from "@/app/(withlayout)/manager/driver/AddDriver";
-import { Button, message, Popconfirm } from "antd";
+import { Button, message, Popconfirm, Pagination } from "antd";
 import UpdateDriverForm from "../Forms/UpdateDriverForm";
 import ViewItem from "../ui/ViewItem";
+import { useDeleteVehicleMutation } from "@/redux/api/vehecleApi";
+import { useDeleteDriverMutation, useGetAllDriverQuery } from "@/redux/api/driverApi";
+import { useState } from "react";
+
+
+interface IProps {
+address? : string;
+avatar? : string;
+createAt? : string;
+email? : string;
+experience? : string;
+id? : string;
+license_no? : string;
+name? : string;
+nid? : string;
+password? : string;
+phone? : string;
+role? : string;
+user_id? : string;
+}
 
 const DriverListTable = () => {
-  const confirm = (e: any) => {
-    console.log(e);
-    message.success(`${e} Deleted Sucessfully`);
+  const [deleteDriver] = useDeleteDriverMutation();
+
+  const confirm = async (e: any) => {
+    const res = await deleteDriver(e);  
+      message.success(`Deleted Sucessfully`); 
   };
 
   const cancel = (e: React.MouseEvent<HTMLElement>) => {
     console.log(e);
     message.error("Click on No");
   };
+
+  const [current, setCurrent] = useState(1);
+  const [vehicleData, setVehicleData] = useState(null);
+  const [isFetching, setIsFetching] = useState(false);
+
+  const onChange: PaginationProps["onChange"] = (page) => {
+    setCurrent(page);
+  };
+
+  const { data: driver } = useGetAllDriverQuery(current);
+  
+  console.log("🚀 ~ DriverListTable ~ driver:", driver)
+
   return (
     <>
       {/* table start */}
@@ -86,38 +121,41 @@ const DriverListTable = () => {
             </thead>
 
             <tbody className="">
-              {vehicleDriversList?.map((vehicleDriver, index) => (
-                <tr
-                  key={vehicleDriver?.email}
+      {
+        ((driver as any)?.data?.data ?? []).map((drivers: IProps, index: number) => (
+          <tr
+                  key={drivers?.id}
                   className={`${index % 2 === 0 ? "" : "bg-gray-50"}  `}
                 >
                   <td className="px-2">
                     <Image
                       className="rounded-full"
                       width={30}
-                      src={vehicleDriver?.avatar}
+                      src={drivers?.avatar}
                       alt="..."
                     />
                   </td>
                   <td className=" px-2 py-3 -space-y-1">
-                    <p className="text-sm font-bold">{vehicleDriver?.name}</p>
+                    <p className="text-sm font-bold">{drivers?.name}</p>
                     <p className="text-[8] text-textColor italic">
-                      {vehicleDriver?.email}
+                      {drivers?.email}
                     </p>
                   </td>
 
                   <td className="px-2 py-3 text-sm leading-5">
-                    {vehicleDriver?.phone}
+                    {drivers?.phone}
                   </td>
                   <td className="px-2 py-3 text-sm leading-5">
-                    {vehicleDriver?.joinDate}
+                    {drivers?.license_no}
                   </td>
                   <td className="px-2 py-3 text-sm leading-5">
-                    {vehicleDriver?.experience}
+                    {drivers?.experience}
                   </td>
                   <td className="px-2 py-3 text-sm leading-5">
-                    {vehicleDriver?.nidNumber}
+                    {drivers?.nid}
                   </td>
+                  
+                  {/* 
                   <td className="px-2 py-3 text-sm leading-5">
                     <Button
                       style={{
@@ -128,7 +166,7 @@ const DriverListTable = () => {
                     >
                       {vehicleDriver?.document}
                     </Button>
-                  </td>
+                  </td> */}
 
                   <td className="px-2 py-3 text-sm leading-5">
                     <div className="flex gap-x-1">
@@ -139,7 +177,7 @@ const DriverListTable = () => {
                           </span>
                         }
                       >
-                        <ViewItem viewID={vehicleDriver?.name} />
+                        <ViewItem viewID={driver?.id} />
                       </ModalBox>
 
                       <ModalBox
@@ -150,13 +188,13 @@ const DriverListTable = () => {
                           </span>
                         }
                       >
-                        <UpdateDriverForm driverData={vehicleDriver} />
+                        <UpdateDriverForm driverData={driver} />
                       </ModalBox>
 
                       <Popconfirm
                         title="Delete the task"
                         description="Are you sure to delete this task?"
-                        onConfirm={() => confirm(vehicleDriver?.name)}
+                        onConfirm={() => confirm(driver?.id)}
                         onCancel={() => cancel}
                         okText="Yes"
                         cancelText="No"
@@ -171,12 +209,17 @@ const DriverListTable = () => {
                     </div>
                   </td>
                 </tr>
-              ))}
+          )
+      )}        
             </tbody>
           </table>
 
-          <div className="flex justify-center my-4  mx-auto">
-            <Pagination />
+          <div className="flex justify-center items-center py-8">
+            <Pagination
+              current={current}
+              onChange={onChange}
+              total={driver?.data?.meta?.total | 30}
+            />
           </div>
         </div>
         {/* table end */}

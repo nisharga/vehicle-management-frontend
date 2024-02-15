@@ -7,7 +7,7 @@ const page = () => {
     <>
       <div className="flex justify-between">
         <h3 className="mb-4 flex justify-center text-xl md:text-3xl text-secondary">
-          Driver List
+          Driver
         </h3>
         
       </div>
