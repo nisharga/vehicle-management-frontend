@@ -243,24 +243,21 @@ export const vehicles = [
     fuelType: "Diesel",
   },
 ];
+export const InventoryRequestListTableFields = [
+  {
+    id: 0,
+    fields: "Title",
+  },
+ 
+
+];
 
 export const DriverListTableFields = [
   {
     id: 0,
     fields: "Photo",
   },
-  {
-    id: 1,
-    fields: "Name",
-  },
-  {
-    id: 2,
-    fields: "Phone",
-  },
-  {
-    id: 5,
-    fields: "License No",
-  },
+ 
   {
     id: 4,
     fields: "Experience",
