@@ -1,15 +1,18 @@
-import InventoryRequestForm from "@/components/Forms/InventoryRequestForm";
-import Heading from "@/components/ui/Heading";
+import InventoryRequestListTable from "@/components/Table/InventoryRequestTable";
+import InventoryListTable from "@/components/Table/InventoryRequestTable";
 
-const inventoryRequestPage = () => {
+const page = () => {
   return (
     <>
-      <Heading>
-        <p>Inventory Request</p>
-      </Heading>
-      <InventoryRequestForm />
+      <div className="flex justify-between">
+        <h3 className="mb-4 flex justify-center text-xl md:text-3xl text-secondary">
+          Inventory Request
+        </h3>
+      </div>
+      {/* <InventoryListTable /> */}
+      <InventoryRequestListTable />
     </>
   );
 };
 
-export default inventoryRequestPage;
+export default page;

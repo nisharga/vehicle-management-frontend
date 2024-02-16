@@ -3,7 +3,7 @@ import Form from "@/components/ReusableForms/Form";
 import FormInput from "@/components/ReusableForms/FormInput";
 import { useUserLoginMutation } from "@/redux/api/authApi";
 import { getUserInfoFromToken, storeUserInfo } from "@/services/auth.service";
-import { Button, message, Tooltip } from "antd";
+import { Button, Tooltip, message } from "antd";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { SubmitHandler } from "react-hook-form";
@@ -52,9 +52,7 @@ export default function LoginPage() {
               Vehicle Management System (VMS)
             </h1>
             <p className="text-3xl my-4">Imagine having a virtual garage</p>
-            
           </div>
-           
         </div>
 
         <div
@@ -79,22 +77,47 @@ export default function LoginPage() {
               Welcome our Vehicle Managment System
             </p>
 
-            <div className='my-8 p-2 shadow-lg text-center flex justify-evenly '>
-                <Tooltip title="
+            <div className="my-8 p-2 shadow-lg text-center flex justify-evenly item-center">
+              <div>
+                <Tooltip
+                  title="
                     Email: faruq@example.com     
                     Password: 12345678
-                    " 
-                    color='geekblue' key='geekblue'>
-                    <p className='cursor-pointer underline text-sky-600'>Super-admin Credentials</p>
+                    "
+                  color="geekblue"
+                  key="geekblue"
+                >
+                  <p className="cursor-pointer underline text-sky-600">
+                    Super-admin Credentials
+                  </p>
                 </Tooltip>
-                <Tooltip title="Email: khaled@example.com
-                    Password: 12345678" color='geekblue' key='geekblue'>
-                    <p className='cursor-pointer underline text-sky-600'>Manager Credentials</p>
+              </div>
+              /
+              <div>
+                <Tooltip
+                  title="Email: khaled@example.com
+                    Password: 12345678"
+                  color="geekblue"
+                  key="geekblue"
+                >
+                  <p className="cursor-pointer underline text-sky-600">
+                    Manager Credentials
+                  </p>
                 </Tooltip>
-                <Tooltip title="Email: kabir@example.com 
-                    Password: 12345678" color='geekblue' key='geekblue'>
-                    <p className='cursor-pointer underline text-sky-600'>Driver Credentials</p>
+              </div>
+              /
+              <div>
+                <Tooltip
+                  title="Email: kabir@example.com 
+                    Password: 12345678"
+                  color="geekblue"
+                  key="geekblue"
+                >
+                  <p className="cursor-pointer underline text-sky-600">
+                    Driver Credentials
+                  </p>
                 </Tooltip>
+              </div>
             </div>
 
             <Form submitHandler={onSubmit}>
@@ -106,7 +129,7 @@ export default function LoginPage() {
                     size="large"
                     placeholder="User Email"
                   />
-                </div> 
+                </div>
                 <br />
                 <div className="w-[60%]">
                   <FormInput
@@ -122,7 +145,7 @@ export default function LoginPage() {
                   className="uppercase block w-[60%] p-4 text-md rounded-full  bg-brand hover:bg-gray-200 hover:text-secondary 
                   focus:outline-none"
                 >
-                { isLogin ? 'Loading...' : 'press LogIn'}
+                  {isLogin ? "Loading..." : "press LogIn"}
                 </Button>
               </div>
             </Form>
