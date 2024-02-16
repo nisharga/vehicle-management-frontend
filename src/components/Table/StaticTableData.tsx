@@ -24,7 +24,7 @@ export const vehiclesFields = [
     fields: "Fuel Type",
   },
   {
-    id: 6,
+    id: 7,
     fields: "Actions",
   },
 ];
