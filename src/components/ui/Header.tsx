@@ -5,7 +5,6 @@ import ThemeSwitcher from "@/helpers/ThemeSwitcher/ThemeSwitcher";
 import { getUserInfo, removeUserInfo } from "@/services/auth.service";
 import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { Avatar, Button, Dropdown, MenuProps, Space, Switch } from "antd";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -22,8 +21,8 @@ const Header = () => {
   //dropdown items.......................
   const items: MenuProps["items"] = [
     {
-      key: `/${role}/profile`,
-      label: <Link href={`/${role}/profile`}>Profile</Link>,
+      key: `profile`,
+      label: <span>Profile</span>,
     },
 
     {
