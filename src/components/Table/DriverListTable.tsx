@@ -59,6 +59,8 @@ const DriverListTable = () => {
     setCurrent(page);
   };
   const { data: driver } = useGetAllDriverQuery(current);
+  
+
 
   //searching code
   const [searchTerm, setSearchTerm] = useState("");
@@ -128,7 +130,7 @@ const DriverListTable = () => {
                   </td> */}
 
             <tbody className="dark:text-[#E8E8E8]">
-              {((driver as any)?.data?.data ?? [])?.map(
+              {((driver as any)?.data ?? [])?.map(
                 (drivers: IProps, index: number) => (
                   <tr
                     key={drivers?.id}

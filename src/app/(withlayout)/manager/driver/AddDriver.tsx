@@ -19,10 +19,13 @@ type AddVehicleValues = {
 };
 
 const AddDriver = () => {
+
+  
   const [addDriver] = useCreateDriverMutation();
   const onSubmit: SubmitHandler<AddVehicleValues> = async (data: any) => {
     
   const res = await addDriver(data);
+    console.log(res)
     
   if((res as any)?.data?.statusCode === 200){
     message.success("Driver Created successful");
@@ -46,17 +49,7 @@ const AddDriver = () => {
           <div className="mb-4">
             <FormInput name="phone" type="text" placeholder="Phone Number" />
           </div>
-          {/* <div className="md:flex md:gap-4 md:items-center ">
-            <p className='mb-4'>Join Date:</p>
-            <div className="mb-4">
-              <FormInput
-                name="joindate"
-                size="large"
-                type="date"
-                placeholder="join_date"
-              />
-            </div>
-          </div> */}
+          
           <div className="mb-4">
             <FormInput name="nid" type="text" placeholder="NID Number" />
           </div>
@@ -66,13 +59,6 @@ const AddDriver = () => {
           <div className="mb-4">
             <FormInput name="address" type="text" placeholder="Address" />
           </div>
-          {/* <div className="mb-4">
-            <FormInput
-              name="file"
-              type="text"
-              placeholder="CV/Resume/passport/driving license (pdf)"
-            />
-          </div> */}
           <div className="mb-4">
             <FormInput
               name="experience"
@@ -87,6 +73,7 @@ const AddDriver = () => {
               placeholder="Avater"
             />
           </div>
+          
 
           <Button
             htmlType="submit"
