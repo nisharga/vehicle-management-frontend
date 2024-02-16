@@ -267,8 +267,20 @@ export const InventoryRequestListTableFields = [
     id: 0,
     fields: "Title",
   },
- 
-
+];
+export const InventoryListTableFields = [
+  {
+    id: 0,
+    fields: "Name",
+  },
+  {
+    id: 1,
+    fields: "Description",
+  },
+  {
+    id: 2,
+    fields: "Quantity",
+  },
 ];
 
 export const DriverListTableFields = [
