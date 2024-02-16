@@ -35,8 +35,11 @@ const UpdateTripCostForm = ({ updateID }: any) => {
   const onSubmit: SubmitHandler<AddVehicleValues> = async (data: any) => {
     data.tollCost = parseInt(data.tollCost);
     data.parkingCost = parseInt(data.parkingCost);
-    const res = await updateTripCost({ id:updateID, data });
-    console.log(res);
+    const res = await updateTripCost({ id: updateID, data });
+    console.log("res: " ,res);
+    if ((res as any)?.data?.success) {
+      message.success("Trip Cost updated successfully");
+    }
   };
 
   return (

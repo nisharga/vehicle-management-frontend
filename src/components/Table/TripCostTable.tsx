@@ -39,10 +39,10 @@ const TripCostTable = () => {
   const [deleteTripCost] = useDeleteTripCostMutation();
 
   const confirm = async (e: any) => {
-    console.log("🚀 ~ confirm ~ e:", e);
     const res = await deleteTripCost(e);
-    console.log("🚀 ~ confirm ~ res:", res);
-    // message.success(`${e} Deleted Sucessfully`);
+    if ((res as any)?.data?.success) {
+      message.success(`Deleted Successfully`);
+    }
   };
 
   const cancel = (e: React.MouseEvent<HTMLElement>) => {
@@ -160,10 +160,7 @@ const TripCostTable = () => {
                             </span>
                           }
                         >
-                          <ViewTripCost
-                            viewID={tripCost?.id}
-                            ItemType="tripCost"
-                          />
+                          <ViewTripCost tripCost={tripCost} />
                         </ModalBox>
 
                         <ModalBox
