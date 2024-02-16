@@ -20,6 +20,7 @@ import { useState } from "react";
 import UpdateDriverForm from "../Forms/UpdateDriverForm";
 import Heading from "../ui/Heading";
 import ViewItem from "../ui/ViewItem";
+import ViewItemDriver from "../ui/ViewItemDriver";
 
 interface IProps {
   address?: string;
@@ -153,7 +154,7 @@ const DriverListTable = () => {
                             </span>
                           }
                         >
-                          <ViewItem viewID={driver?.id} />
+                          <ViewItemDriver viewID={drivers?.id} />
                         </ModalBox>
 
                         <ModalBox
@@ -170,10 +171,12 @@ const DriverListTable = () => {
                         <Popconfirm
                           title="Delete the task"
                           description="Are you sure to delete this task?"
-                          onConfirm={() => confirm(driver?.id)}
+                          onConfirm={() => confirm(drivers?.id)}
                           onCancel={() => cancel}
-                          okText="Yes"
+                          
                           cancelText="No"
+                          okText="Delete"
+                          okType="danger"
                         >
                           <Button danger>
                             <span className="item justify-center items-center">
