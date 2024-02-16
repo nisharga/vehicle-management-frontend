@@ -149,7 +149,7 @@ const TripListTable = () => {
                           trips?.status ? "bg-red-300" : "bg-green-300"
                         } inline-flex px-2 py-1 leading-none text-primary rounded-lg`}
                       >
-                        {trips?.status ? "Pending" : "Done"}
+                        {trips?.status ? trips?.status : "Pending"}
                       </span>
                     </td>
 
