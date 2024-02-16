@@ -350,23 +350,37 @@ export const tripFields = [
   },
   {
     id: 2,
-    fields: "Start Time",
-  },
+    fields: "Trip Date",
+  }, 
   {
     id: 3,
-    fields: "End Time",
+    fields: "Passenger Name",
   },
-  {
+   {
     id: 4,
-    fields: "Passenger Count",
+    fields: "Passengers",
   },
   {
     id: 5,
-    fields: "Trip Rent",
-  }, 
+    fields: "Trip Period",
+  },
   {
     id: 6,
-    fields: "Action",
+    fields: "Trip Rent",
+  },{
+    id: 7,
+    fields: "Driver",
+  },{
+    id: 8,
+    fields: "Vehicle",
+  }, 
+  {
+    id: 9,
+    fields: "Status",
+  }, 
+  {
+    id: 10,
+    fields: "Actions",
   },
 ];
 
