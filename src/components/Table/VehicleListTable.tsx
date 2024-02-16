@@ -66,7 +66,7 @@ const VehicleListTable = (e: any) => {
             <div className=" max-w-[80%]">
               <Input
                 size="large"
-                placeholder={`Search by Trip Id / Passenger Name of total ${vehicle?.length} Trips`}
+                placeholder={`Search by Reg.Id`}
                 prefix={<SearchOutlined />}
                 onChange={(event) => {
                   setSearchTerm(event?.target?.value);
