@@ -109,7 +109,18 @@ const DriverListTable = () => {
             </thead>
 
             <tbody className="dark:text-[#E8E8E8]">
-              {((driver as any)?.data ?? [])?.map(
+              {((driver as any)?.data ?? [])?.filter((V: any) => {
+                if (searchTerm == "") {
+                  return V;
+                } else if (
+                  V?.nid
+                    .toLowerCase()
+                    .includes(searchTerm.toLowerCase()) ||
+                  V?.phone.toLowerCase().includes(searchTerm.toLowerCase())
+                ) {
+                  return V;
+                }
+              })?.map(
                 (drivers: IProps, index: number) => (
                   <tr
                     key={drivers?.id}
@@ -165,7 +176,7 @@ const DriverListTable = () => {
                             </span>
                           }
                         >
-                          <UpdateDriverForm driverData={driver} />
+                          <UpdateDriverForm driverData={drivers} />
                         </ModalBox>
 
                         <Popconfirm
