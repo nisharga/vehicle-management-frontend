@@ -3,9 +3,11 @@
 import Form from "@/components/ReusableForms/Form";
 import FormInput from "@/components/ReusableForms/FormInput";
 import { useDriverVehicleQuery } from "@/redux/api/driverApi";
-import { Button } from "antd";
+import { Button, message } from "antd";
 import { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form"; 
+import { SubmitHandler } from "react-hook-form"; 
+import { formatDate } from '@/utils/formateDate';
+import { useCreateTripMutation } from "@/redux/api/tripApi";
 
 
 type CreateTripValue = {
@@ -18,22 +20,36 @@ type CreateTripValue = {
   description: string;
   tripId: string;
 };
-const CreateTrip = () => {
-  const { register } = useForm();
-  
+
+const CreateTrip = () => { 
+  const [selectedDriver, setSelectedDriver] = useState([]); 
+  const [selectedVehicle, setSelectedVehicle] = useState([]); 
+
+  const [createTrip] = useCreateTripMutation()
+
   const onSubmit: SubmitHandler<CreateTripValue> = async (data: any) => {
-    console.log("trip create Data--->", data);
+    data.status = "UPCOMMING";
+    data.passengerCount = parseInt(data?.passengerCount);
+    data.tripRent = parseInt(data?.tripRent);
+    data.startTime = formatDate(data?.startTime);
+    data.vehicle_id = selectedVehicle;
+    data.driver_id = selectedDriver;
+   
+    const res = await createTrip(data) 
+
+    if((res as any)?.data?.statusCode === 200){
+      message.success(`Create Trip Sucessfully`);
+    }
+ 
   };
 
    const {data: driverVehicle} = useDriverVehicleQuery({})
-   console.log("🚀 ~ AddTripCost ~ driverVehicle:", driverVehicle?.data?.driverResult)
-   console.log("🚀 ~ AddTripCost ~ driverVehicle:", driverVehicle?.data?.vehicleResult)
-
-  const [selectedClient,setSelectedClient] = useState([]);
-  console.log("🚀 ~ CreateTrip ~ selectedClient:", selectedClient)
-
-  function handleSelectChange(event: any) {
-      setSelectedClient(event.target.value);
+  
+  function handleSelectDriver(event: any) {
+    setSelectedDriver(event.target.value);
+  }
+  function handleSelectVehicle(event: any) {
+    setSelectedVehicle(event.target.value);
   }
 
 
@@ -46,60 +62,92 @@ const CreateTrip = () => {
          
           <div className="mb-4">
             <FormInput
-              name="passengerName"
-              type="text"
-              placeholder="Passenger Name"
-            />
-          </div>
-
-          <div className="mb-4">
-          <select value={selectedClient} onChange={handleSelectChange}> 
-              <option value="female">female</option>
-              <option value="male">male</option> 
-            </select>
-          </div>
-
-          <div className="mb-4">
-            <FormInput
-              name="phone"
-              type="phone"
-              placeholder="Passenger Phone"
-            />
-          </div>
-          <div className="mb-4">
-            <FormInput
-              name="tripPeriod"
-              type="date"
-              placeholder="Trip Period"
-            />
-          </div>
-          <div className="mb-4">
-            <FormInput name="tollCost" type="text" placeholder="Toll Cost" />
-          </div>
-          <div className="mb-4">
-            <FormInput
-              name="parkingCost"
-              type="text"
-              placeholder="Parking Cost"
-            />
-          </div>
-          <div className="mb-4">
-            <FormInput
               name="startLocation"
               type="text"
               placeholder="Start Location"
             />
           </div>
+          
           <div className="mb-4">
             <FormInput
-              name="description"
-              type="comment"
-              placeholder="Description"
+              name="endLocation"
+              type="text"
+              placeholder="End Location"
             />
           </div>
-          <div className="mb-4">
-            <FormInput name="tripId" type="text" placeholder="TripId" />
+
+          <div className="mb-4 flex gap-2 items-center">
+          <label className="mr-2">Date:</label>
+            <FormInput
+              name="startTime"
+              type="date"
+              placeholder="Trip Date"
+            />
           </div>
+
+          <div className="mb-4">
+            <FormInput
+              name="passengerName"
+              type="text"
+              placeholder="Passenger Name"
+            />
+          </div>
+          
+          <div className="mb-4">
+            <FormInput
+              name="passengerPhone"
+              type="text"
+              placeholder="Passenger Phone"
+            />
+          </div>
+          
+          <div className="mb-4">
+            <FormInput
+              name="passengerCount"
+              type="number"
+              placeholder="Total passenger Count"
+            />
+          </div> 
+          
+          <div className="mb-4">
+            <FormInput
+              name="tripPeriod"
+              type="text"
+              placeholder="Single-Trip | Round-Trip"
+            />
+          </div>
+            
+          <div className="mb-4">
+            <FormInput
+              name="tripRent"
+              type="number"
+              placeholder="$tripRent"
+            />
+          </div>
+
+          <div className="mb-4">
+          <label className="mr-2">Select Driver:</label>
+          <select value={selectedDriver} onChange={handleSelectDriver}>   
+              {
+               (driverVehicle?.data?.driverResult ?? []).map((driver: any) => {
+                return <option value={driver?.id} key={driver?.id}>{driver?.name}</option>
+               })
+              }  
+            </select>
+          </div>
+          
+          <div className="mb-4">
+          <label className="mr-2">Select Vehicle:</label>
+          <select value={selectedVehicle} onChange={handleSelectVehicle}>   
+              {
+               (driverVehicle?.data?.vehicleResult ?? []).map((vehicle: any) => {
+                return <option value={vehicle?.id} key={vehicle?.id}>{vehicle?.brand}</option>
+               })
+              }  
+            </select>
+          </div>
+
+          
 
           <Button
             htmlType="submit"
