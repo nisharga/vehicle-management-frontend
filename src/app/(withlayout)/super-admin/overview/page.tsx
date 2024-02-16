@@ -9,7 +9,7 @@ import TotalSaleAreaChart from "@/components/OverviewPageComponent/Charts/TotalS
 import DriverList from "@/components/OverviewPageComponent/table/DriverList";
 import VehicleList from "@/components/OverviewPageComponent/table/VehicleList";
 import TripListTable from "@/components/Table/TripListTable";
-import UpcomingTripTable from "@/components/Table/UpcomingTrip";
+import TripUpcoming from "@/components/Table/TripUpcoming";
 
 const overviewPage = () => {
   return (
@@ -37,7 +37,7 @@ const overviewPage = () => {
           <DriverList />
         </div>
       </div>
-      <UpcomingTripTable />
+      <TripUpcoming />
       <LossProfitCOstSalePieChart />
       <TripListTable />
     </>
