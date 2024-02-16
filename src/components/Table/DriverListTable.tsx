@@ -59,6 +59,8 @@ const DriverListTable = () => {
     setCurrent(page);
   };
   const { data: driver } = useGetAllDriverQuery(current);
+  
+
 
   //searching code
   const [searchTerm, setSearchTerm] = useState("");
@@ -105,30 +107,8 @@ const DriverListTable = () => {
               </tr>
             </thead>
 
-            {/* <tbody className="">
-      {
-        ((driver as any)?.data ?? []).map((drivers: IProps, index: number) => (
-              <tr key={drivers?.id}
-                  className={`${index % 2 === 0 ? "" : "bg-gray-50"}  `} >
-
-                  <td className="px-2">
-                    <Image
-                      className="rounded-full"
-                      width={30}
-                      src={drivers?.avatar}
-                      alt="..."
-                    />
-                  </td>
-                  
-                  <td className=" px-2 py-3 -space-y-1">
-                    <p className="text-sm font-bold">{drivers?.name}</p>
-                    <p className="text-[8] text-textColor italic">
-                      {drivers?.email}
-                    </p>
-                  </td> */}
-
             <tbody className="dark:text-[#E8E8E8]">
-              {((driver as any)?.data?.data ?? [])?.map(
+              {((driver as any)?.data ?? [])?.map(
                 (drivers: IProps, index: number) => (
                   <tr
                     key={drivers?.id}

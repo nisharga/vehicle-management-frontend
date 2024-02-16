@@ -12,8 +12,7 @@ type AddVehicleValues = {
   photo: string;
 };
 
-const UpdateDriverForm = ({ driverData }: any) => {
-  console.log("driver data", driverData);
+const UpdateDriverForm = ({ driverData }: any) => { 
   const { name, phone, experience, id } = driverData;
   const defaultValues = {
     name: name,

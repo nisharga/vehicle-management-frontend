@@ -19,6 +19,7 @@ import UpdateTripForm from "../Forms/UpdateTripForm";
 import ModalBox from "../ModalBox/ModalBox";
 import Heading from "../ui/Heading";
 import { tripFields } from "./StaticTableData";
+import { formatDateToRegularDate } from "@/utils/formateDate";
 
 const TripListTable = () => {
   const [tripDelete] = useDeleteTripMutation();
@@ -26,7 +27,7 @@ const TripListTable = () => {
   const confirm = async (e: any) => {
     const deleteTrip = await tripDelete(e);
     console.log("🚀 ~ confirm ~ delete:", deleteTrip);
-    message.success(`${e} Deleted Sucessfully`);
+    message.success(`  Deleted Sucessfully`);
   };
 
   const cancel = (e: React.MouseEvent<HTMLElement>) => {
@@ -43,6 +44,7 @@ const TripListTable = () => {
   };
 
   const { data: trip } = useTripAllQuery(current);
+   
   //searching code
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -88,10 +90,10 @@ const TripListTable = () => {
                   if (searchTerm == "") {
                     return V;
                   } else if (
-                    V?.registrationNo
+                    V?.passengerName
                       .toLowerCase()
                       .includes(searchTerm.toLowerCase()) ||
-                    V?.passengerName
+                    V?.passengerPhone
                       .toLowerCase()
                       .includes(searchTerm.toLowerCase())
                   ) {
@@ -105,26 +107,40 @@ const TripListTable = () => {
                       index % 2 === 0 ? "" : "bg-gray-50 dark:bg-[#145374]"
                     }  `}
                   >
-                    <td className="px-2 py-3 text-sm leading-5">{trips?.id}</td>
+                    <td className="px-2 py-3 text-sm leading-5">{trips?.startLocation}</td>
 
                     <td className="px-2 py-3 text-sm leading-5">
+                      {trips?.endLocation}
+                    </td>
+
+                    <td className="px-2 py-3 text-sm leading-5">
+                      {formatDateToRegularDate(trips?.startTime)}
+                    </td>
+
+                    <td className=" px-2 py-3 text-sm leading-5">
                       {trips?.passengerName}
                     </td>
 
-                    <td className="px-2 py-3 text-sm leading-5">
-                      {trips?.passengerPhone}
-                    </td>
-
                     <td className=" px-2 py-3 text-sm leading-5">
-                      {trips?.startLocation}
-                    </td>
-
-                    <td className=" px-2 py-3 text-sm leading-5">
-                      {trips?.endLocation}
+                      {trips?.passengerCount}
                     </td>
 
                     <td className=" px-2 py-3 text-sm leading-5">
                       {trips?.tripPeriod}
+                    </td>
+                    
+                   
+                    
+                    <td className=" px-2 py-3 text-sm leading-5">
+                      {trips?.tripRent}
+                    </td>
+                    
+                    <td className=" px-2 py-3 text-sm leading-5">
+                      {trips?.driver?.name}
+                    </td>
+
+                    <td className=" px-2 py-3 text-sm leading-5">
+                      {trips?.vehicle?.brand}
                     </td>
 
                     <td className="px-2 py-3 text-sm leading-5">
@@ -133,7 +149,7 @@ const TripListTable = () => {
                           trips?.status ? "bg-red-300" : "bg-green-300"
                         } inline-flex px-2 py-1 leading-none text-primary rounded-lg`}
                       >
-                        {trips?.status ? "Pending" : "Done"}
+                        {trips?.status ? trips?.status : "Pending"}
                       </span>
                     </td>
 
@@ -146,7 +162,7 @@ const TripListTable = () => {
                             </span>
                           }
                         >
-                          <UpdateTripForm updateID={trips?.startLocation} />
+                          <UpdateTripForm updateID={trips?.id} />
                         </ModalBox>
 
                         <Popconfirm

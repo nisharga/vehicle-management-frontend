@@ -16,7 +16,7 @@ type AddVehicleValues = {
 };
 
 const UpdateVehecleForm = ({ vehicleData }: any) => {
-  console.log(vehicleData);
+  
   const { color, seatCapacity, model, tax, registrationNo, id } = vehicleData;
   const [updateVehicle] = useUpdateSingleVehicleMutation();
 
