@@ -41,6 +41,13 @@ const driverApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.driver],
     }),
+    driverVehicle: build.query({
+      query: (page) => ({
+        url: `/vehicle-driver/vehicleDriverlist`,
+        method: "GET", 
+      }), 
+      providesTags: [tagTypes.driver],
+    }),
   }),
 });
 
@@ -50,4 +57,5 @@ export const {
     useCreateDriverMutation,
     useUpdateDriverMutation,
     useDeleteDriverMutation,
+    useDriverVehicleQuery
 } = driverApi;

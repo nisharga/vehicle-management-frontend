@@ -27,7 +27,7 @@ const ModalBox: React.FC<IProps> = ({ btnLabel, children, title, modalWidth }) =
         open={open}
         onCancel={() => setOpen(false)}
         title={title || ""}
-        bodyStyle={{ height: "100%" }}
+        //bodyStyle={{ height: "100%" }}
         width={modalWidth || 400}
         footer={null}
       >

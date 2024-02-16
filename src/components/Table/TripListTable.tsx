@@ -43,6 +43,7 @@ const TripListTable = () => {
   };
 
   const { data: trip } = useTripAllQuery(current);
+ 
   //searching code
   const [searchTerm, setSearchTerm] = useState("");
 
