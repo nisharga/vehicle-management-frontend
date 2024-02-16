@@ -1,16 +1,15 @@
 "use client";
-import { USER_ROLE } from "@/constants/role";
 import { authKey } from "@/constants/storageKey";
 import ThemeSwitcher from "@/helpers/ThemeSwitcher/ThemeSwitcher";
-import { getUserInfo, removeUserInfo } from "@/services/auth.service";
+import { removeUserInfo } from "@/services/auth.service";
 import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
-import { Avatar, Button, Dropdown, MenuProps, Space, Switch } from "antd";
+import { Avatar, Button, Dropdown, MenuProps } from "antd";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const Header = () => {
-  const { role } = getUserInfo() as any;
-  const userRole = USER_ROLE;
+  // const { role } = getUserInfo() as any;
+
   const router = useRouter();
   // logout function..................
   const logOut = () => {
@@ -60,7 +59,7 @@ const Header = () => {
     >
       <div className="w-auto">
         <ul className="gap-x-5 py-3 flex">
-          <li>
+          {/* <li>
             <a className="text-base text-secondary block" href="#">
               <Space direction="vertical">
                 <Switch
@@ -70,7 +69,7 @@ const Header = () => {
                 />
               </Space>
             </a>
-          </li>
+          </li> */}
           <li>
             <ThemeSwitcher />
           </li>
