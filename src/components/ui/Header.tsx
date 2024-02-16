@@ -1,13 +1,18 @@
 "use client";
 import { authKey } from "@/constants/storageKey";
 import ThemeSwitcher from "@/helpers/ThemeSwitcher/ThemeSwitcher";
-import { removeUserInfo } from "@/services/auth.service";
-import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
-import { Avatar, Button, Dropdown, MenuProps } from "antd";
+import { getUserInfo, getUserInfoFromToken, removeUserInfo } from "@/services/auth.service";
+import { LogoutOutlined, UserOutlined,MoonOutlined,SunOutlined } from "@ant-design/icons";
+import { Avatar, Button, Dropdown, MenuProps, Space, Switch } from "antd";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const Header = () => {
+  const { role } = getUserInfo() as any;
+  
+  // const userRole = USER_ROLE;
+  
   // const { role } = getUserInfo() as any;
 
   const router = useRouter();
@@ -58,6 +63,10 @@ const Header = () => {
           text-lg z-50 dark:bg-[#00334E]`}
     >
       <div className="w-auto">
+
+        {/* <ul className="gap-x-5 py-3 flex flex-row justify-center items-center">
+          <li> */}
+
         <ul className="gap-x-5 py-3 flex">
           {/* <li>
             <a className="text-base text-secondary block" href="#">

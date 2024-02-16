@@ -1,12 +1,32 @@
 "use client";
 import { SearchOutlined } from "@ant-design/icons";
 import { Input, message } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Heading from "../ui/Heading";
 import { trips } from "./StaticTableData";
+import { useTripAllQuery } from "@/redux/api/tripApi";
 
 const TripHistoryTable = () => {
+  const [current, setCurrent] = useState(1);
+  const [allTrip, setAllTrip] = useState([{
+    id:'',
+    passengerName:'',
+    passengerPhone:'',
+    startLocation: "",
+    tripPeriod:"",
+    endLocation:"",
+    status:''
+  }])
+  const { data:tripAll , isLoading } = useTripAllQuery(current);
+
+  useEffect(()=>{
+    if(tripAll != undefined){
+      setAllTrip(tripAll.data.data)
+    }
+    
+  },[tripAll])
+
   const confirm = (e: any) => {
     console.log(e);
     message.success(`${e} Deleted Sucessfully`);
@@ -51,6 +71,7 @@ const TripHistoryTable = () => {
     },
   ];
 
+  console.log(allTrip)
   return (
     <>
       <Heading>
@@ -65,7 +86,7 @@ const TripHistoryTable = () => {
           <div className=" my-2 mx-auto max-w-[55%] md:max-w-[42%]">
             <Input
               size="large"
-              placeholder={`Search by Trip Id / Passenger Name of total ${trips?.length} Trips`}
+              placeholder={`Search by Trip Id / Passenger Name of total ${allTrip?.length} Trips`}
               prefix={<SearchOutlined />}
               onChange={(event) => {
                 setSearchTerm(event?.target?.value);
@@ -88,12 +109,12 @@ const TripHistoryTable = () => {
             </thead>
 
             <tbody className="dark:text-[#E8E8E8]">
-              {(trips ?? [])
+              {(allTrip ?? [])
                 ?.filter((value) => {
                   if (searchTerm == "") {
                     return value;
                   } else if (
-                    value?.tripId
+                    value?.id
                       .toLowerCase()
                       .includes(searchTerm.toLowerCase()) ||
                     value?.passengerName
@@ -105,13 +126,13 @@ const TripHistoryTable = () => {
                 })
                 ?.map((trips, index) => (
                   <tr
-                    key={trips?.startTime}
+                    key={index}
                     className={`${
                       index % 2 === 0 ? "" : "bg-gray-50 dark:bg-[#145374]"
                     }  `}
                   >
                     <td className="px-2 py-3 text-sm leading-5">
-                      {trips?.tripId}
+                      {trips?.id}
                     </td>
 
                     <td className="px-2 py-3 text-sm leading-5">
@@ -137,10 +158,10 @@ const TripHistoryTable = () => {
                     <td className="px-2 py-3 text-sm leading-5">
                       <span
                         className={`${
-                          trips?.status ? "bg-red-300" : "bg-green-300"
+                          trips?.status === "UPCOMMING"? "bg-orange-300" : trips.status === 'COMPLETED' ? "bg-green-300" : "bg-red-300" 
                         } inline-flex px-2 py-1 leading-none dark:text-[#00334E] rounded-lg `}
                       >
-                        {trips?.status ? "Pending" : "Done"}
+                        {trips?.status }
                       </span>
                     </td>
                   </tr>

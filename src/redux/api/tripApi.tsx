@@ -41,6 +41,13 @@ const tripApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.trip],
     }),
+    upcomingTrip:build.query({
+      query:(page)=>({
+        url:`/trip/upcomingTrip`,
+        method:"GET"
+      }),
+      providesTags:[tagTypes.trip],
+    })
   }),
 });
 
@@ -49,5 +56,6 @@ export const {
     useTripSingleQuery,
     useCreateTripMutation,
     useUpdateSingleTripMutation,
-    useDeleteTripMutation
+    useDeleteTripMutation,
+    useUpcomingTripQuery,
 } = tripApi;

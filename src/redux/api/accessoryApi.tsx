@@ -36,7 +36,7 @@ const accessoryApi = baseApi.injectEndpoints({
           }),
           deleteAccessory: build.mutation({
             query: (id:string) => ({
-              url: `/accessory/${id}`,
+              url: `/accessory/delete/${id}`,
               method: "DELETE",  
             }),
             invalidatesTags: [tagTypes.accessory],
