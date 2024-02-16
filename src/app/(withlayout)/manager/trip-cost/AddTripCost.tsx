@@ -4,7 +4,7 @@ import Form from "@/components/ReusableForms/Form";
 import FormInput from "@/components/ReusableForms/FormInput";
 import FormSelectField from "@/components/ReusableForms/FormSelectField"; 
 import { useCreateTripCostMutation } from "@/redux/api/tripCostApi";
-import { Button } from "antd";
+import { Button, message } from "antd";
 
 const AddTripCost = () => {
  
@@ -17,7 +17,10 @@ const AddTripCost = () => {
 
     try {
       const res = await createTripCost(data);
-      console.log("trip created successfully", res);
+      console.log("res: ", res);
+      if ((res as any)?.data?.success) {
+        message.success("tripCost created successfully");
+      }
     } catch (error) {
       console.log("trip cost error", error);
     }
@@ -33,7 +36,7 @@ const AddTripCost = () => {
               name="passengerName"
               type="text"
               size="large"
-              placeholder="Passenger Name"
+              placeholder="Trip Holder Name"
             />
           </div>
           <div className="mb-4">
