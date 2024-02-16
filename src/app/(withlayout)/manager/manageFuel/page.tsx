@@ -1,7 +1,7 @@
 const manageFuelPage = () => {
   return (
     <div>
-      <p>manageFuel....</p>
+      <p>manageFuelsss....</p>
     </div>
   );
 };

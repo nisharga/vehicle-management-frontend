@@ -1,11 +1,9 @@
 "use client";
-import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
+
 import { Image, PaginationProps } from "antd";
-import ModalBox from "../ModalBox/ModalBox";
 
-import { InventoryRequestListTableFields } from "./StaticTableData";
 
-import MakeInventoryRequest from "@/app/(withlayout)/driver/inventoryRequest/MakeRequest";
+import { InventoryRequestListTableFields,InventoryListTableFields } from "./StaticTableData";
 import {
     useDeleteDriverMutation,
 } from "@/redux/api/driverApi";
@@ -14,6 +12,7 @@ import { useEffect, useState } from "react";
 import UpdateDriverForm from "../Forms/UpdateDriverForm";
 import ViewItemDriver from "../ui/ViewItemDriver";
 import { useGetAllRequestQuery } from "@/redux/api/inventoryRequestApi";
+import { useGetInventoriesQuery } from "@/redux/api/inventoryApi";
 
 interface IProps {
     address?: string;
@@ -31,16 +30,16 @@ interface IProps {
     user_id?: string;
 }
 
-
-
 const InventoryListTable = () => {
     const [current, setCurrent] = useState(1);
-    const [inventoryRequest, setInventoryRequest] = useState([{
-        title: ''
-    }]);
+    const [allInventories, setAllInventory] = useState([{
+        name:'',
+        description:'',
+        quantity:0
+    }])
     const [requests, setRequest] = useState({
-        data:[],
-        meta:{limit:0,page:0,total:0}
+        data: [],
+        meta: { limit: 0, page: 0, total: 0 }
     })
     const [isFetching, setIsFetching] = useState(false);
     const [deleteDriver] = useDeleteDriverMutation();
@@ -50,20 +49,18 @@ const InventoryListTable = () => {
         setCurrent(page);
     };
 
-    const { data: allRequest } = useGetAllRequestQuery(current);
+    const { data: inventories } = useGetInventoriesQuery(current)
 
     useEffect(() => {
-        if (allRequest != undefined) {
-            setInventoryRequest(allRequest.data)
-            setRequest(allRequest.data)
+        if (inventories != undefined) {
+            setAllInventory(inventories.data)
         }
-    }, [allRequest])
+    }, [inventories])
 
     
-    console.log(requests.meta.total)
+
     return (
         <>
-
             <div className="overflow-x-auto rounded-lg">
                 <div className="align-middle inline-block min-w-full shadow overflow-hidden bg-white   px-8 pt-3 rounded-bl-lg rounded-br-lg py-10">
                     <div className="pb-3 flex justify-between">
@@ -97,60 +94,48 @@ const InventoryListTable = () => {
                                 <input
                                     type="text"
                                     className="flex-shrink flex-grow flex-auto leading-normal tracking-wide w-px border border-none border-l-0 rounded rounded-l-none px-3 relative focus:outline-none text-xxs lg:text-xs text-gray-500 font-thin"
-                                    placeholder={`Search Through ${InventoryRequestListTableFields?.length} Driver`}
+                                    placeholder={`Search Through ${allInventories?.length} Inventories`}
                                 />
                             </div>
                         </div>
 
-                        <ModalBox btnLabel="Make Request">
-                            <MakeInventoryRequest />
-                        </ModalBox>
+                       
                     </div>
 
                     <table className="min-w-full">
                         <thead className="bg-gray-50 rounded-2xl">
                             <tr className="">
-                                {InventoryRequestListTableFields?.map((InventoryRequestListTableField) => (
+                                {InventoryListTableFields?.map((InventoryListTableField) => (
                                     <th
-                                        key={InventoryRequestListTableField?.id}
-                                        className=" px-2 py-3 text-left text-black"
+                                        key={InventoryListTableField?.id}
+                                        className=" px-2 py-3 text-left font-bold text-black"
                                     >
-                                        {InventoryRequestListTableField?.fields}
+                                        {InventoryListTableField?.fields}
                                     </th>
                                 ))}
+                               
                             </tr>
                         </thead>
 
                         <tbody className="">
-                            {((inventoryRequest as any)?.data ?? []).map(
+                            {((allInventories as any)?.data ?? []).map(
                                 (inventory: any, index: number) => (
                                     <tr
                                         key={inventory?.id}
-                                        className={`${index % 2 === 0 ? "" : "bg-gray-50"}  flex flex-row`}
+                                        className={`${index % 2 === 0 ? "" : "bg-gray-50"}`}
                                     >
 
-                                        <td className=" px-2 py-3 -space-y-1 flex-auto">
-                                            <p className="text-sm font-bold">{inventory?.title}</p>
+                                        <td className=" px-2 py-3 -space-y-1 ">
+                                            <p className="text-sm font-bold">{inventory?.name}</p>
+                                        </td>
+                                        <td className=" px-2 py-3 -space-y-1 ">
+                                            <p className="text-sm font-bold">{inventory?.description}</p>
+                                        </td>
+                                        <td className=" px-2 py-3 -space-y-1 ">
+                                            <p className="text-sm font-bold">{inventory?.quantity}</p>
                                         </td>
 
 
-                                        <td className="px-2 py-3 text-sm leading-5">
-                                            <div className="flex gap-x-1">
-
-
-                                                <ModalBox
-                                                    btnLabel={
-                                                        <span className="item justify-center items-center">
-                                                            {" "}
-                                                            <EditOutlined />
-                                                        </span>
-                                                    }
-                                                >
-                                                    <UpdateDriverForm driverData={inventory} />
-                                                </ModalBox>
-
-                                            </div>
-                                        </td>
                                     </tr>
                                 )
                             )}
@@ -161,7 +146,7 @@ const InventoryListTable = () => {
                         <Pagination
                             current={current}
                             onChange={onChange}
-                            total={requests?.meta?.total }
+                            total={requests?.meta?.total}
                         />
                     </div>
                 </div>

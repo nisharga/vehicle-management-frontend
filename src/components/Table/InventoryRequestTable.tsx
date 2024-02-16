@@ -11,9 +11,8 @@ import {
 } from "@/redux/api/driverApi";
 import { Button, Pagination, Popconfirm, message } from "antd";
 import { useEffect, useState } from "react";
-import UpdateDriverForm from "../Forms/UpdateDriverForm";
-import ViewItemDriver from "../ui/ViewItemDriver";
 import { useGetAllRequestQuery } from "@/redux/api/inventoryRequestApi";
+import UpdateInventoryRequestForm from "../Forms/UpdateInvetoryRequestForm";
 
 interface IProps {
     address?: string;
@@ -60,7 +59,6 @@ const InventoryRequestListTable = () => {
     }, [allRequest])
 
     
-    console.log(requests.meta.total)
     return (
         <>
 
@@ -128,16 +126,11 @@ const InventoryRequestListTable = () => {
                                         key={inventory?.id}
                                         className={`${index % 2 === 0 ? "" : "bg-gray-50"}  flex flex-row`}
                                     >
-
                                         <td className=" px-2 py-3 -space-y-1 flex-auto">
                                             <p className="text-sm font-bold">{inventory?.title}</p>
                                         </td>
-
-
                                         <td className="px-2 py-3 text-sm leading-5">
                                             <div className="flex gap-x-1">
-
-
                                                 <ModalBox
                                                     btnLabel={
                                                         <span className="item justify-center items-center">
@@ -146,9 +139,8 @@ const InventoryRequestListTable = () => {
                                                         </span>
                                                     }
                                                 >
-                                                    <UpdateDriverForm driverData={inventory} />
+                                                    <UpdateInventoryRequestForm inventoryRequestData={inventory} />
                                                 </ModalBox>
-
                                             </div>
                                         </td>
                                     </tr>

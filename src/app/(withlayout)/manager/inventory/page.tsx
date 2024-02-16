@@ -1,14 +1,16 @@
 import InventoryListTable from "@/components/Table/InventoryTable";
+import Heading from "@/components/ui/Heading";
 
-const toolsPage = () => {
+const inventoryPage = () => {
   return (
     <>
-      <div>
-      <p>inventory...</p>
-    </div>
+     
+    <Heading>
+        <p>Inventory</p>
+      </Heading>
     <InventoryListTable />
     </>
   );
 };
 
-export default toolsPage;
+export default inventoryPage;

@@ -20,14 +20,14 @@ const inventoryRequestApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: [tagTypes.request],
         }),
-        // updateDriver: build.mutation({
-        //   query: ({id, ...data}) => ({
-        //     url: `/driver/update/${id}`,
-        //     method: "PATCH", 
-        //     data: data,
-        //   }),
-        //   invalidatesTags: [tagTypes.driver],
-        // }),
+        updateRequest: build.mutation({
+          query: ({id, ...data}) => ({
+            url: `/inventoryRequest/update/${id}`,
+            method: "PATCH", 
+            data: data,
+          }),
+          invalidatesTags: [tagTypes.driver],
+        }),
         // deleteDriver: build.mutation({
         //   query: (id) => ({
         //     url: `/driver/delete/${id}`,
@@ -39,5 +39,5 @@ const inventoryRequestApi = baseApi.injectEndpoints({
 });
 
 export const {
-    useCreateRequestMutation, useGetAllRequestQuery
+    useCreateRequestMutation, useGetAllRequestQuery,useUpdateRequestMutation
 } = inventoryRequestApi;
