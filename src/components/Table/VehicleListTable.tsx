@@ -74,8 +74,6 @@ const VehicleListTable = (e: any) => {
               />
             </div>
 
-          
-
             <ModalBox btnLabel="Add Vehicle">
               <AddVehicle />
             </ModalBox>
@@ -163,7 +161,7 @@ const VehicleListTable = (e: any) => {
                             </span>
                           }
                         >
-                          <UpdateVehecleForm updateID={vehicle?.id} />
+                          <UpdateVehecleForm vehicleData={vehicle} />
                         </ModalBox>
 
                         <Popconfirm
@@ -195,7 +193,6 @@ const VehicleListTable = (e: any) => {
               total={vehicle?.data?.meta?.total | 30}
             />
           </div>
-          
         </div>
         {/* table end */}
       </div>

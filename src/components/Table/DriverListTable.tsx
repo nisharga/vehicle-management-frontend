@@ -42,6 +42,7 @@ const DriverListTable = () => {
 
   const confirm = async (e: any) => {
     const res = await deleteDriver(e);
+    console.log("🚀 ~ confirm ~ res:", res);
     message.success(`Deleted Sucessfully`);
   };
 
@@ -61,7 +62,6 @@ const DriverListTable = () => {
 
   //searching code
   const [searchTerm, setSearchTerm] = useState("");
-
   return (
     <>
       <Heading>
@@ -105,22 +105,27 @@ const DriverListTable = () => {
               </tr>
             </thead>
 
-            {/* ?.filter((V: any) => {
-                  if (searchTerm == "") {
-                    return V;
-                  } else if (
-                    V?.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                    V?.nid
-                      .toLowerCase()
-                      .includes(searchTerm.toLowerCase())
-                      .includes(searchTerm.toLowerCase()) ||
-                    V?.license_no
-                      .toLowerCase()
-                      .includes(searchTerm.toLowerCase())
-                  ) {
-                    return V;
-                  }
-                }) */}
+            {/* <tbody className="">
+      {
+        ((driver as any)?.data ?? []).map((drivers: IProps, index: number) => (
+              <tr key={drivers?.id}
+                  className={`${index % 2 === 0 ? "" : "bg-gray-50"}  `} >
+
+                  <td className="px-2">
+                    <Image
+                      className="rounded-full"
+                      width={30}
+                      src={drivers?.avatar}
+                      alt="..."
+                    />
+                  </td>
+                  
+                  <td className=" px-2 py-3 -space-y-1">
+                    <p className="text-sm font-bold">{drivers?.name}</p>
+                    <p className="text-[8] text-textColor italic">
+                      {drivers?.email}
+                    </p>
+                  </td> */}
 
             <tbody className="dark:text-[#E8E8E8]">
               {((driver as any)?.data?.data ?? [])?.map(
@@ -158,19 +163,6 @@ const DriverListTable = () => {
                     <td className="px-2 py-3 text-sm leading-5">
                       {drivers?.nid}
                     </td>
-
-                    {/* 
-                  <td className="px-2 py-3 text-sm leading-5">
-                    <Button
-                      style={{
-                        backgroundColor: "#00334E",
-                        color: "#eee",
-                      }}
-                      icon={<DownloadOutlined />}
-                    >
-                      {vehicleDriver?.document}
-                    </Button>
-                  </td> */}
 
                     <td className="px-2 py-3 text-sm leading-5">
                       <div className="flex gap-x-1">
