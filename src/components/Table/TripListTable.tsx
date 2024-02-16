@@ -32,8 +32,7 @@ const TripListTable = () => {
   };
 
   const { data: trip } = useTripAllQuery(current);
-  console.log(trip)
-  
+ 
   return (
     <>
       <Heading>Trip List</Heading>

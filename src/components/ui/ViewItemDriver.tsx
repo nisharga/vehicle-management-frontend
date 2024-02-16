@@ -4,8 +4,7 @@ import { Timeline } from "antd";
 
 const ViewItemDriver = ({ viewID }: any, ItemType: string) => {
   
-  const { data: driver } =  useGetSingleDriverQuery(viewID);
-   console.log("🚀 ~ ViewItemDriver ~ driver:", driver)
+  const { data: driver } =  useGetSingleDriverQuery(viewID); 
    
   return (
     <>
