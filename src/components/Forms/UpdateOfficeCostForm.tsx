@@ -3,9 +3,9 @@ import FormInput from "@/components/ReusableForms/FormInput";
 import { useUpdateOfficeCostMutation } from "@/redux/api/officeCostApi";
 import { Button, message } from "antd";
 
-
 const UpdateOfficeCostForm = ({ officeCostData }: any) => {
   const { id, cost_name, amount, description } = officeCostData;
+  console.log("office cost id: " + id);
   const [updateOfficeCost] = useUpdateOfficeCostMutation();
 
   const defaultValues = {
@@ -14,10 +14,10 @@ const UpdateOfficeCostForm = ({ officeCostData }: any) => {
     description: description,
   };
 
-  const onSubmit= async (data: any) => {
-    
+  const onSubmit = async (data: any) => {
+    console.log("id", id, data);
     data.amount = parseInt(data.amount);
-    console.log("object updated",data)
+    console.log("object updated", data);
     const res = await updateOfficeCost({ id, ...data });
     console.log(res);
   };

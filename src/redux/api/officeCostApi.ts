@@ -28,10 +28,10 @@ const officeCostApi = baseApi.injectEndpoints({
       providesTags: [tagTypes.officeCost],
     }),
     updateOfficeCost: build.mutation({
-      query: (data) => ({
-        url: `${officeCostUrl}/update/${data?.id}`,
+      query: ({ id, ...data }) => ({
+        url: `${officeCostUrl}/update/${id}`,
         method: "PATCH",
-        data: data?.data,
+        data: data,
       }),
       invalidatesTags: [tagTypes.officeCost],
     }),
