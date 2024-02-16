@@ -13,7 +13,7 @@ const accessoryApi = baseApi.injectEndpoints({
           }),
           getSingleAccessory: build.query({
             query: (id) => ({
-              url: `/accessory/${id}`,
+              url: `/accessory/single/${id}`,
               method: "GET", 
             }),
             providesTags: [tagTypes.vehicle],
@@ -27,16 +27,16 @@ const accessoryApi = baseApi.injectEndpoints({
             invalidatesTags: [tagTypes.accessory],
           }),
           updateAccessory: build.mutation({
-            query: ({id, ...updatedData}) => ({
-              url: `/accessory/${id}`,
+            query: ({id,updatedData}) => ({
+              url: `/accessory/update/${id}`,
               method: "PATCH", 
               body: updatedData,
             }),
-            // invalidatesTags: [tagTypes.accessory],
+            invalidatesTags: [tagTypes.accessory],
           }),
           deleteAccessory: build.mutation({
             query: (id:string) => ({
-              url: `/accessory/${id}`,
+              url: `/accessory/delete/${id}`,
               method: "DELETE",  
             }),
             invalidatesTags: [tagTypes.accessory],

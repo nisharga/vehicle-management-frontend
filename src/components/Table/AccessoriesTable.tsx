@@ -64,9 +64,9 @@ const AccessoriesTable = () => {
   const onChange: PaginationProps["onChange"] = (page) => {
     setCurrent(page);
   };
-  const handleDelete = (id: any) => {
-    // console.log(accessoryId)
-    Modal.confirm({
+  const handleDelete =async (id: any) => {
+    // console.log(id)
+   Modal.confirm({
       title: "Confirm Delete",
       content: "Are you sure you want to delete this accessory?",
       okText: "Delete",
@@ -78,6 +78,7 @@ const AccessoriesTable = () => {
             Modal.success({
               title: "Accessory Deleted",
               content: "The accessory has been successfully deleted.",
+              okType: "danger",
             });
             // Refetch data
             refetch();
@@ -88,8 +89,7 @@ const AccessoriesTable = () => {
               title: "Delete Failed",
               okType: "danger",
               cancelText: "Cancel",
-              content:
-                "An error occurred while deleting the accessory. Please try again later.",
+              content: "An error occurred while deleting the accessory. Please try again later.",
             });
             console.error("Delete error:", error);
           });
