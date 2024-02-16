@@ -32,7 +32,7 @@ const tripApi = baseApi.injectEndpoints({
         method: "PATCH", 
         data: data,
       }),
-      invalidatesTags: [tagTypes.vehicle],
+      invalidatesTags: [tagTypes.trip],
     }),
     deleteTrip: build.mutation({
       query: (id) => ({

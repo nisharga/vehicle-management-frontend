@@ -1,9 +1,9 @@
-import UpcomingTripTable from "@/components/Table/UpcomingTrip";
+import TripUpcoming from "@/components/Table/TripUpcoming";
 
 const page = () => {
   return (
     <div>
-      <UpcomingTripTable />
+      <TripUpcoming />
     </div>
   );
 };

@@ -11,6 +11,7 @@ const tripCostApi = baseApi.injectEndpoints({
         method: "POST",
         data: data,
       }),
+      invalidatesTags: [tagTypes.tripCost],
     }),
     getAllTripCost: build.query({
       query: (page) => ({

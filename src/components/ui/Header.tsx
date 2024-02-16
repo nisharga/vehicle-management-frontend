@@ -1,5 +1,4 @@
 "use client";
-import { USER_ROLE } from "@/constants/role";
 import { authKey } from "@/constants/storageKey";
 import ThemeSwitcher from "@/helpers/ThemeSwitcher/ThemeSwitcher";
 import { getUserInfo, getUserInfoFromToken, removeUserInfo } from "@/services/auth.service";
@@ -12,7 +11,10 @@ import { useState } from "react";
 const Header = () => {
   const { role } = getUserInfo() as any;
   
-  const userRole = USER_ROLE;
+  // const userRole = USER_ROLE;
+  
+  // const { role } = getUserInfo() as any;
+
   const router = useRouter();
   // logout function..................
   const logOut = () => {
@@ -23,8 +25,8 @@ const Header = () => {
   //dropdown items.......................
   const items: MenuProps["items"] = [
     {
-      key: `/${role}/profile`,
-      label: <Link href={`/${role}/profile`}>Profile</Link>,
+      key: `profile`,
+      label: <span>Profile</span>,
     },
 
     {
@@ -61,8 +63,12 @@ const Header = () => {
           text-lg z-50 dark:bg-[#00334E]`}
     >
       <div className="w-auto">
-        <ul className="gap-x-5 py-3 flex flex-row justify-center items-center">
-          <li>
+
+        {/* <ul className="gap-x-5 py-3 flex flex-row justify-center items-center">
+          <li> */}
+
+        <ul className="gap-x-5 py-3 flex">
+          {/* <li>
             <a className="text-base text-secondary block" href="#">
               <Space direction="vertical">
                 <Switch
@@ -72,7 +78,7 @@ const Header = () => {
                 />
               </Space>
             </a>
-          </li>
+          </li> */}
           <li>
             <ThemeSwitcher />
           </li>

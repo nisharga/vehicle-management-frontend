@@ -33,7 +33,7 @@ interface IProps {
 
 
 
-const InventoryRequestListTable = () => {
+const InventoryListTable = () => {
     const [current, setCurrent] = useState(1);
     const [inventoryRequest, setInventoryRequest] = useState([{
         title: ''
@@ -173,4 +173,4 @@ const InventoryRequestListTable = () => {
     );
 };
 
-export default InventoryRequestListTable;
+export default InventoryListTable;

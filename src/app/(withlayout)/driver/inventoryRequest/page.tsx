@@ -1,3 +1,4 @@
+import InventoryRequestListTable from "@/components/Table/InventoryRequestTable";
 import InventoryListTable from "@/components/Table/InventoryRequestTable";
 
 const page = () => {
@@ -8,7 +9,8 @@ const page = () => {
           Inventory Request
         </h3>
       </div>
-      <InventoryListTable />
+      {/* <InventoryListTable /> */}
+      <InventoryRequestListTable />
     </>
   );
 };

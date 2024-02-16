@@ -88,7 +88,7 @@ const UpcomingTripTable = () => {
     },
   ];
   return (
-    <div>
+    <>
       <Heading>
         <p>Upcoming Trip </p>
       </Heading>
@@ -149,7 +149,7 @@ const UpcomingTripTable = () => {
         </div>
         {/* table end */}
       </div>
-    </div>
+    </>
   );
 };
 

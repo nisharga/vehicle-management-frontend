@@ -1,8 +1,13 @@
+import InventoryListTable from "@/components/Table/InventoryTable";
+
 const toolsPage = () => {
   return (
-    <div>
-      <p>inventory</p>
+    <>
+      <div>
+      <p>inventory...</p>
     </div>
+    <InventoryListTable />
+    </>
   );
 };
 

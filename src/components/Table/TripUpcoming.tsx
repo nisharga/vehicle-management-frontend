@@ -34,8 +34,10 @@ const UpcomingTripTable = () => {
     
   },[upcomingTrip])
   
-  console.log(upcoming,trips)
+
   
+// const TripUpcoming = () => {
+
   const confirm = (e: any) => {
     console.log(e);
     message.success(`${e} Deleted Sucessfully`);
@@ -182,4 +184,4 @@ const UpcomingTripTable = () => {
   );
 };
 
-export default UpcomingTripTable;
+export default UpcomingTripTable

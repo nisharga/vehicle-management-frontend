@@ -24,7 +24,7 @@ export const vehiclesFields = [
     fields: "Fuel Type",
   },
   {
-    id: 6,
+    id: 7,
     fields: "Actions",
   },
 ];
@@ -32,7 +32,7 @@ export const vehiclesFields = [
 export const tripCostFields = [
   {
     id: 1,
-    fields: "Passenger Name",
+    fields: "Trip Holder Name",
   },
   {
     id: 2,
@@ -82,6 +82,25 @@ export const driverSalaryFields = [
   },
   {
     id: 6,
+    fields: "Action",
+  },
+];
+
+export const officeCostFields = [
+  {
+    id: 1,
+    fields: "Cost Title",
+  },
+  {
+    id: 2,
+    fields: "Amount",
+  },
+  {
+    id: 3,
+    fields: "Created Date",
+  },
+  {
+    id: 4,
     fields: "Action",
   },
 ];
@@ -269,7 +288,7 @@ export const DriverListTableFields = [
   {
     id: 7,
     fields: "Actions",
-  } 
+  },
 ];
 
 export const vehicleDriversList = [
@@ -347,23 +366,37 @@ export const tripFields = [
   },
   {
     id: 2,
-    fields: "Start Time",
-  },
+    fields: "Trip Date",
+  }, 
   {
     id: 3,
-    fields: "End Time",
+    fields: "Passenger Name",
   },
-  {
+   {
     id: 4,
-    fields: "Passenger Count",
+    fields: "Passengers",
   },
   {
     id: 5,
-    fields: "Trip Rent",
-  }, 
+    fields: "Trip Period",
+  },
   {
     id: 6,
-    fields: "Action",
+    fields: "Trip Rent",
+  },{
+    id: 7,
+    fields: "Driver",
+  },{
+    id: 8,
+    fields: "Vehicle",
+  }, 
+  {
+    id: 9,
+    fields: "Status",
+  }, 
+  {
+    id: 10,
+    fields: "Actions",
   },
 ];
 
