@@ -32,7 +32,7 @@ export const vehiclesFields = [
 export const tripCostFields = [
   {
     id: 1,
-    fields: "Passenger Name",
+    fields: "Trip Holder Name",
   },
   {
     id: 2,
@@ -82,6 +82,25 @@ export const driverSalaryFields = [
   },
   {
     id: 6,
+    fields: "Action",
+  },
+];
+
+export const officeCostFields = [
+  {
+    id: 1,
+    fields: "Cost Title",
+  },
+  {
+    id: 2,
+    fields: "Amount",
+  },
+  {
+    id: 3,
+    fields: "Created Date",
+  },
+  {
+    id: 4,
     fields: "Action",
   },
 ];
@@ -272,7 +291,7 @@ export const DriverListTableFields = [
   {
     id: 7,
     fields: "Actions",
-  } 
+  },
 ];
 
 export const vehicleDriversList = [
@@ -363,7 +382,7 @@ export const tripFields = [
   {
     id: 5,
     fields: "Trip Rent",
-  }, 
+  },
   {
     id: 6,
     fields: "Action",

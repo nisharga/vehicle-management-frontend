@@ -3,9 +3,9 @@ import { useGetSingleVehicleQuery } from "@/redux/api/vehecleApi";
 import { formatDateToRegularDate } from "@/utils/formateDate";
 import { Timeline } from "antd";
 
-const ViewTripCost = ({ tripCostId }: any, ItemType: string) => {
-  console.log(tripCostId, "tripCostId");
-  const { data: tripCost } = useGetSingleTripCostQuery(tripCostId);
+const ViewTripCost = ({ tripCost }: any, ItemType: string) => {
+  // console.log(tripCostId, "tripCostId");
+  // const { data: tripCost } = useGetSingleTripCostQuery(tripCostId);
   console.log("single trip cost", tripCost);
   // const purchaseDate = formatDateToRegularDate(vehicle?.data?.purchaseDate);
   // const registrationDate = formatDateToRegularDate(
@@ -21,25 +21,25 @@ const ViewTripCost = ({ tripCostId }: any, ItemType: string) => {
         <Timeline
           items={[
             {
-              children: `PassengerName: ${tripCost?.data?.passengerName}`,
+              children: `Trip holder Name: ${tripCost?.passengerName}`,
             },
             {
-              children: `Phone: ${tripCost?.data?.phone}`,
+              children: `Phone: ${tripCost?.phone}`,
             },
             {
-              children: `Trip Period: ${tripCost?.data?.trip_period}`,
+              children: `Trip Period: ${tripCost?.trip_period}`,
             },
             {
-              children: `Toll Cost: ${tripCost?.data?.tollCost}`,
+              children: `Toll Cost: ${tripCost?.tollCost}`,
             },
             {
-              children: `Parking Cost: ${tripCost?.data?.parkingCost}`,
+              children: `Parking Cost: ${tripCost?.parkingCost}`,
             },
             {
-              children: `Start Location: ${tripCost?.data?.startLocation}`,
+              children: `Start Location: ${tripCost?.startLocation}`,
             },
             {
-              children: `Description: ${tripCost?.data?.description}`,
+              children: `Description: ${tripCost?.description}`,
             },
           ]}
         />
