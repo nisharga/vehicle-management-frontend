@@ -16,41 +16,42 @@ type AddVehicleValues = {
 const AddVehicle = () => {
   const [createVehicle] = useCreateVehicleMutation();
   const onSubmit: SubmitHandler<AddVehicleValues> = async (data: any) => {
-   
-  const registrationNo = data.registrationNo;
+    const registrationNo = data.registrationNo;
 
-  const purchaseDate =  formatDate(data.purchaseDate);
-  const registrationDate = formatDate(data.registrationDate);
-  
-  const color = data.color;
-  const mileage = Number(data.mileage);
-  const price = Number(data.price);
-  const tax = Number(data.tax);
-  const seatCapacity = Number(data.seatCapacity);
-  const vehicleType = data.vehicleType;
-  const brand = data.brand;
-  const model = data.model;
-  const fuelType = data.fuelType;
-   
-  const formData = {registrationNo,
-    purchaseDate,
-    registrationDate,
-    color,
-    mileage,
-    price,
-    tax,
-    seatCapacity,
-    vehicleType,
-    brand,
-    model,
-    fuelType} 
+    const purchaseDate = formatDate(data.purchaseDate);
+    const registrationDate = formatDate(data.registrationDate);
 
-    const resData = await createVehicle(formData)
-    if((resData as any).data?.statusCode === 200){
+    const color = data.color;
+    const mileage = Number(data.mileage);
+    const price = Number(data.price);
+    const tax = Number(data.tax);
+    const seatCapacity = Number(data.seatCapacity);
+    const vehicleType = data.vehicleType;
+    const brand = data.brand;
+    const model = data.model;
+    const fuelType = data.fuelType;
+
+    const formData = {
+      registrationNo,
+      purchaseDate,
+      registrationDate,
+      color,
+      mileage,
+      price,
+      tax,
+      seatCapacity,
+      vehicleType,
+      brand,
+      model,
+      fuelType,
+    };
+
+    const resData = await createVehicle(formData);
+    if ((resData as any).data?.statusCode === 200) {
       message.success("Vehicle Created successful");
-    }else{
+    } else {
       message.error("Something went wrong");
-    } 
+    }
   };
 
   return (
@@ -66,8 +67,8 @@ const AddVehicle = () => {
               placeholder="Vehicle Registration No"
             />
           </div>
-          <div className="md:flex md:gap-4 md:items-center ">
-          <p className='mb-4'>Purchase:</p>
+
+          <p className="mb-4">Purchase:</p>
           <div className="mb-4">
             <FormInput
               name="purchaseDate"
@@ -76,7 +77,7 @@ const AddVehicle = () => {
               placeholder="Purchase Date"
             />
           </div>
-          <p className='mb-4'>Registration:</p>
+          <p className="mb-4">Registration:</p>
           <div className="mb-4">
             <FormInput
               name="registrationDate"
@@ -84,7 +85,6 @@ const AddVehicle = () => {
               type="date"
               placeholder="Registration Date"
             />
-          </div>
           </div>
           <div className="mb-4">
             <FormInput
@@ -100,29 +100,29 @@ const AddVehicle = () => {
               name="mileage"
               type="number"
               size="large"
-              placeholder="Mileage" 
-            />
-          </div> 
-          <div className="md:flex md:gap-4 md:items-center">
-          <div className="mb-4">
-            <FormInput
-              name="price"
-              type="number"
-              size="large"
-              placeholder="Vehicle Price"
+              placeholder="Mileage"
             />
           </div>
-          
-          <div className="mb-4">
-            <FormInput
-              name="tax"
-              type="number"
-              size="large"
-              placeholder="Vehicle Tax"
-            />
-          </div> 
-        </div> 
-          
+          <div className="md:flex md:gap-4 md:items-center">
+            <div className="mb-4">
+              <FormInput
+                name="price"
+                type="number"
+                size="large"
+                placeholder="Vehicle Price"
+              />
+            </div>
+
+            <div className="mb-4">
+              <FormInput
+                name="tax"
+                type="number"
+                size="large"
+                placeholder="Vehicle Tax"
+              />
+            </div>
+          </div>
+
           <div className="mb-4">
             <FormInput
               name="seatCapacity"
@@ -134,7 +134,7 @@ const AddVehicle = () => {
 
           <div className="mb-4 flex justify-between">
             <span className="p-1">Vehicle Type:</span>
-            
+
             <div className="flex">
               <FormInput
                 name="vehicleType"
@@ -143,7 +143,9 @@ const AddVehicle = () => {
                 value="AC"
                 id="ac"
               />
-              <label htmlFor="ac" className="p-1">Ac</label>
+              <label htmlFor="ac" className="p-1">
+                Ac
+              </label>
             </div>
 
             <div className="flex">
@@ -154,7 +156,9 @@ const AddVehicle = () => {
                 value="NonAC"
                 id="nonac"
               />
-              <label htmlFor="nonac" className="p-1">NonAC</label>
+              <label htmlFor="nonac" className="p-1">
+                NonAC
+              </label>
             </div>
 
             <div className="flex">
@@ -165,31 +169,32 @@ const AddVehicle = () => {
                 value="SlippingBus"
                 id="slippingbus"
               />
-              <label htmlFor="slippingbus" className="p-1">Slipping</label>
+              <label htmlFor="slippingbus" className="p-1">
+                Slipping
+              </label>
             </div>
-
           </div>
 
           <div className="md:flex md:gap-4 md:items-center ">
-          <div className="mb-4">
-            <FormInput
-              name="brand"
-              type="text"
-              size="large"
-              placeholder="Vehicle Brand"
-            />
+            <div className="mb-4">
+              <FormInput
+                name="brand"
+                type="text"
+                size="large"
+                placeholder="Vehicle Brand"
+              />
+            </div>
+
+            <div className="mb-4">
+              <FormInput
+                name="model"
+                type="text"
+                size="large"
+                placeholder="Vehicle model"
+              />
+            </div>
           </div>
 
-          <div className="mb-4">
-            <FormInput
-              name="model"
-              type="text"
-              size="large"
-              placeholder="Vehicle model"
-            />
-          </div>
-          </div>
-          
           <div className="mb-4 flex justify-between gap-1">
             <span className="p-1">Fuel Type:</span>
             <div className="flex">
@@ -200,7 +205,9 @@ const AddVehicle = () => {
                 value="Petrol"
                 id="petrol"
               />
-              <label htmlFor="petrol" className="p-1">Petrol</label>
+              <label htmlFor="petrol" className="p-1">
+                Petrol
+              </label>
             </div>
 
             <div className="flex">
@@ -211,9 +218,11 @@ const AddVehicle = () => {
                 value="Diesel"
                 id="diesel"
               />
-              <label htmlFor="diesel" className="p-1">Diesel</label>
+              <label htmlFor="diesel" className="p-1">
+                Diesel
+              </label>
             </div>
-            
+
             <div className="flex">
               <FormInput
                 name="fuelType"
@@ -222,9 +231,11 @@ const AddVehicle = () => {
                 value="Electric"
                 id="electric"
               />
-              <label htmlFor="electric" className="p-1">Electric</label>
+              <label htmlFor="electric" className="p-1">
+                Electric
+              </label>
             </div>
-            
+
             <div className="flex">
               <FormInput
                 name="fuelType"
@@ -233,12 +244,11 @@ const AddVehicle = () => {
                 value="Hybrid"
                 id="hybrid"
               />
-              <label htmlFor="hybrid" className="p-1">Hybrid</label>
+              <label htmlFor="hybrid" className="p-1">
+                Hybrid
+              </label>
             </div>
-             
           </div>
-
-           
 
           <Button
             htmlType="submit"
