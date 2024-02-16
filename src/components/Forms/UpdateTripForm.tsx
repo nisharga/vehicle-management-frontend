@@ -31,7 +31,7 @@ const UpdateTripForm = ({ updateID }: any) => {
     console.log("data:", updateID, data)
      
     try {
-      const res = await updateTrip({ id: updateID, data });
+      const res = await updateTrip({ id: updateID, ...data });
       console.log("res: ", res)
       if ((res as any)?.data?.statusCode === 200) {
         message.success("Trip updated successfully");
