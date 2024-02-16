@@ -6,7 +6,7 @@ import { useState } from "react";
 import Heading from "../ui/Heading";
 import { trips } from "./StaticTableData";
 
-const UpcomingTripTable = () => {
+const TripUpcoming = () => {
   const confirm = (e: any) => {
     console.log(e);
     message.success(`${e} Deleted Sucessfully`);
@@ -153,4 +153,4 @@ const UpcomingTripTable = () => {
   );
 };
 
-export default UpcomingTripTable;
+export default TripUpcoming;
