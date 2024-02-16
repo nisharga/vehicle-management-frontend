@@ -21,44 +21,31 @@ const AddOfficeCost = () => {
   };
   return (
     <>
-      <p className="font-bold text-black text-[16px] mb-2">Add Driver</p>
+      <p className="font-bold text-black text-[16px] mb-2">Add Office Cost</p>
       <div className="mx-auto overflow-y-scroll ">
         <Form submitHandler={onSubmit}>
           <div className="mb-4">
-            <FormInput name="name" type="text" placeholder="Driver Name" />
-          </div>
-          <div className="mb-4">
-            <FormInput name="email" type="text" placeholder="Driver Email" />
-          </div>
-          <div className="mb-4">
-            <FormInput name="phone" type="text" placeholder="Phone Number" />
-          </div>
-          <div className="mb-4">
-            <FormInput name="join_date" type="text" placeholder="Join Date" />
-          </div>
-          <div className="mb-4">
-            <FormInput name="nid" type="text" placeholder="NID Number" />
+            <FormInput name="itemName" type="text" placeholder="Item Name" />
           </div>
           <div className="mb-4">
             <FormInput
-              name="file"
+              name="description"
               type="text"
-              placeholder="CV/Resume/passport/driving license (pdf)"
+              placeholder="Product Description"
             />
           </div>
           <div className="mb-4">
             <FormInput
-              name="profilePic"
+              name="productCost"
               type="text"
-              placeholder="Experience (year)"
+              placeholder="Product Cost (Tk)"
             />
           </div>
-
           <Button
             htmlType="submit"
             className="text-md rounded-lg bg-secondary text-[#eee]"
           >
-            New Driver Add
+            Add Office Cost
           </Button>
         </Form>
       </div>

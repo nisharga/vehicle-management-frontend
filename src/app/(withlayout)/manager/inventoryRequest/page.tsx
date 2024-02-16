@@ -1,9 +1,7 @@
-import Upcoming from "@/components/ui/Upcoming";
-
 const page = () => {
   return (
     <div>
-      <Upcoming />
+      <p>inventoryRequest</p>
     </div>
   );
 };

@@ -3,36 +3,37 @@
 import Form from "@/components/ReusableForms/Form";
 import FormInput from "@/components/ReusableForms/FormInput";
 import { useCreateAccessoryMutation } from "@/redux/api/accessoryApi";
-import { useCreateVehicleMutation } from "@/redux/api/vehecleApi";
 import { formatDate } from "@/utils/formateDate";
 import { Button, message } from "antd";
 import { SubmitHandler } from "react-hook-form";
 const AddAccessory = () => {
-const [createAccessory]= useCreateAccessoryMutation()
+  const [createAccessory] = useCreateAccessoryMutation();
   const onSubmit: SubmitHandler<any> = async (data: any) => {
+    const accessory_name = data.accessory_name;
+    const quantity = Number(data.quantity);
+    const purchase_date = formatDate(data.purchase_date);
+    const expire_date = formatDate(data.expire_date);
+    const amount = Number(data.amount);
+    const description = data.description;
+    // console.log(accessory_name,quantity,purchase_date,expire_date,amount,description);
 
-   
- 
-const accessory_name = data.accessory_name
-const quantity = Number(data.quantity)
-const purchase_date = formatDate(data.purchase_date)
-const expire_date = formatDate(data.expire_date)
-const amount= Number(data.amount)
-const description = data.description
-// console.log(accessory_name,quantity,purchase_date,expire_date,amount,description);
-   
-  const formData = {accessory_name,quantity,purchase_date,expire_date,amount,description} 
+    const formData = {
+      accessory_name,
+      quantity,
+      purchase_date,
+      expire_date,
+      amount,
+      description,
+    };
 
-    const resData = await createAccessory(formData)
-    console.log(resData)
-    if((resData as any).data?.statusCode === 200){
+    const resData = await createAccessory(formData);
+    console.log(resData);
+    if ((resData as any).data?.statusCode === 200) {
       message.success("Accessor Created successful");
-    }else{
+    } else {
       message.error("Something went wrong");
-    } 
+    }
   };
-
-
 
   return (
     <>
@@ -63,7 +64,7 @@ const description = data.description
               placeholder="purchase Date"
             />
           </div>
- 
+
           <div className="mb-4">
             <FormInput
               name="expire_date"
@@ -78,9 +79,9 @@ const description = data.description
               name="amount"
               type="number"
               size="large"
-              placeholder="Amount" 
+              placeholder="Amount"
             />
-          </div> 
+          </div>
 
           <div className="mb-4">
             <FormInput
@@ -90,9 +91,6 @@ const description = data.description
               placeholder="Description"
             />
           </div>
-      
-
-           
 
           <Button
             htmlType="submit"
