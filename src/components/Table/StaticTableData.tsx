@@ -265,7 +265,19 @@ export const vehicles = [
 export const InventoryRequestListTableFields = [
   {
     id: 0,
+    fields: 'No'
+  },
+  {
+    id: 1,
     fields: "Title",
+  },
+  {
+    id: 1,
+    fields: "Status",
+  },
+  {
+    id: 2,
+    fields: "Action",
   },
 ];
 export const InventoryListTableFields = [
@@ -288,7 +300,7 @@ export const DriverListTableFields = [
     id: 0,
     fields: "Photo",
   },
- 
+
   {
     id: 1,
     fields: "Name",
@@ -320,8 +332,8 @@ export const ManageRoleListTableFields = [
     id: 0,
     fields: "Name",
   },
- 
- 
+
+
   {
     id: 2,
     fields: "Phone",
@@ -334,6 +346,26 @@ export const ManageRoleListTableFields = [
     id: 4,
     fields: "Location",
   },
+];
+
+export const ManageRequestTableFields = [
+  {
+    id: 0,
+    fields: "Inventory Reference",
+  },
+  {
+    id: 1,
+    fields: 'Title'
+  },
+  {
+    id: 2,
+    fields: 'Comments'
+  },
+  {
+    id: 3,
+    fields: "Aprove Status",
+  }
+
 ];
 
 export const vehicleDriversList = [
@@ -412,12 +444,12 @@ export const tripFields = [
   {
     id: 2,
     fields: "Trip Date",
-  }, 
+  },
   {
     id: 3,
     fields: "Passenger Name",
   },
-   {
+  {
     id: 4,
     fields: "Passengers",
   },
@@ -428,17 +460,17 @@ export const tripFields = [
   {
     id: 6,
     fields: "Trip Rent",
-  },{
+  }, {
     id: 7,
     fields: "Driver",
-  },{
+  }, {
     id: 8,
     fields: "Vehicle",
-  }, 
+  },
   {
     id: 9,
     fields: "Status",
-  }, 
+  },
   {
     id: 10,
     fields: "Actions",
