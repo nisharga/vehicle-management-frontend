@@ -30,10 +30,8 @@ interface IProps {
     user_id?: string;
 }
 
-
-
 const InventoryRequestListTable = () => {
-    const [current, setCurrent] = useState(1);
+   
     const [inventoryRequest, setInventoryRequest] = useState([{
         title: ''
     }]);
@@ -41,11 +39,10 @@ const InventoryRequestListTable = () => {
         data:[],
         meta:{limit:0,page:0,total:0}
     })
-    const [isFetching, setIsFetching] = useState(false);
-    const [deleteDriver] = useDeleteDriverMutation();
-
+    const [current, setCurrent] = useState(1);
 
     const onChange: PaginationProps["onChange"] = (page) => {
+        
         setCurrent(page);
     };
 
