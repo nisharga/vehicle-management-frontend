@@ -1,7 +1,10 @@
 "use client";
 import Heading from "@/components/ui/Heading";
+import { useGetAllDriverQuery } from "@/redux/api/driverApi";
 import { SearchOutlined } from "@ant-design/icons";
 import { Image, Input } from "antd";
+
+import dayjs from "dayjs";
 
 import { message } from "antd";
 import { useState } from "react";
@@ -17,50 +20,15 @@ const DriverList = () => {
     message.error("Click on No");
   };
 
-  // data
-  const vehicleDriversList = [
-    {
-      name: "John Doe",
-      email: "john@example.com",
-      phone: "123-456-7890",
-      avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-      experience: 2,
-      joinDate: "2022-01-01",
-    },
-    {
-      name: "Jane Smith",
-      email: "jane@example.com",
-      phone: "987-654-3210",
-      avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-      experience: 5,
-      joinDate: "2021-12-15",
-    },
-    {
-      name: "Alice Johnson",
-      email: "alice@example.com",
-      phone: "555-555-5555",
-      avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-      experience: 1,
-      joinDate: "2023-03-10",
-    },
+  const { data } = useGetAllDriverQuery(1);
+  let driverData = data?.data || []; // Ensure data is an array, handle undefined case
+  driverData = [...driverData].sort(
+    (a, b) => new Date(b.createAt).getTime() - new Date(a.createAt).getTime()
+  );
 
-    {
-      name: "Bob Williams",
-      email: "bob@example.com",
-      phone: "111-222-3333",
-      avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-      experience: 3,
-      joinDate: "2020-09-20",
-    },
-    {
-      name: "Emily Brown",
-      email: "emily@example.com",
-      phone: "999-888-7777",
-      avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-      experience: 4,
-      joinDate: "2023-07-05",
-    },
-  ];
+
+  // data
+
   const DriverListTableFields = [
     {
       id: 0,
@@ -99,7 +67,7 @@ const DriverList = () => {
           <div className="mx-auto max-w-[55%] md:max-w-[42%] my-2">
             <Input
               size="small"
-              placeholder={`Search by Name / Email of total ${vehicleDriversList?.length} Trips`}
+              placeholder={`Search by Name / Email of total ${driverData?.length} Trips`}
               prefix={<SearchOutlined />}
               onChange={(event) => {
                 setSearchTerm(event?.target?.value);
@@ -122,8 +90,8 @@ const DriverList = () => {
             </thead>
 
             <tbody className="dark:text-[#E8E8E8]">
-              {vehicleDriversList
-                ?.filter((value) => {
+              {driverData
+                ?.filter((value: any) => {
                   if (searchTerm == "") {
                     return value;
                   } else if (
@@ -137,7 +105,7 @@ const DriverList = () => {
                     return value;
                   }
                 })
-                ?.map((vehicleDriver, index) => (
+                ?.map((vehicleDriver: any, index: number) => (
                   <tr
                     key={vehicleDriver?.email}
                     className={`${
@@ -163,7 +131,9 @@ const DriverList = () => {
                       {vehicleDriver?.phone}
                     </td>
                     <td className="px-2 py-1 text-sm leading-5">
-                      {vehicleDriver?.joinDate}
+                      {dayjs(vehicleDriver?.createAt).format(
+                        "MMM D, YYYY"
+                      )}
                     </td>
                     <td className="px-2 py-1 text-sm leading-5">
                       {vehicleDriver?.experience}
