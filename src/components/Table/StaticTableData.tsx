@@ -272,11 +272,11 @@ export const InventoryRequestListTableFields = [
     fields: "Title",
   },
   {
-    id: 1,
+    id: 2,
     fields: "Status",
   },
   {
-    id: 2,
+    id: 3,
     fields: "Action",
   },
 ];
@@ -474,6 +474,33 @@ export const tripFields = [
   {
     id: 10,
     fields: "Actions",
+  },
+];
+export const manageFuelFields = [
+  {
+    id: 0,
+    fields: "Vehicle Reference",
+  },
+  {
+    id: 1,
+    fields: "Fuel type",
+  },
+  {
+    id: 2,
+    fields: "Invoice number",
+  },
+  
+  {
+    id: 8,
+    fields: "Purchase date",
+  },
+  {
+    id: 9,
+    fields: "amount",
+  },
+  {
+    id: 10,
+    fields: "ltr",
   },
 ];
 

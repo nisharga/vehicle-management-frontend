@@ -6,7 +6,7 @@ const inventoryRequestApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
         getAllRequest: build.query({
             query: (page) => ({
-                url: `/inventoryRequest`,
+                url: `/inventoryRequest?page=${page}&limit=${5}`,
                 method: "GET",
             }),
             providesTags: [tagTypes.request],
