@@ -26,7 +26,6 @@ const DriverList = () => {
     (a, b) => new Date(b.createAt).getTime() - new Date(a.createAt).getTime()
   );
 
-  console.log("driverData: ", driverData);
 
   // data
 
