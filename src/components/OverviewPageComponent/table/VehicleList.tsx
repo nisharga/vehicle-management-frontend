@@ -1,15 +1,24 @@
 "use client";
 
 import Heading from "@/components/ui/Heading";
+import { useVehicleAllQuery } from "@/redux/api/vehecleApi";
 import { SearchOutlined } from "@ant-design/icons";
 import { Input } from "antd";
 import { useState } from "react";
 
 const VehicleList = () => {
+  const {data} = useVehicleAllQuery(1)
+
+
+  let vehicleData = data?.data?.data || []; // Ensure data is an array, handle undefined case
+  vehicleData = [...vehicleData].sort(
+    (a, b) => new Date(b.createAt).getTime() - new Date(a.createAt).getTime()
+  );
+
   const fields = [
     {
       id: 0,
-      fields: "Vehicle Name",
+      fields: "License No",
     },
     {
       id: 1,
@@ -21,33 +30,7 @@ const VehicleList = () => {
     },
   ];
 
-  const vehicleData = [
-    {
-      vehicleName: "desh",
-      brand: "tyota",
-      model: "MX154",
-    },
-    {
-      vehicleName: "desh",
-      brand: "tyota",
-      model: "MY154",
-    },
-    {
-      vehicleName: "desh",
-      brand: "tyota",
-      model: "MZ154",
-    },
-    {
-      vehicleName: "desh",
-      brand: "tyota",
-      model: "MY154",
-    },
-    {
-      vehicleName: "desh",
-      brand: "tyota",
-      model: "MM154",
-    },
-  ];
+  
   //searching code
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -87,7 +70,7 @@ const VehicleList = () => {
 
             <tbody className="dark:text-[#E8E8E8]">
               {(vehicleData ?? [])
-                ?.filter((value) => {
+                ?.filter((value:any) => {
                   if (searchTerm == "") {
                     return value;
                   } else if (
@@ -98,7 +81,7 @@ const VehicleList = () => {
                     return value;
                   }
                 })
-                ?.map((V, index) => (
+                ?.map((V:any, index:number) => (
                   <tr
                     key={index}
                     className={`${
@@ -106,7 +89,7 @@ const VehicleList = () => {
                     }  `}
                   >
                     <td className="px-2 py-3 text-sm leading-5">
-                      {V?.vehicleName}
+                      {V?.registrationNo}
                     </td>
 
                     <td className="px-2 py-3 text-sm leading-5">{V?.brand}</td>
