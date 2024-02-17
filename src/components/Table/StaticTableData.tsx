@@ -290,15 +290,27 @@ export const DriverListTableFields = [
   },
  
   {
+    id: 1,
+    fields: "Name",
+  },
+  {
+    id: 2,
+    fields: "Phone",
+  },
+  {
+    id: 3,
+    fields: "License No",
+  },
+  {
     id: 4,
-    fields: "Experience",
+    fields: "Experince",
   },
   {
-    id: 6,
-    fields: "NID No.",
+    id: 5,
+    fields: "NID",
   },
   {
-    id: 7,
+    id: 5,
     fields: "Actions",
   },
 ];

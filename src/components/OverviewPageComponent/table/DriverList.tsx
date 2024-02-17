@@ -2,11 +2,15 @@
 import Heading from "@/components/ui/Heading";
 import { SearchOutlined } from "@ant-design/icons";
 import { Image, Input } from "antd";
-
+import { useGetAllDriverQuery } from "@/redux/api/driverApi"; 
 import { message } from "antd";
 import { useState } from "react";
+import { formatDateToRegularDate } from "../../../utils/formateDate";
 
 const DriverList = () => {
+  const { data: driverList } = useGetAllDriverQuery(1);
+  console.log("🚀 ~ DriverList ~ driverList:", driverList) 
+  
   const confirm = (e: any) => {
     console.log(e);
     message.success(`${e} Deleted Sucessfully`);
@@ -61,6 +65,7 @@ const DriverList = () => {
       joinDate: "2023-07-05",
     },
   ];
+
   const DriverListTableFields = [
     {
       id: 0,
@@ -99,7 +104,7 @@ const DriverList = () => {
           <div className="mx-auto max-w-[55%] md:max-w-[42%] my-2">
             <Input
               size="small"
-              placeholder={`Search by Name / Email of total ${vehicleDriversList?.length} Trips`}
+              placeholder={`Search by Name / Email of total ${vehicleDriversList?.length} Driver`}
               prefix={<SearchOutlined />}
               onChange={(event) => {
                 setSearchTerm(event?.target?.value);
@@ -122,8 +127,8 @@ const DriverList = () => {
             </thead>
 
             <tbody className="dark:text-[#E8E8E8]">
-              {vehicleDriversList
-                ?.filter((value) => {
+              {driverList?.data
+                ?.filter((value : any) => {
                   if (searchTerm == "") {
                     return value;
                   } else if (
@@ -137,7 +142,7 @@ const DriverList = () => {
                     return value;
                   }
                 })
-                ?.map((vehicleDriver, index) => (
+                ?.map((vehicleDriver:any, index:number) => (
                   <tr
                     key={vehicleDriver?.email}
                     className={`${
@@ -163,9 +168,9 @@ const DriverList = () => {
                       {vehicleDriver?.phone}
                     </td>
                     <td className="px-2 py-1 text-sm leading-5">
-                      {vehicleDriver?.joinDate}
+                      {formatDateToRegularDate(vehicleDriver?.createAt)}
                     </td>
-                    <td className="px-2 py-1 text-sm leading-5">
+                    <td className="px-2 py-1 text-sm leading-5 text-center">
                       {vehicleDriver?.experience}
                     </td>
                   </tr>
