@@ -73,11 +73,11 @@ const UpdateTripForm = ({ updateID }: any) => {
 
           <Button
             htmlType="submit"
-            className="text-md rounded-lg  "
-            style={{
-              backgroundColor: "#00334E",
-              color: "#eee",
-            }}
+            className="text-md rounded-lg  bg-secondary text-[#eee]"
+            // style={{
+            //   backgroundColor: "#00334E",
+            //   color: "#eee",
+            // }}
           >
             Update Trip
           </Button>

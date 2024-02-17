@@ -5,7 +5,7 @@ import {
   EyeOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
-import { Button, Input, Popconfirm, message } from "antd";
+import { Button, Input, Modal, Popconfirm, message } from "antd";
 import ModalBox from "../ModalBox/ModalBox";
 ///import Pagination from "../ui/Pagination";
 import AddTripCost from "@/app/(withlayout)/manager/trip-cost/AddTripCost";
@@ -38,18 +38,37 @@ type TripCost = {
 const TripCostTable = () => {
   const [deleteTripCost] = useDeleteTripCostMutation();
 
-  const confirm = async (e: any) => {
-    const res = await deleteTripCost(e);
-    if ((res as any)?.data?.success) {
-      message.success(`Deleted Successfully`);
-    }
+  const handleDelete = async (e: any) => {
+    Modal.confirm({
+      title: "Confirm Delete",
+      content: "Are you sure you want to delete?",
+      okText: "Delete",
+      okType: "danger",
+      cancelText: "Cancel",
+      onOk: async () => {
+        await deleteTripCost(e)
+          .then(() => {
+            Modal.success({
+              title: "Trip cost Deleted",
+              content: "The trip cost has been successfully deleted.",
+            });
+          })
+          .catch((error: any) => {
+            // Error message
+            Modal.error({
+              title: "Delete Failed",
+              okType: "danger",
+              cancelText: "Cancel",
+              content:
+                "An error occurred while deleting the trip cost. Please try again later.",
+            });
+            console.error("Delete error:", error);
+          });
+      },
+    });
   };
 
-  const cancel = (e: React.MouseEvent<HTMLElement>) => {
-    console.log(e);
-    message.error("Click on No");
-  };
-
+  
   const [current, setCurrent] = useState(1);
   const [vehicleData, setVehicleData] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
@@ -77,7 +96,7 @@ const TripCostTable = () => {
             <div className=" max-w-[80%]">
               <Input
                 size="large"
-                placeholder={`Search by Passenger Name of total ${tripCost?.data?.data?.length} Trips`}
+                placeholder={`Search by trip Holder Name of total ${tripCost?.data?.data?.length} Trips`}
                 prefix={<SearchOutlined />}
                 onChange={(event) => {
                   setSearchTerm(event?.target?.value);
@@ -113,7 +132,8 @@ const TripCostTable = () => {
                   } else if (
                     V?.passengerName
                       .toLowerCase()
-                      .includes(searchTerm.toLowerCase())
+                      .includes(searchTerm.toLowerCase()) ||
+                    V?.phone.toLowerCase().includes(searchTerm.toLowerCase())
                   ) {
                     return V;
                   }
@@ -174,7 +194,7 @@ const TripCostTable = () => {
                           <UpdateTripCostForm updateID={tripCost?.id} />
                         </ModalBox>
 
-                        <Popconfirm
+                        {/* <Popconfirm
                           title="Delete the task"
                           description="Are you sure to delete this task?"
                           onConfirm={() => confirm(tripCost?.id)}
@@ -188,7 +208,12 @@ const TripCostTable = () => {
                               <DeleteOutlined />
                             </span>
                           </Button>
-                        </Popconfirm>
+                        </Popconfirm> */}
+                        <Button danger onClick={() => handleDelete(tripCost?.id)}>
+                          <span className="item justify-center items-center">
+                            <DeleteOutlined />
+                          </span>
+                        </Button>
                       </div>
                     </td>
                   </tr>
