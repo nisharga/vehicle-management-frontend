@@ -31,10 +31,10 @@ export const options = {
     legend: {
       position: "top" as const,
     },
-    title: {
-      display: true,
-      text: "Chart.js Line Chart",
-    },
+    // title: {
+    //   display: true,
+    //   text: "Chart.js Line Chart",
+    // },
   },
 };
 
@@ -56,7 +56,7 @@ export const data = {
 const TotalCostAreaChart = () => {
   return (
     <>
-      <Heading>Total Sale</Heading>
+      <Heading>Total Cost</Heading>
       <div className="bg-white dark:bg-[#00334E] rounded-lg ">
         <Line options={options} data={data} />
       </div>
