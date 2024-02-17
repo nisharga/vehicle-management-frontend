@@ -22,7 +22,6 @@ export default function LoginPage() {
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
     try {
       const res = await userLogin({ ...data }).unwrap();
-
       if (res?.data?.accessToken) {
         const userInfo = await getUserInfoFromToken(res?.data?.accessToken);
         if (userInfo?.role === "MANAGER") {
@@ -35,13 +34,16 @@ export default function LoginPage() {
           router.push("/super-admin");
           message.success("Admin log in successful");
         }
+      } else {
+        message.error("Login not successful");
       }
       storeUserInfo({ accessToken: res?.data?.accessToken });
     } catch (err: any) {
-      console.error(err.message);
+      message.error("Login unsuccessful");
     }
   };
 
+  console.log(isLogin);
   return (
     <>
       <div className="min-h-screen flex items-stretch text-white ">
