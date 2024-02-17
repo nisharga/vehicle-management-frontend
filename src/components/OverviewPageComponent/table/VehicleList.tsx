@@ -76,7 +76,10 @@ const VehicleList = () => {
                   if (searchTerm == "") {
                     return value;
                   } else if (
-                    value?.model
+                    value?.brand
+                      .toLowerCase()
+                      .includes(searchTerm.toLowerCase()) 
+                      || value?.model
                       .toLowerCase()
                       .includes(searchTerm.toLowerCase())
                   ) {

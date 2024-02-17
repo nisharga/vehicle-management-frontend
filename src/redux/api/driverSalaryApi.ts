@@ -11,6 +11,7 @@ const driverSalaryApi = baseApi.injectEndpoints({
         method: "POST",
         data: data,
       }),
+      invalidatesTags: [tagTypes.driverSalary],
     }),
     getAllDriverSalary: build.query({
       query: (page) => ({
@@ -24,7 +25,7 @@ const driverSalaryApi = baseApi.injectEndpoints({
         url: `${driverSalaryUrl}/single/${id}`,
         method: "GET",
       }),
-      // providesTags: [tagTypes.driverSalary],
+      providesTags: [tagTypes.driverSalary],
     }),
     updateDriverSalary: build.mutation({
       query: (data) => ({
@@ -32,14 +33,14 @@ const driverSalaryApi = baseApi.injectEndpoints({
         method: "PATCH",
         data: data?.data,
       }),
-      // providesTags: [tagTypes.driverSalary],
+      invalidatesTags: [tagTypes.driverSalary],
     }),
     deleteDriverSalary: build.mutation({
       query: (id: any) => ({
         url: `${driverSalaryUrl}/delete/${id}`,
         method: "DELETE",
       }),
-      // providesTags: [tagTypes.driverSalary],
+      invalidatesTags: [tagTypes.driverSalary],
     }),
   }),
 });

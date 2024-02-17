@@ -1,5 +1,6 @@
 "use client";
 
+import DriverSelectFields from "@/Options/DriverSelectFields";
 import Form from "@/components/ReusableForms/Form";
 import FormInput from "@/components/ReusableForms/FormInput";
 import FormSelectField from "@/components/ReusableForms/FormSelectField";
@@ -13,7 +14,7 @@ const AddDriverSalary = () => {
 
     try {
       const res = await createDriverSalary(data);
-      console.log("driver salary created successfully", res);
+      message.success("DriverSalary created successfully")
     } catch (error) {
       console.log("driver salary error", error);
     }
@@ -25,12 +26,7 @@ const AddDriverSalary = () => {
       <div className="mx-auto overflow-y-scroll ">
         <Form submitHandler={onSubmit}>
           <div className="mb-4">
-            <FormInput
-              name="driver_id"
-              type="text"
-              size="large"
-              placeholder="Enter Driver Id"
-            />
+           <DriverSelectFields name="driver_id" label="Driver"/>
           </div>
           <div className="mb-4">
             <FormInput
