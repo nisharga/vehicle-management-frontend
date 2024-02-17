@@ -7,6 +7,15 @@ import { Input } from "antd";
 import { useState } from "react";
 
 const VehicleList = () => {
+  const {data} = useVehicleAllQuery(1)
+
+
+  let vehicleData = data?.data?.data || [];
+   // Ensure data is an array, handle undefined case
+  vehicleData = [...vehicleData].sort(
+    (a, b) => new Date(b.createAt).getTime() - new Date(a.createAt).getTime()
+  );
+
   const fields = [
     {
       id: 0,
@@ -22,33 +31,6 @@ const VehicleList = () => {
     },
   ];
 
-  const vehicleData = [
-    {
-      vehicleName: "desh",
-      brand: "tyota",
-      model: "MX154",
-    },
-    {
-      vehicleName: "desh",
-      brand: "tyota",
-      model: "MY154",
-    },
-    {
-      vehicleName: "desh",
-      brand: "tyota",
-      model: "MZ154",
-    },
-    {
-      vehicleName: "desh",
-      brand: "tyota",
-      model: "MY154",
-    },
-    {
-      vehicleName: "desh",
-      brand: "tyota",
-      model: "MM154",
-    },
-  ];
 
   const {data: vehicle} = useVehicleAllQuery(1);
    //searching code

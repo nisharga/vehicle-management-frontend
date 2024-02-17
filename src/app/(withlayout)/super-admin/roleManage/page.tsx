@@ -1,8 +1,14 @@
+import ManageRoleTable from "@/components/Table/ManageRoleTable";
+import Heading from "@/components/ui/Heading";
+
 const roleManagePage = () => {
   return (
-    <div>
-      <p>roleManage....</p>
-    </div>
+    <>
+      <Heading>
+        <p>Manage Role</p>
+      </Heading>
+      <ManageRoleTable />
+    </>
   );
 };
 

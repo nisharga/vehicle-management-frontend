@@ -315,6 +315,27 @@ export const DriverListTableFields = [
   },
 ];
 
+export const ManageRoleListTableFields = [
+  {
+    id: 0,
+    fields: "Name",
+  },
+ 
+ 
+  {
+    id: 2,
+    fields: "Phone",
+  },
+  {
+    id: 3,
+    fields: "Role",
+  },
+  {
+    id: 4,
+    fields: "Location",
+  },
+];
+
 export const vehicleDriversList = [
   {
     name: "John Doe",

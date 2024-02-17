@@ -1,15 +1,17 @@
 "use client";
 import Heading from "@/components/ui/Heading";
+import { useGetAllDriverQuery } from "@/redux/api/driverApi";
 import { SearchOutlined } from "@ant-design/icons";
 import { Image, Input } from "antd";
-import { useGetAllDriverQuery } from "@/redux/api/driverApi"; 
+
+// import dayjs from "dayjs";
+
 import { message } from "antd";
 import { useState } from "react";
 import { formatDateToRegularDate } from "../../../utils/formateDate";
 
 const DriverList = () => {
   const { data: driverList } = useGetAllDriverQuery(1);
-  console.log("🚀 ~ DriverList ~ driverList:", driverList) 
   
   const confirm = (e: any) => {
     console.log(e);
@@ -21,50 +23,8 @@ const DriverList = () => {
     message.error("Click on No");
   };
 
-  // data
-  const vehicleDriversList = [
-    {
-      name: "John Doe",
-      email: "john@example.com",
-      phone: "123-456-7890",
-      avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-      experience: 2,
-      joinDate: "2022-01-01",
-    },
-    {
-      name: "Jane Smith",
-      email: "jane@example.com",
-      phone: "987-654-3210",
-      avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-      experience: 5,
-      joinDate: "2021-12-15",
-    },
-    {
-      name: "Alice Johnson",
-      email: "alice@example.com",
-      phone: "555-555-5555",
-      avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-      experience: 1,
-      joinDate: "2023-03-10",
-    },
-
-    {
-      name: "Bob Williams",
-      email: "bob@example.com",
-      phone: "111-222-3333",
-      avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-      experience: 3,
-      joinDate: "2020-09-20",
-    },
-    {
-      name: "Emily Brown",
-      email: "emily@example.com",
-      phone: "999-888-7777",
-      avatar: "https://i.ibb.co/hFjP6S5/Screenshot-2020-12-14-114235.png",
-      experience: 4,
-      joinDate: "2023-07-05",
-    },
-  ];
+  const { data } = useGetAllDriverQuery(1);
+ 
 
   const DriverListTableFields = [
     {
@@ -104,7 +64,7 @@ const DriverList = () => {
           <div className="mx-auto max-w-[55%] md:max-w-[42%] my-2">
             <Input
               size="small"
-              placeholder={`Search by Name / Email of total ${vehicleDriversList?.length} Driver`}
+              placeholder={`Search by Name / Email`}
               prefix={<SearchOutlined />}
               onChange={(event) => {
                 setSearchTerm(event?.target?.value);
@@ -127,22 +87,8 @@ const DriverList = () => {
             </thead>
 
             <tbody className="dark:text-[#E8E8E8]">
-              {driverList?.data
-                ?.filter((value : any) => {
-                  if (searchTerm == "") {
-                    return value;
-                  } else if (
-                    value?.name
-                      .toLowerCase()
-                      .includes(searchTerm.toLowerCase()) ||
-                    value?.email
-                      .toLowerCase()
-                      .includes(searchTerm.toLowerCase())
-                  ) {
-                    return value;
-                  }
-                })
-                ?.map((vehicleDriver:any, index:number) => (
+              {
+                driverList?.data?.map((vehicleDriver:any, index:number) => (
                   <tr
                     key={vehicleDriver?.email}
                     className={`${
@@ -176,6 +122,7 @@ const DriverList = () => {
                   </tr>
                 ))}
             </tbody>
+            
           </table>
         </div>
       </div>
