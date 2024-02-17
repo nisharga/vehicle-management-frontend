@@ -4,40 +4,40 @@ import Heading from "@/components/ui/Heading";
 import { FC } from "react";
 import {formatDateToRegularDate} from "../../../utils/formateDate"
 import { useTripDetailsAllQuery } from "@/redux/api/tripApi";
-interface IProps {
-  driver: {
-    address: string;
-    avatar: string;
-    email: string;
-    experience: string;
-    license_no: string;
-    // Add any other properties if available
-  };
-  driver_id: string;
-  endLocation: string;
-  id: string;
-  passengerCount: number;
-  passengerName: string;
-  passengerPhone: string;
-  startLocation: string;
-  startTime: string;
-  status: string;
-  tripCosts: any[]; // Change any[] to the correct type if available
-  tripPeriod: string;
-  tripRent: number;
-  vehicle: {
-    id: string;
-    fuelType: string;
-    mileage: number;
-    price: number;
-    purchaseDate: string;
-    // Add any other properties if available
-  };
-  vehicle_id: string;
-}
+// interface IProps {
+//   driver: {
+//     address: string;
+//     avatar: string;
+//     email: string;
+//     experience: string;
+//     license_no: string;
+//     // Add any other properties if available
+//   };
+//   driver_id: string;
+//   endLocation: string;
+//   id: string;
+//   passengerCount: number;
+//   passengerName: string;
+//   passengerPhone: string;
+//   startLocation: string;
+//   startTime: string;
+//   status: string;
+//   tripCosts: any[]; // Change any[] to the correct type if available
+//   tripPeriod: string;
+//   tripRent: number;
+//   vehicle: {
+//     id: string;
+//     fuelType: string;
+//     mileage: number;
+//     price: number;
+//     purchaseDate: string;
+//     // Add any other properties if available
+//   };
+//   vehicle_id: string;
+// }
 
 
-const UpcomingTripTable:FC<IProps> = () => {
+const UpcomingTripTable = () => {
   const { data: trip } = useTripDetailsAllQuery({}); 
 
   const tripFields = [
