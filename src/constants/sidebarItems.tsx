@@ -120,9 +120,9 @@ export const sidebarItems = (role: string) => {
     },
 
     {
-      label: <Link href={`/${role}/inventoryRequest`}>Inventory Request</Link>,
+      label: <Link href={`/${role}/manageRequest`}>Manage Request</Link>,
       icon: <SubnodeOutlined />,
-      key: `/${role}/inventoryRequest`,
+      key: `/${role}/manageRequest`,
     },
     {
       label: <Link href={`/${role}/report`}>Report</Link>,
