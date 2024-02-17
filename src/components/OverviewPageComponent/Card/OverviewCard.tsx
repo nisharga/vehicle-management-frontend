@@ -48,7 +48,7 @@ const DriverOverviewCard = () => {
           </svg>
 
           <div className="my-auto mx-auto bg-[#5588A3] text-[#EFEFEF] rounded-3xl px-2 py-1">
-            <p>Total Trip</p>
+            <p>UPCOMMING TRIP</p>
           </div>
           <p
             className="my-auto mx-auto font-bold text-lg text-[#002140] dark:text-[#E8E8E8] rounded-3xl px-2 py-1"
@@ -71,7 +71,7 @@ const DriverOverviewCard = () => {
           </svg>
 
           <div className="my-auto mx-auto bg-[#5588A3] text-[#EFEFEF] rounded-3xl px-2 py-1">
-            <p>Complete Trip</p>
+            <p>PENDING TRIP</p>
           </div>
           <p
             className="my-auto mx-auto font-bold text-lg text-[#002140] dark:text-[#E8E8E8] rounded-3xl px-2 py-1"
@@ -97,7 +97,7 @@ const DriverOverviewCard = () => {
 
           <div className="my-auto mx-auto">
             <p className="my-auto mx-auto bg-[#5588A3] text-[#EFEFEF] rounded-3xl px-2 py-1">
-              In Complete
+            COMPLETED TRIP
             </p>
           </div>
 

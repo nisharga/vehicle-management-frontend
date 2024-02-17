@@ -10,7 +10,8 @@ const VehicleList = () => {
   const {data} = useVehicleAllQuery(1)
 
 
-  let vehicleData = data?.data?.data || []; // Ensure data is an array, handle undefined case
+  let vehicleData = data?.data?.data || [];
+   // Ensure data is an array, handle undefined case
   vehicleData = [...vehicleData].sort(
     (a, b) => new Date(b.createAt).getTime() - new Date(a.createAt).getTime()
   );
@@ -18,7 +19,7 @@ const VehicleList = () => {
   const fields = [
     {
       id: 0,
-      fields: "License No",
+      fields: "Registration No",
     },
     {
       id: 1,
@@ -30,8 +31,9 @@ const VehicleList = () => {
     },
   ];
 
-  
-  //searching code
+
+  const {data: vehicle} = useVehicleAllQuery(1);
+   //searching code
   const [searchTerm, setSearchTerm] = useState("");
 
   return (
@@ -47,7 +49,7 @@ const VehicleList = () => {
           <div className="mx-auto max-w-[55%] md:max-w-[42%] my-2">
             <Input
               size="small"
-              placeholder={`Search by Brand total ${vehicleData?.length} Vehicle`}
+              placeholder={`Search by Brand Model total ${vehicleData?.length} Vehicle`}
               prefix={<SearchOutlined />}
               onChange={(event) => {
                 setSearchTerm(event?.target?.value);
@@ -69,8 +71,8 @@ const VehicleList = () => {
             </thead>
 
             <tbody className="dark:text-[#E8E8E8]">
-              {(vehicleData ?? [])
-                ?.filter((value:any) => {
+              {(vehicle?.data?.data ?? [])
+                ?.filter((value : any) => {
                   if (searchTerm == "") {
                     return value;
                   } else if (

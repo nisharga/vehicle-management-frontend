@@ -4,12 +4,15 @@ import { useGetAllDriverQuery } from "@/redux/api/driverApi";
 import { SearchOutlined } from "@ant-design/icons";
 import { Image, Input } from "antd";
 
-import dayjs from "dayjs";
+// import dayjs from "dayjs";
 
 import { message } from "antd";
 import { useState } from "react";
+import { formatDateToRegularDate } from "../../../utils/formateDate";
 
 const DriverList = () => {
+  const { data: driverList } = useGetAllDriverQuery(1);
+  
   const confirm = (e: any) => {
     console.log(e);
     message.success(`${e} Deleted Sucessfully`);
@@ -21,13 +24,7 @@ const DriverList = () => {
   };
 
   const { data } = useGetAllDriverQuery(1);
-  let driverData = data?.data || []; // Ensure data is an array, handle undefined case
-  driverData = [...driverData].sort(
-    (a, b) => new Date(b.createAt).getTime() - new Date(a.createAt).getTime()
-  );
-
-
-  // data
+ 
 
   const DriverListTableFields = [
     {
@@ -67,7 +64,7 @@ const DriverList = () => {
           <div className="mx-auto max-w-[55%] md:max-w-[42%] my-2">
             <Input
               size="small"
-              placeholder={`Search by Name / Email of total ${driverData?.length} Trips`}
+              placeholder={`Search by Name / Email`}
               prefix={<SearchOutlined />}
               onChange={(event) => {
                 setSearchTerm(event?.target?.value);
@@ -90,22 +87,8 @@ const DriverList = () => {
             </thead>
 
             <tbody className="dark:text-[#E8E8E8]">
-              {driverData
-                ?.filter((value: any) => {
-                  if (searchTerm == "") {
-                    return value;
-                  } else if (
-                    value?.name
-                      .toLowerCase()
-                      .includes(searchTerm.toLowerCase()) ||
-                    value?.email
-                      .toLowerCase()
-                      .includes(searchTerm.toLowerCase())
-                  ) {
-                    return value;
-                  }
-                })
-                ?.map((vehicleDriver: any, index: number) => (
+              {
+                driverList?.data?.map((vehicleDriver:any, index:number) => (
                   <tr
                     key={vehicleDriver?.email}
                     className={`${
@@ -131,16 +114,15 @@ const DriverList = () => {
                       {vehicleDriver?.phone}
                     </td>
                     <td className="px-2 py-1 text-sm leading-5">
-                      {dayjs(vehicleDriver?.createAt).format(
-                        "MMM D, YYYY"
-                      )}
+                      {formatDateToRegularDate(vehicleDriver?.createAt)}
                     </td>
-                    <td className="px-2 py-1 text-sm leading-5">
+                    <td className="px-2 py-1 text-sm leading-5 text-center">
                       {vehicleDriver?.experience}
                     </td>
                   </tr>
                 ))}
             </tbody>
+            
           </table>
         </div>
       </div>
