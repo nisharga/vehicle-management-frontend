@@ -14,8 +14,8 @@ const officeCostApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.officeCost],
     }),
     getAllOfficeCost: build.query({
-      query: () => ({
-        url: `${officeCostUrl}`,
+      query: (page) => ({
+        url: `${officeCostUrl}?page=${page}&limit=${5}`,
         method: "GET",
       }),
       providesTags: [tagTypes.officeCost],

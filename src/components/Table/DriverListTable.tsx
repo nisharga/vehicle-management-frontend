@@ -20,6 +20,7 @@ import { useState } from "react";
 import UpdateDriverForm from "../Forms/UpdateDriverForm";
 import Heading from "../ui/Heading";
 import ViewItem from "../ui/ViewItem";
+import ViewItemDriver from "../ui/ViewItemDriver";
 
 interface IProps {
   address?: string;
@@ -108,7 +109,18 @@ const DriverListTable = () => {
             </thead>
 
             <tbody className="dark:text-[#E8E8E8]">
-              {((driver as any)?.data ?? [])?.map(
+              {((driver as any)?.data ?? [])?.filter((V: any) => {
+                if (searchTerm == "") {
+                  return V;
+                } else if (
+                  V?.nid
+                    .toLowerCase()
+                    .includes(searchTerm.toLowerCase()) ||
+                  V?.phone.toLowerCase().includes(searchTerm.toLowerCase())
+                ) {
+                  return V;
+                }
+              })?.map(
                 (drivers: IProps, index: number) => (
                   <tr
                     key={drivers?.id}
@@ -153,7 +165,7 @@ const DriverListTable = () => {
                             </span>
                           }
                         >
-                          <ViewItem viewID={driver?.id} />
+                          <ViewItemDriver viewID={drivers?.id} />
                         </ModalBox>
 
                         <ModalBox
@@ -164,16 +176,18 @@ const DriverListTable = () => {
                             </span>
                           }
                         >
-                          <UpdateDriverForm driverData={driver} />
+                          <UpdateDriverForm driverData={drivers} />
                         </ModalBox>
 
                         <Popconfirm
                           title="Delete the task"
                           description="Are you sure to delete this task?"
-                          onConfirm={() => confirm(driver?.id)}
+                          onConfirm={() => confirm(drivers?.id)}
                           onCancel={() => cancel}
-                          okText="Yes"
+                          
                           cancelText="No"
+                          okText="Delete"
+                          okType="danger"
                         >
                           <Button danger>
                             <span className="item justify-center items-center">

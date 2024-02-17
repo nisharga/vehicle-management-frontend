@@ -1,8 +1,45 @@
 "use client";
 
 import Heading from "@/components/ui/Heading";
+import { FC } from "react";
+import {formatDateToRegularDate} from "../../../utils/formateDate"
+import { useTripDetailsAllQuery } from "@/redux/api/tripApi";
+// interface IProps {
+//   driver: {
+//     address: string;
+//     avatar: string;
+//     email: string;
+//     experience: string;
+//     license_no: string;
+//     // Add any other properties if available
+//   };
+//   driver_id: string;
+//   endLocation: string;
+//   id: string;
+//   passengerCount: number;
+//   passengerName: string;
+//   passengerPhone: string;
+//   startLocation: string;
+//   startTime: string;
+//   status: string;
+//   tripCosts: any[]; // Change any[] to the correct type if available
+//   tripPeriod: string;
+//   tripRent: number;
+//   vehicle: {
+//     id: string;
+//     fuelType: string;
+//     mileage: number;
+//     price: number;
+//     purchaseDate: string;
+//     // Add any other properties if available
+//   };
+//   vehicle_id: string;
+// }
+
 
 const UpcomingTripTable = () => {
+  const { data: trip } = useTripDetailsAllQuery({}); 
+
   const tripFields = [
     {
       id: 0,
@@ -18,75 +55,28 @@ const UpcomingTripTable = () => {
     },
 
     {
-      id: 4,
+      id: 3,
       fields: "Start-Location",
     },
     {
-      id: 8,
+      id: 4,
       fields: "End-Location",
     },
     {
-      id: 3,
-      fields: "Trip Period",
+      id: 5,
+      fields: "tripPeriod",
+    },
+    {
+      id: 6,
+      fields: "Date",
+    },
+    {
+      id: 7,
+      fields: "Status",
     },
   ];
 
-  const trips = [
-    {
-      tripId: "12345",
-      passengerName: "Omar faruq",
-      passengerPhone: "789456123",
-      startLocation: "123 Main St",
-      endLocation: "456 Elm St",
-      tripPeriod: "5",
-      startTime: "2024-02-04T08:00:00",
-    },
-    {
-      tripId: "12345",
-      passengerName: "Omar Faruq",
-      passengerPhone: "789456123",
-      startLocation: "123 Main St",
-      endLocation: "456 Elm St",
-      tripPeriod: "5",
-      startTime: "2024-02-04T08:00:00",
-    },
-    {
-      tripId: "67890",
-      passengerName: "Alice Smith",
-      passengerPhone: "123456789",
-      startLocation: "789 Oak St",
-      endLocation: "321 Pine St",
-      tripPeriod: "7",
-      startTime: "2024-02-05T10:00:00",
-    },
-    {
-      tripId: "13579",
-      passengerName: "Bob Johnson",
-      passengerPhone: "987654321",
-      startLocation: "456 Elm St",
-      endLocation: "789 Oak St",
-      tripPeriod: "3",
-      startTime: "2024-02-06T12:00:00",
-    },
-    {
-      tripId: "24680",
-      passengerName: "Emily Johnson",
-      passengerPhone: "321654987",
-      startLocation: "321 Pine St",
-      endLocation: "123 Main St",
-      tripPeriod: "4",
-      startTime: "2024-02-07T14:00:00",
-    },
-    {
-      tripId: "11223",
-      passengerName: "Sophia Williams",
-      passengerPhone: "456789123",
-      startLocation: "789 Oak St",
-      endLocation: "456 Elm St",
-      tripPeriod: "6",
-      startTime: "2024-02-08T16:00:00",
-    },
-  ];
+  
   return (
     <>
       <Heading>
@@ -112,7 +102,7 @@ const UpcomingTripTable = () => {
             </thead>
 
             <tbody className="dark:text-[#E8E8E8]">
-              {(trips ?? [])?.map((trips, index) => (
+              {(trip?.data?.data ?? [])?.map((trips: any, index: number) => (
                 <tr
                   key={index}
                   className={`${
@@ -120,7 +110,7 @@ const UpcomingTripTable = () => {
                   }  `}
                 >
                   <td className="px-2 py-3 text-sm leading-5">
-                    {trips?.tripId}
+                    {index + 1}
                   </td>
 
                   <td className="px-2 py-3 text-sm leading-5">
@@ -141,6 +131,13 @@ const UpcomingTripTable = () => {
 
                   <td className=" px-2 py-3 text-sm leading-5">
                     {trips?.tripPeriod}
+                  </td> 
+                  
+                  <td className=" px-2 py-3 text-sm leading-5">
+                    {formatDateToRegularDate(trips?.startTime)}
+                  </td>
+                  <td className=" px-2 py-3 text-sm leading-5">
+                    {trips?.status}
                   </td>
                 </tr>
               ))}

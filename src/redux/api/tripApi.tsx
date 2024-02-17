@@ -10,6 +10,13 @@ const tripApi = baseApi.injectEndpoints({
         method: "GET", 
       }), 
       providesTags: [tagTypes.trip],
+    }), 
+    tripDetailsAll: build.query({
+      query: () => ({
+        url: `/trip/list`,
+        method: "GET", 
+      }), 
+      providesTags: [tagTypes.trip],
     }),
     tripSingle: build.query({
       query: (id) => ({
@@ -53,6 +60,7 @@ const tripApi = baseApi.injectEndpoints({
 
 export const {
     useTripAllQuery,
+    useTripDetailsAllQuery,
     useTripSingleQuery,
     useCreateTripMutation,
     useUpdateSingleTripMutation,

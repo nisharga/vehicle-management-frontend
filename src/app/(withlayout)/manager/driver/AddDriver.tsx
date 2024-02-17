@@ -6,6 +6,9 @@ import { useCreateDriverMutation } from "@/redux/api/driverApi";
 import { Button } from "antd";
 import { SubmitHandler } from "react-hook-form";
 import { message } from "antd";
+import { useState } from "react";
+import Image from "next/image";
+import { useForm } from "react-hook-form"; 
 
 type AddVehicleValues = {
   name: string;
@@ -19,11 +22,41 @@ type AddVehicleValues = {
 };
 
 const AddDriver = () => {
+  const [avater, setAvater] = useState("");
+   
+  const [currentImage, setCurrentImage] = useState(avater || "https://i.ibb.co/SRF75vM/avatar.png");
+     
+  const handleImageUpload = (e : any) => {
+    const file = e.target.files[0];
 
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+          setCurrentImage((reader as any)?.result);
+      };
+      reader.readAsDataURL(file);
+  } else {
+      setCurrentImage(currentImage);
+  }
+
+        const imageStoragekey = '68cb5fb5d48334a60f021c30aff06ada'
+        
+        const formData = new FormData()
+        formData.append('image', file)
+        fetch(`https://api.imgbb.com/1/upload?key=${imageStoragekey}`, {
+            method: 'POST',
+            body: formData
+        })
+        .then(res => res.json())
+        .then(result => setAvater(result?.data?.display_url))
+
+
+  }
   
   const [addDriver] = useCreateDriverMutation();
   const onSubmit: SubmitHandler<AddVehicleValues> = async (data: any) => {
-    
+  data.avatar = avater;
+
   const res = await addDriver(data);
     console.log(res)
     
@@ -66,14 +99,43 @@ const AddDriver = () => {
               placeholder="Experience (year)"
             />
           </div>
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <FormInput
               name="avatar"
               type="text"
               placeholder="Avater"
-            />
-          </div>
-          
+            /> 
+          </div> */}
+                                   <div className="flex lg:flex-row flex-col gap-4 justify-center lg:items-center mt-2 py-2">
+                                     
+                                     <div className="form-control w-full max-w-x flex items-center gap-2"
+                                     >
+                                      <div className="w-2/5">
+                                         <label className="label">
+                                             <span className="label-text text-gray-600 font-semibold">Profile Image</span>
+                                         </label>
+                                         <div className="w-12 h-12 rounded-full">
+                                         <Image
+                                                 src={currentImage}
+                                                 alt='avater'
+                                                 className="w-full
+                                                 object-cover"
+                                                 width={0}
+                                                 height={0}
+                                                 unoptimized
+                                             />
+                                         </div>
+                                      </div> 
+
+                                         <input
+                                             type="file"
+                                             placeholder="Image"
+                                             className="input input-bordered input-warning w-full max-w-x mt-2"
+                                            onChange= {handleImageUpload}
+                                         />
+                                     </div>
+                                 </div>
+                             
 
           <Button
             htmlType="submit"

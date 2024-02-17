@@ -105,17 +105,15 @@ console.log(fuels,trip)
             </thead>
 
             <tbody className="dark:text-[#E8E8E8]">
-              {(fuels?.data ?? [])
+              {(manageFuels?.data?.data ?? [])
                 ?.filter((V: any) => {
                   if (searchTerm == "") {
                     return V;
                   } else if (
-                    V?.passengerName
-                      .toLowerCase()
-                      .includes(searchTerm.toLowerCase()) ||
-                    V?.passengerPhone
-                      .toLowerCase()
-                      .includes(searchTerm.toLowerCase())
+                    V?.amount
+                      .includes(searchTerm) ||
+                    V?.invoice_number
+                      .includes(searchTerm)
                   ) {
                     return V;
                   }

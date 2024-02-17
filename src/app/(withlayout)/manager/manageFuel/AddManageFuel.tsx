@@ -59,7 +59,7 @@ const AddManageFuel = () => {
             <FormInput
               name="startLocation"
               type="text"
-              placeholder="Start Location"
+              placeholder="Select vehicle"
             />
           </div>
 
@@ -67,20 +67,20 @@ const AddManageFuel = () => {
             <FormInput
               name="endLocation"
               type="text"
-              placeholder="End Location"
+              placeholder="Fuel tyoe"
             />
           </div>
 
           <div className="mb-4 flex gap-2 items-center">
-            <label className="mr-2">Date:</label>
-            <FormInput name="startTime" type="date" placeholder="Trip Date" />
+            <label className="mr-2">Purchase Date:</label>
+            <FormInput name="startTime" type="date" placeholder="Purchase Date" />
           </div>
 
           <div className="mb-4">
             <FormInput
               name="passengerName"
               type="text"
-              placeholder="Passenger Name"
+              placeholder="invoice"
             />
           </div>
 
@@ -88,7 +88,7 @@ const AddManageFuel = () => {
             <FormInput
               name="passengerPhone"
               type="text"
-              placeholder="Passenger Phone"
+              placeholder="Amount"
             />
           </div>
 
@@ -96,49 +96,12 @@ const AddManageFuel = () => {
             <FormInput
               name="passengerCount"
               type="number"
-              placeholder="Total passenger Count"
+              placeholder="Liter"
             />
           </div>
 
-          <div className="mb-4">
-            <FormInput
-              name="tripPeriod"
-              type="text"
-              placeholder="Single-Trip | Round-Trip"
-            />
-          </div>
-
-          <div className="mb-4">
-            <FormInput name="tripRent" type="number" placeholder="$tripRent" />
-          </div>
-
-          <div className="mb-4">
-            <label className="mr-2">Select Driver:</label>
-            <select value={selectedDriver} onChange={handleSelectDriver}>
-              {(driverVehicle?.data?.driverResult ?? []).map((driver: any) => {
-                return (
-                  <option value={driver?.id} key={driver?.id}>
-                    {driver?.name}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-
-          <div className="mb-4">
-            <label className="mr-2">Select Vehicle:</label>
-            <select value={selectedVehicle} onChange={handleSelectVehicle}>
-              {(driverVehicle?.data?.vehicleResult ?? []).map(
-                (vehicle: any) => {
-                  return (
-                    <option value={vehicle?.id} key={vehicle?.id}>
-                      {vehicle?.brand}
-                    </option>
-                  );
-                }
-              )}
-            </select>
-          </div>
+  
+    
 
           <Button
             htmlType="submit"
