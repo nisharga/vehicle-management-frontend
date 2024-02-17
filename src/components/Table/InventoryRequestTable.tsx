@@ -124,10 +124,16 @@ const InventoryRequestListTable = () => {
                                 (inventory: any, index: number) => (
                                     <tr
                                         key={inventory?.id}
-                                        className={`${index % 2 === 0 ? "" : "bg-gray-50"}  flex flex-row`}
+                                        className={`${index % 2 === 0 ? "" : "bg-gray-50"} `}
                                     >
-                                        <td className=" px-2 py-3 -space-y-1 flex-auto">
+                                        <td className="px-2 py-3 -space-y-1 ">
+                                            {index + 1}
+                                        </td>
+                                        <td className="px-2 py-3 -space-y-1 flex-auto">
                                             <p className="text-sm font-bold">{inventory?.title}</p>
+                                        </td>
+                                        <td className="px-2 py-3 -space-y-1 flex-auto">
+                                            <p className="text-sm font-bold">{inventory?.approve_status}</p>
                                         </td>
                                         <td className="px-2 py-3 text-sm leading-5">
                                             <div className="flex gap-x-1">
