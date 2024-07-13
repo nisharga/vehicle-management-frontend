@@ -9,15 +9,14 @@ import { useEffect, useState } from "react";
 import logo from "../../assets/logo.png";
 import { getTokenFromKey } from "@/services/auth.service";
 
-
 const role = USER_ROLE.ADMIN;
 
-const Sidebar =  () => {
+const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const [currentRole, setCurrentRole] = useState('')
-  const roleFromToekn =  getTokenFromKey()
+  const [currentRole, setCurrentRole] = useState("");
+  const roleFromToekn = getTokenFromKey();
 
-  useEffect(()=>{
+  useEffect(() => {
     // if(roleFromToekn.role === 'ADMIN'){
     //   roles = 'super-admin'
     // }else if(roleFromToekn.role === 'MANAGER'){
@@ -25,19 +24,16 @@ const Sidebar =  () => {
     // } else if(roleFromToekn.role === 'DRIVER'){
     //   roles = 'driver'
     // }
-    if (roleFromToekn.role == 'ADMIN') {
-      setCurrentRole('super-admin')
-    }else if(roleFromToekn.role == 'MANAGER'){
-      setCurrentRole('manager')
-    }else if(roleFromToekn.role == 'DRIVER'){
-      setCurrentRole('driver')
+    if (roleFromToekn.role == "ADMIN") {
+      setCurrentRole("super-admin");
+    } else if (roleFromToekn.role == "MANAGER") {
+      setCurrentRole("manager");
+    } else if (roleFromToekn.role == "DRIVER") {
+      setCurrentRole("driver");
     }
     // setCurrentRole(roleFromToekn.role)
-  },[roleFromToekn])
+  }, [roleFromToekn]);
 
-  
-
- 
   return (
     <Sider
       collapsible

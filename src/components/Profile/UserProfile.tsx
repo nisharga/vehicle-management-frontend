@@ -1,5 +1,5 @@
 "use client";
-import profile from "@/assets/v-profile.png";
+import profile from "@/assets/profile.png";
 import Form from "@/components/ReusableForms/Form";
 import FormInput from "@/components/ReusableForms/FormInput";
 import {
@@ -54,7 +54,7 @@ const UserProfile = () => {
         <div className="bg-white dark:bg-[#00334E] w-full md:w-72 px-4 py-8 rounded">
           <div className="flex items-center justify-center">
             <div className="w-32 h-32 bg-red-500 rounded-full relative">
-              <Image src={profile} alt="profile" fill />
+              <Image src={profile} alt="profile" className="" />
               <div className="absolute right-1  bottom-0 flex justify-center items-center ">
                 <div className="w-10 h-10 rounded-full flex items-center justify-center">
                   <Button
@@ -69,8 +69,8 @@ const UserProfile = () => {
             </div>
           </div>
           <div className="text-center my-6 dark:text-[#EFEFEF]">
-            <h1 className="text-lg font-semibold ">Md. Shofikul</h1>
-            <p className="font-light">Full stack developer</p>
+            <h1 className="text-lg font-semibold ">Nisharga Kabir</h1>
+            <p className="font-light">Part Time Manager</p>
           </div>
           <Divider style={{ backgroundColor: "#eee" }} />
           <div>

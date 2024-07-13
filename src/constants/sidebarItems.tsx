@@ -172,7 +172,6 @@ export const sidebarItems = (role: string) => {
       icon: <AppstoreAddOutlined />,
       key: `/${role}/roleManage`,
     },
-
     ...contactSidebarItem,
     ...privacyPolicySidebarItem,
     ...faqSidebarItem,

@@ -46,7 +46,7 @@ export const data = {
     {
       fill: true,
       label: "Total Sale per Month",
-      data: labels.map(() => faker.datatype.number({ min: 10, max: 100 })),
+      data: labels.map(() => faker.number.int({ min: 10, max: 100 })),
       borderColor: "#EFEFEF",
       backgroundColor: "#002140",
     },

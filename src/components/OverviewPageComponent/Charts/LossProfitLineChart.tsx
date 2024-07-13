@@ -73,7 +73,7 @@ export const data = {
     {
       fill: true,
       label: "Loss",
-      data: labels.map(() => faker.datatype.number({ min: -10, max: 9954 })),
+      data: labels.map(() => faker.number.int({ min: -10, max: 9954 })),
       borderColor: "#1e3a8a",
       backgroundColor: "#1d4ed8",
       yAxisID: "y",
@@ -81,7 +81,7 @@ export const data = {
     {
       fill: true,
       label: "Profit",
-      data: labels.map(() => faker.datatype.number({ min: -15, max: 8899 })),
+      data: labels.map(() => faker.number.int({ min: -15, max: 8899 })),
       borderColor: "#0c4a6e",
       backgroundColor: "#0369a1",
       yAxisID: "y1",

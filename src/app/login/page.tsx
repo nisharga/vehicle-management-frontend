@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { SubmitHandler } from "react-hook-form";
 import logo from "../../assets/logo.png";
+import { SetStateAction, useState } from "react";
 
 type FormValues = {
   id: string;
@@ -17,21 +18,24 @@ type FormValues = {
 export default function LoginPage() {
   const [userLogin, { isLoading: isLogin }] = useUserLoginMutation();
 
+  const [email, setEmail] = useState("kabir@example.com");
+  const [password, setPassword] = useState("12345678");
+
   const router = useRouter();
 
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
     try {
-      const res = await userLogin({ ...data }).unwrap();
+      const res = await userLogin({ email, password }).unwrap();
       if (res?.data?.accessToken) {
         const userInfo = await getUserInfoFromToken(res?.data?.accessToken);
         if (userInfo?.role === "MANAGER") {
-          router.push("/manager");
+          router.push("/manager/overview");
           message.success("Manager log in successful");
         } else if (userInfo?.role === "DRIVER") {
-          router.push("/driver");
+          router.push("/driver/overview");
           message.success("Driver log in successful");
         } else {
-          router.push("/super-admin");
+          router.push("/super-admin/overview");
           message.success("Admin log in successful");
         }
       } else {
@@ -103,7 +107,7 @@ export default function LoginPage() {
                   key="geekblue"
                 >
                   <p className="cursor-pointer underline text-sky-600">
-                    Manager Credentials
+                    Driver Credentials
                   </p>
                 </Tooltip>
               </div>
@@ -116,7 +120,7 @@ export default function LoginPage() {
                   key="geekblue"
                 >
                   <p className="cursor-pointer underline text-sky-600">
-                    Driver Credentials
+                    Manager Credentials
                   </p>
                 </Tooltip>
               </div>
@@ -130,6 +134,12 @@ export default function LoginPage() {
                     type="email"
                     size="large"
                     placeholder="User Email"
+                    value={email}
+                    onChange={(e: {
+                      target: { value: SetStateAction<string> };
+                    }) => {
+                      return setEmail(e.target.value);
+                    }}
                   />
                 </div>
                 <br />
@@ -139,16 +149,25 @@ export default function LoginPage() {
                     type="password"
                     size="large"
                     placeholder="User Password"
+                    value={password}
+                    onChange={(e: {
+                      target: { value: SetStateAction<string> };
+                    }) => {
+                      return setPassword(e.target.value);
+                    }}
                   />
                 </div>
                 <br />
-                <Button
-                  htmlType="submit"
-                  className="uppercase block w-[60%] p-4 text-md rounded-full  bg-brand hover:bg-gray-200 hover:text-secondary 
+                <div className="w-[60%] ">
+                  {" "}
+                  <button
+                    type="submit"
+                    className="uppercase block w-full rounded-lg !bg-brand  hover:!bg-gray-200 hover:!text-sky-600 transition-0.3s py-1
                   focus:outline-none"
-                >
-                  {isLogin ? "Loading..." : "press LogIn"}
-                </Button>
+                  >
+                    {isLogin ? "Loading..." : "press LogIn"}
+                  </button>
+                </div>
               </div>
             </Form>
           </div>
